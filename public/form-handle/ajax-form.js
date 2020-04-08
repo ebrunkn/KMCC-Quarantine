@@ -9,7 +9,7 @@ $(document).ready(function(){
                 In whole project field name is diffrerent (data['period'] , period etc) .
                 Below lines just finding out the errored field on DOM
                 =============*/
-                // console.log(general_key);
+                console.log(`${general_key } - ${general_value}`);
                 $targetField = $('[name="'+general_key+'"');
                 // if(!$targetField.length){
                 //     $targetField = $('[name="'+general_key+'"');

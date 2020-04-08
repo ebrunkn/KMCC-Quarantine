@@ -8,4 +8,8 @@ class Warehouse extends Model
 {
     protected $table = 'warehouses';
     protected $fillable = ['item_name'];
+
+    public function getStocks(){
+        return $this->hasMany('App\Model\WarehouseStock','item_id','id');
+    }
 }

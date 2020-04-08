@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 use App\Model\Building;
+use App\Model\BuildingContact;
+use App\Model\LogReport;
 
 // Requests
 use App\Http\Requests\BuildingRequest;
@@ -30,10 +34,10 @@ class BuildingController extends Controller
             'building_name'=>'required',
 			'total_rooms'=>'required',
             'occupancy'=>'required',
-            'name'=>'required',
-			'phone'=>'required',
-		);
-        
+            'name'=>'array',
+			'phone'=>'array',
+        );
+               
 		$validation = Validator::make($request->input(), $validationRule);
         
 		if ($validation->fails()) {
@@ -47,17 +51,52 @@ class BuildingController extends Controller
             // $validated = $request->validated();
             if($id){
                 $building = Building::find($id);
-                $building->name = $request->input('building_name');
+                $building->building_name = $request->input('building_name');
                 $building->total_rooms = $request->input('total_rooms');
                 $building->occupancy = $request->input('occupancy');
-                $user->save();
+                $building->save();
+
+                LogReport::create(array(
+                    'user_id'=>auth()->user()->id,
+                    'type'=>'edit building',
+                    'data'=> $building,
+                ));
             }else{
-                Building::create(array(
+                $building = Building::create(array(
                     'building_name'=> $request->input('building_name'),
                     'total_rooms'=> $request->input('total_rooms'),
                     'occupancy'=> $request->input('occupancy'),
                 ));
+
+                LogReport::create(array(
+                    'user_id'=>auth()->user()->id,
+                    'type'=>'add building',
+                    'data'=> $building,
+                ));
             }
+
+            $contacts = [];
+            foreach($request->input('name') as $index=>$name){
+                // Log::info($name);
+                if(strlen($name) && strlen($request->input('phone')[$index])){
+                    $contacts[] = [
+                        'building_id'=>$building->id,
+                        'name'=>$name,
+                        'phone'=>$request->input('phone')[$index],
+                        'created_at'=>Carbon::now(),
+                        'updated_at'=>Carbon::now(),
+                    ];
+                }
+                
+            } 
+            if(count($contacts)){
+                BuildingContact::insert($contacts);
+                LogReport::create(array(
+                    'user_id'=>auth()->user()->id,
+                    'type'=>'edit building contact',
+                    'data'=> $building,
+                ));
+            }         
             
             return response()->json([
 				'code' => 200,
@@ -84,5 +123,15 @@ class BuildingController extends Controller
         $data_bundle = [];
         $data_bundle['buildings'] = Building::findOrFail($id);
         return view('admin.building.view', compact($data_bundle));
+    }
+
+    public function deleteContact(Request $request, $id){
+        BuildingContact::where('id', $id)->delete();
+        LogReport::create(array(
+            'user_id'=>auth()->user()->id,
+            'type'=>'delete building contact',
+            'data'=> $building,
+        ));
+        return redirect()->back();
     }
 }
