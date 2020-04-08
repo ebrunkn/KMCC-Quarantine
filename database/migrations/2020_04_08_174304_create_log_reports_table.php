@@ -19,6 +19,7 @@ class CreateLogReportsTable extends Migration
             $table->string('type')->nullable();
             $table->text('data')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

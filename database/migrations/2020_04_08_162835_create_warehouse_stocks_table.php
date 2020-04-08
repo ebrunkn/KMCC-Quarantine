@@ -18,6 +18,7 @@ class CreateWarehouseStocksTable extends Migration
             $table->bigInteger('item_id')->unsigned();
             $table->bigInteger('qty')->unsigned()->default(0);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('item_id')->references('id')->on('warehouses')->onDelete('cascade');
         });
