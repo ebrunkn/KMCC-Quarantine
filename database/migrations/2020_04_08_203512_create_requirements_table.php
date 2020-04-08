@@ -17,6 +17,7 @@ class CreateRequirementsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('building_id')->unsigned()->nullable();
+            $table->bigInteger('room_no')->unsigned()->nullable();
             $table->bigInteger('type_id')->unsigned();
             $table->bigInteger('warehouse_item_id')->unsigned()->nullable();
             $table->integer('requested_qty')->default(0);
