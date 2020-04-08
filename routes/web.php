@@ -14,13 +14,8 @@
 Route::namespace('Admin')->group(function(){
     Route::get('login', 'LoginController@login');
     Route::post('login', 'LoginController@loginProcess');
-<<<<<<< HEAD
 
-    // Route::group(['middleware'=>'auth'], function() {
-=======
-    
     Route::group(['middleware'=>'auth'], function() {
->>>>>>> dev-backend
         Route::get('logout', 'LoginController@logout');
         Route::get('/', 'DashboardController@index');
 
