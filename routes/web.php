@@ -14,10 +14,10 @@
 Route::namespace('Admin')->group(function(){
     Route::get('login', 'LoginController@login');
     Route::post('login', 'LoginController@loginProcess');
-    
+
     // Route::group(['middleware'=>'auth'], function() {
         Route::get('logout', 'LoginController@logout');
-        Route::get('/', 'DashboardController@dashboard');
+        Route::get('/', 'DashboardController@index');
 
         // Route::get('users','UserController@index');
         // Route::get('users/add','UserController@create');
