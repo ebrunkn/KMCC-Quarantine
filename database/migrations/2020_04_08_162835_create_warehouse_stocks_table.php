@@ -17,6 +17,7 @@ class CreateWarehouseStocksTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('item_id')->unsigned();
             $table->bigInteger('qty')->unsigned()->default(0);
+            $table->boolean('restock')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

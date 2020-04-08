@@ -10,5 +10,5 @@ class WarehouseStock extends Model
     use SoftDeletes;
     
     protected $table = 'warehouse_stocks';
-    protected $fillable = ['item_id','qty'];
+    protected $fillable = ['item_id','qty','restock'];
 }

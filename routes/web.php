@@ -28,6 +28,7 @@ Route::namespace('Admin')->group(function(){
         Route::get('buildings/edit/{id}','BuildingController@edit');
         Route::post('buildings/save/{id?}','BuildingController@save');
         Route::get('buildings/view/{id}','BuildingController@view');
+        Route::post('buildings/add-contact','BuildingController@addContact');
         Route::get('buildings/delete-contact/{id}','BuildingController@deleteContact');
 
         Route::get('warehouse', 'WarehouseController@index');
