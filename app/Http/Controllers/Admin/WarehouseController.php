@@ -30,9 +30,9 @@ class WarehouseController extends Controller
             'item_name'=>'required',
 			'qty'=>'required',
         );
-               
+
 		$validation = Validator::make($request->input(), $validationRule);
-        
+
 		if ($validation->fails()) {
 			return response()->json([
 				'code' => 400,
@@ -67,15 +67,15 @@ class WarehouseController extends Controller
                     'type'=>'add warehouse item',
                     'data'=> $data,
                 ));
-                
+
             }
-            
+
             return response()->json([
 				'code' => 200,
 				'status' => 'OK',
 				'message' => 'Data Saved',
             ], 200);
-            
+
         }
     }
 
@@ -90,9 +90,9 @@ class WarehouseController extends Controller
 			'item_id'=>'required',
 			'qty'=>'required',
         );
-               
+
 		$validation = Validator::make($request->input(), $validationRule);
-        
+
 		if ($validation->fails()) {
 			return response()->json([
 				'code' => 400,

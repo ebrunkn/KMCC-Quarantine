@@ -83,6 +83,20 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="#reports-nav" data-toggle="collapse" aria-expanded="false">
+                        <span class="link-title">Warehouse</span>
+                        <i class="mdi mdi-bullseye link-icon"></i>
+                    </a>
+                    <ul class="collapse navigation-submenu" id="reports-nav">
+                        <li>
+                            <a href="{{url('warehouse')}}">List</a>
+                        </li>
+                        <li>
+                            <a href="{{url('warehouse/add')}}">Add New</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-category-divider">DOCS</li>
                 <li>
                     <a href="#">
