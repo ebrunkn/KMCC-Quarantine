@@ -130,7 +130,7 @@ class BuildingController extends Controller
         LogReport::create(array(
             'user_id'=>auth()->user()->id,
             'type'=>'delete building contact',
-            'data'=> $building,
+            'data'=> $id,
         ));
         return redirect()->back();
     }
