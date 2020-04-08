@@ -21,7 +21,7 @@ class BuildingController extends Controller
         $data_bundle = [];
         $data_bundle['buildings'] = Building::paginate(20);
         // dd($data_bundle['buildings']);
-        return view('admin.building.index', compact($data_bundle));
+        return view('admin.building.index', compact('data_bundle'));
     }
 
     public function create(Request $request){
@@ -112,7 +112,7 @@ class BuildingController extends Controller
     public function edit(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['buildings'] = Building::findOrFail($id);
-        return view('admin.building.edit',compact($data_bundle));
+        return view('admin.building.edit',compact('data_bundle'));
     }
 
     public function delete(Request $request, $id){
@@ -122,7 +122,7 @@ class BuildingController extends Controller
     public function view(Request $request, $id){
         $data_bundle = [];
         $data_bundle['buildings'] = Building::findOrFail($id);
-        return view('admin.building.view', compact($data_bundle));
+        return view('admin.building.view', compact('data_bundle'));
     }
 
     public function deleteContact(Request $request, $id){
