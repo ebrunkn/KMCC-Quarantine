@@ -1,4 +1,4 @@
-@extends ('admin.label-free.master')
+@extends ('admin.layout.master')
 
 @section('content')
   <div class="page-content-wrapper-inner">
@@ -9,7 +9,7 @@
                   <a href="#">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="#">Devices</a>
+                  <a href="#">Buildings</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">List</li>
               </ol>
@@ -26,40 +26,21 @@
                         <thead>
 
                           <tr>
-                            <th>Device UID</th>
-                            <th>Location</th>
-{{--                            <th>Zone</th>--}}
-                            <th>Last Connected</th>
-                            <th>OTP</th>
+                            <th>Building Name</th>
+                            <th>Rooms</th>
+                            <th>Occupied</th>
                             <th></th>
                           </tr>
 
                         </thead>
                         <tbody>
-                          @foreach($data_bundle['devices'] as $device)
+                          @foreach($data_bundle['buildings'] as $building)
                             <tr>
                               <td class="">
-                                {{$device->device_uid}}
+                                {{$building->building_name}}
                               </td>
-                              <td>
-                                @if($device->location)
-                                  {{$device->location['location_name']}}
-                                @else
-                                  <a href="{{url('admin/devices/link-to-location', array($device->id))}}" class="btn btn-xs btn-warning">Add Lo Location</a>
-                                @endif
-                              </td>
-                              <td>{{$device->updated_at}}</td>
-                              <td>
-                                @if($device->otp)
-                                  {{$device->otp}} <a href="{{url('admin/devices/otp/trash', array($device->id))}}"> <i class="mdi mdi-trash-can-outline"></i> </a>
-                                @else
-                                  @if($device->location)
-                                    <a href="{{url('admin/devices/otp/generate', array($device->id))}}" class="btn btn-xs btn-warning">
-                                      Generate OTP
-                                    </a>
-                                  @endif
-                                @endif
-                              </td>
+                              <td>{{$building->total_rooms}}</td>
+                              <td>{{$building->occupancy}}</td>
                               <td class="actions">
                                 <i class="mdi mdi-dots-vertical"></i>
                               </td>
@@ -75,7 +56,7 @@
 
             <div class="row">
               <div class="col-12">
-                {!! $data_bundle['devices']->render() !!}
+                {{-- {!! $data_bundle['buildings']->render() !!} --}}
               </div>
             </div>
           </div>

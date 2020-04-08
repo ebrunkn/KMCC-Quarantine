@@ -35,41 +35,7 @@
                     <i class="mdi mdi-menu"></i>
                 </button>
                 <div class="nav ml-auto">
-                    <form action="#" class="p-1">
-                        <select name="user_location" id="user_location" class="form-control">
-                            @if(session()->has('user.locations'))
-                            @foreach (session()->get('user.locations') as $location)
-                            <option value="{{$location->id}}"
-                                {{session()->get('user.user_location')['location_id'] == $location->id ? 'selected' : ''}}>
-                                {{$location->location_name}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </form>
-                    <form action="#" class="p-1">
-                        <select name="user_zone" id="user_zone" class="form-control">
-                            @if(session()->has('user.zones'))
-                            @foreach (session()->get('user.zones') as $zone)
-                            <option value="{{$zone['id']}}"
-                                {{session()->get('user.user_location')['zone_id'] == $zone['id'] ? 'selected' : ''}}>
-                                {{$zone['zone_name']}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </form>
                     <ul class="nav">
-                        {{-- <li class="nav-item dropdown">
-              <a class="nav-link" href="#" id="notificationDropdown" data-toggle="dropdown" aria-expanded="false">
-                <i class="mdi mdi-bell-outline mdi-1x"></i>
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="#" id="messageDropdown" data-toggle="dropdown" aria-expanded="false">
-                <i class="mdi mdi-message-outline mdi-1x"></i>
-                <span
-                  class="notification-indicator notification-indicator-primary notification-indicator-ripple"></span>
-              </a>
-            </li> --}}
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{url('admin/logout')}}">
                                 <i class="mdi mdi-logout mdi-1x"></i>
@@ -97,107 +63,25 @@
             <ul class="navigation-menu">
                 <li class="nav-category-divider">MAIN</li>
                 <li>
-                    <a href="{{url('admin/dashboard')}}">
+                    <a href="{{url('/')}}">
                         <span class="link-title">Dashboard</span>
                         <i class="mdi mdi-gauge link-icon"></i>
                     </a>
                 </li>
                 <li>
                     <a href="#reports-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Reports</span>
+                        <span class="link-title">Buildings</span>
                         <i class="mdi mdi-bullseye link-icon"></i>
                     </a>
                     <ul class="collapse navigation-submenu" id="reports-nav">
                         <li>
-                            <a href="{{url('admin/reports', array('playing'))}}">Playing</a>
+                            <a href="{{url('buildings')}}">List</a>
                         </li>
                         <li>
-                            <a href="{{url('admin/reports', array('checkin-summary'))}}">Daily Report</a>
+                            <a href="{{url('buildings/add')}}">Add New</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#sample-pages" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Rules & Regulations</span>
-                        <i class="mdi mdi-flask link-icon"></i>
-                    </a>
-                    <ul class="collapse navigation-submenu" id="sample-pages">
-                        <li>
-                            <a href="{{url('admin/rules-regulation/templates')}}">Templates</a>
-                        </li>
-                        <li>
-                            <a href="{{url('admin/rules-regulation/assign')}}">Assign</a>
-                        </li>
-                    </ul>
-                </li>
-
-                {{-- @if (in_array(auth('admin')->user()->user_group, ['super_admin', 'admin'])) --}}
-                <li>
-                    <a href="#ui-elements" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Devices</span>
-                        <i class="mdi mdi-bullseye link-icon"></i>
-                    </a>
-                    <ul class="collapse navigation-submenu" id="ui-elements">
-                        <li>
-                            <a href="{{url('admin/devices')}}">View All</a>
-                        </li>
-                        <li>
-                            <a href="{{url('admin/devices/add')}}">Add</a>
-                        </li>
-                        {{--            <li>--}}
-                        {{--              <a href="pages/ui-components/typography.html">Typography</a>--}}
-                        {{--            </li>--}}
-                    </ul>
-                </li>
-                <li>
-                    <a href="#users-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Users</span>
-                        <i class="mdi mdi-clipboard-outline link-icon"></i>
-                    </a>
-                    <ul class="collapse navigation-submenu" id="users-nav">
-                        <li>
-                            <a href="{{url('admin/users')}}">View All</a>
-                        </li>
-                        <li>
-                            <a href="{{url('admin/users/add')}}">Add</a>
-                        </li>
-                        {{--            <li>--}}
-                        {{--              <a href="pages/ui-components/typography.html">Typography</a>--}}
-                        {{--            </li>--}}
-                    </ul>
-                </li>
-                <li>
-                    <a href="{{url('admin/locations')}}">
-                        <span class="link-title">Locations</span>
-                        <i class="mdi mdi-chart-donut link-icon"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="link-title">Zones</span>
-                        <i class="mdi mdi-flower-tulip-outline link-icon"></i>
-                    </a>
-                </li>
-                <li class="nav-category-divider">General Settings</li>
-                <li>
-                    <a href="#settings" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Settings</span>
-                        <i class="mdi mdi-bullseye link-icon"></i>
-                    </a>
-                    <ul class="collapse navigation-submenu" id="settings">
-                        <li>
-                            <a href="#">Countries</a>
-                        </li>
-                        <li>
-                            <a href="{{url('admin/admin-users')}}">Managers</a>
-                        </li>
-                        {{--            <li>--}}
-                        {{--              <a href="pages/ui-components/typography.html">Typography</a>--}}
-                        {{--            </li>--}}
-                    </ul>
-                </li>
-                {{-- @endif --}}
-
                 <li class="nav-category-divider">DOCS</li>
                 <li>
                     <a href="#">
