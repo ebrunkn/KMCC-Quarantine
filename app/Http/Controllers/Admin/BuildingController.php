@@ -47,18 +47,24 @@ class BuildingController extends Controller
             // $validated = $request->validated();
             if($id){
                 $building = Building::find($id);
-                $building->name = $validated['name'];
-                $building->total_rooms = $validated['total_rooms'];
-                $building->occupancy = $validated['occupancy'];
+                $building->name = $request->input('building_name');
+                $building->total_rooms = $request->input('total_rooms');
+                $building->occupancy = $request->input('occupancy');
                 $user->save();
             }else{
                 Building::create(array(
-                    'name'=> $validated['name'],
-                    'total_rooms'=> $validated['total_rooms'],
-                    'occupancy'=> $validated['occupancy'],
+                    'building_name'=> $request->input('building_name'),
+                    'total_rooms'=> $request->input('total_rooms'),
+                    'occupancy'=> $request->input('occupancy'),
                 ));
             }
-            return redirect(url('buildings'));
+            
+            return response()->json([
+				'code' => 200,
+				'status' => 'OK',
+				'message' => 'Data Saved',
+            ], 200);
+            
         }
         
         // return response()->json('saved', 200);
