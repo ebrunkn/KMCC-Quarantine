@@ -88,7 +88,7 @@ $(document).ready(function(){
                 // console.log(result); // show response from the php script.
                 if( result.status == 'OK' ) {
                     // showAlert('success', 'core.loading.saved');
-                    toastr.success('Saved');
+                    // toastr.success('Saved');
                     window.location.href = bactToUrl;
                 }
                 else if ( result.status == 'INVALID_DATA' ) {
