@@ -15,7 +15,7 @@ Route::namespace('Admin')->group(function(){
     Route::get('login', 'LoginController@login');
     Route::post('login', 'LoginController@loginProcess');
     
-    // Route::group(['middleware'=>'auth'], function() {
+    Route::group(['middleware'=>'auth'], function() {
         Route::get('logout', 'LoginController@logout');
         Route::get('/', 'DashboardController@dashboard');
 
@@ -29,12 +29,14 @@ Route::namespace('Admin')->group(function(){
         Route::get('buildings/edit/{id}','BuildingController@edit');
         Route::post('buildings/save/{id?}','BuildingController@save');
         Route::get('buildings/view/{id}','BuildingController@view');
+        Route::get('buildings/delete-contact/{id}','BuildingController@deleteContact');
 
         Route::get('warehouse', 'WarehouseController@index');
         Route::get('warehouse/add', 'WarehouseController@create');
         Route::get('warehouse/edit/{id}', 'WarehouseController@edit');
         Route::post('warehouse/save', 'WarehouseController@save');
         Route::get('warehouse/view/{id}', 'WarehouseController@view');
+        Route::post('warehouse/add-stock', 'WarehouseController@addStock');
 
-    // });
+    });
 });

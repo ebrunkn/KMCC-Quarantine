@@ -50,7 +50,7 @@ class WarehouseController extends Controller
                     'item_name'=> $request->input('item_name'),
                 ));
 
-                $building = WarehouseStock::create(array(
+                WarehouseStock::create(array(
                     'item_id'=> $item->id,
                     'qty'=> $request->input('qty'),
                 ));
@@ -68,6 +68,35 @@ class WarehouseController extends Controller
 
     public function edit(Request $request, $id) {
         return view('admin.warehouse.edit');
+    }
+
+    public function addStock(Request $request, $id) {
+        $validationRule = array(
+			'item_id'=>'required',
+			'qty'=>'required',
+        );
+               
+		$validation = Validator::make($request->input(), $validationRule);
+        
+		if ($validation->fails()) {
+			return response()->json([
+				'code' => 400,
+				'status' => 'INVALID_DATA',
+				'errors' => $validation->errors(),
+				'message' => $validation->errors(),
+			], 200);
+		} else {
+            WarehouseStock::create(array(
+                'item_id'=> $item->id,
+                'qty'=> $request->input('qty'),
+            ));
+
+            return response()->json([
+				'code' => 200,
+				'status' => 'OK',
+				'message' => 'Data Saved',
+            ], 200);
+        }
     }
 
     public function delete(Request $request, $id){
