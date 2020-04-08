@@ -15,14 +15,14 @@ Route::namespace('Admin')->group(function(){
     Route::get('login', 'LoginController@login');
     Route::post('login', 'LoginController@loginProcess');
     
-    Route::group(['middleware'=>'auth'], function() {
+    // Route::group(['middleware'=>'auth'], function() {
         Route::get('logout', 'LoginController@logout');
         Route::get('/', 'DashboardController@dashboard');
 
-        Route::get('users','UserController@index');
-        Route::get('users/add','UserController@create');
-        Route::get('users/edit/{id}','UserController@edit');
-        Route::post('users/save','UserController@save');
+        // Route::get('users','UserController@index');
+        // Route::get('users/add','UserController@create');
+        // Route::get('users/edit/{id}','UserController@edit');
+        // Route::post('users/save','UserController@save');
 
         Route::get('buildings','BuildingController@index');
         Route::get('buildings/add','BuildingController@create');
@@ -36,5 +36,5 @@ Route::namespace('Admin')->group(function(){
         Route::post('warehouse/save', 'WarehouseController@save');
         Route::get('warehouse/view/{id}', 'WarehouseController@view');
 
-    });
+    // });
 });

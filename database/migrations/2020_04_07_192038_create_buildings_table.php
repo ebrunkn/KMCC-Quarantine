@@ -15,8 +15,9 @@ class CreateBuildingsTable extends Migration
     {
         Schema::create('buildings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('building_name');
             $table->bigInteger('total_rooms')->unsigned()->default(0);
+            $table->bigInteger('occupancy')->unsigned()->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
