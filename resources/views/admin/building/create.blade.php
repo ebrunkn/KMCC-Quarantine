@@ -18,7 +18,7 @@
     <div class="content-viewport">
         <div class="row">
             <div class="col-lg-12">
-                <form id="data-form" action="{{url('buildings/save')}}" callback="{{url('buildings')}}" method="POST">
+                <form id="data-form" class="form" action="{{url('buildings/save')}}" callback="{{url('buildings')}}" method="POST">
                     <div class="grid">
                         <p class="grid-header">Add Building</p>
                         <div class="grid-body">

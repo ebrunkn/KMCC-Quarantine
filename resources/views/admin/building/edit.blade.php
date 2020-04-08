@@ -25,8 +25,10 @@
                             <div class="row mb-3">
 
                                 <div class="col-md-8 mx-auto">
-                                    <form id="data-form" action="{{url('buildings/save')}}"
-                                        callback="{{url('buildings')}}" method="POST">
+                                    <form id="data-form" class="form"
+                                        action="{{url('buildings/save', array($data_bundle['buildings']->id))}}"
+                                        callback="{{url('buildings/edit', array($data_bundle['buildings']->id))}}"
+                                        method="POST">
                                         {{-- {!! Form::open(['url' => 'buildings/save', 'callback' => url('buildings')]) !!} --}}
                                         @csrf
 
@@ -106,8 +108,8 @@
                                             </td>
                                             <td>{{$contact->phone}}</td>
                                             <td class="actions">
-                                                <a href="{{url('buildings/edit', array($contact->id))}}"
-                                                    class="btn btn-xs btn-danger"><i class="mdi mdi-delete"></a></i>
+                                                <a href="{{url('buildings/delete-contact', array($contact->id))}}"
+                                                    class="btn btn-xs btn-danger"><i class="mdi mdi-delete"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -120,54 +122,63 @@
 
                                 <div class="col-md-8 mx-auto contacts">
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="grid">
-                    <p class="grid-header">
-                        Add New Contact Person
-                    </p>
-                    <div class="grid-body">
-                        <div class="item-wrapper">
-                            <div class="row mb-3">
+                    <div class="grid">
+                        <p class="grid-header">
+                            Add New Contact Person
+                        </p>
+                        <div class="grid-body">
+                            <div class="item-wrapper">
+                                <div class="row mb-3">
+                                    <div class="col-md-8 mx-auto">
+                                        <form id="data-form" class="form"
+                                            action="{{url('buildings/add-contact')}}"
+                                            callback="{{url('buildings/edit', array($data_bundle['buildings']->id))}}"
+                                            method="POST">
+                                            {{-- {!! Form::open(['url' => 'buildings/save', 'callback' => url('buildings')]) !!} --}}
+                                            @csrf
+                                            {!! Form::hidden('building_id', $data_bundle['buildings']->id) !!}
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Name</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::text('name', old('name'),
+                                                    array('class'=>'form-control','placeholder'=>'Name')) !!}
+                                                    <span id="form-error-name"></span>
+                                                </div>
+                                            </div>
 
-                                <div class="col-md-8 mx-auto">
-                                    <div class="form-group row showcase_row_area">
-                                        <div class="col-md-3 showcase_text_area">
-                                            <label for="inputType1">Name</label>
-                                        </div>
-                                        <div class="col-md-9 showcase_content_area">
-                                            {!! Form::text('name[]', old('name[]'),
-                                            array('class'=>'form-control','placeholder'=>'Name')) !!}
-                                            <span id="form-error-name"></span>
-                                        </div>
-                                    </div>
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Phone</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::text('phone', old('phone'),
+                                                    array('class'=>'form-control','placeholder'=>'Phone')) !!}
+                                                    <span id="form-error-phone"></span>
+                                                </div>
+                                            </div>
 
-                                    <div class="form-group row showcase_row_area">
-                                        <div class="col-md-3 showcase_text_area">
-                                            <label for="inputType1">Phone</label>
-                                        </div>
-                                        <div class="col-md-9 showcase_content_area">
-                                            {!! Form::text('phone[]', old('phone[]'),
-                                            array('class'=>'form-control','placeholder'=>'Phone')) !!}
-                                            <span id="form-error-phone"></span>
-                                        </div>
-                                    </div>
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
 
-                                    <div class="form-group row showcase_row_area">
-                                        <div class="col-md-3 showcase_text_area">
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::submit('Submit', array('class'=>'btn btn-success
+                                                    btn-block',
+                                                    'id' => 'form-submit')) !!}
+                                                </div>
+                                            </div>
 
-                                        </div>
-                                        <div class="col-md-9 showcase_content_area">
-                                            {!! Form::submit('Submit', array('class'=>'btn btn-success btn-block',
-                                            'id' => 'form-submit')) !!}
-                                        </div>
+                                        </form>
                                     </div>
 
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -175,39 +186,38 @@
             </div>
         </div>
     </div>
-</div>
-<div class="d-none" id="contact-person-item">
-    <div class="form-group row showcase_row_area border-top pt-3">
-        <div class="col-md-3 showcase_text_area">
-            <label for="inputType1">Name</label>
+    <div class="d-none" id="contact-person-item">
+        <div class="form-group row showcase_row_area border-top pt-3">
+            <div class="col-md-3 showcase_text_area">
+                <label for="inputType1">Name</label>
+            </div>
+            <div class="col-md-9 showcase_content_area">
+                {!! Form::text('name', old('name'),
+                array('class'=>'form-control','placeholder'=>'Name')) !!}
+                <span id="form-error-name"></span>
+            </div>
         </div>
-        <div class="col-md-9 showcase_content_area">
-            {!! Form::text('name[]', old('name[]'),
-            array('class'=>'form-control','placeholder'=>'Name')) !!}
-            <span id="form-error-name"></span>
-        </div>
-    </div>
 
-    <div class="form-group row showcase_row_area">
-        <div class="col-md-3 showcase_text_area">
-            <label for="inputType1">Phone</label>
-        </div>
-        <div class="col-md-9 showcase_content_area">
-            {!! Form::text('phone[]', old('phone[]'),
-            array('class'=>'form-control','placeholder'=>'Phone')) !!}
-            <span id="form-error-phone"></span>
+        <div class="form-group row showcase_row_area">
+            <div class="col-md-3 showcase_text_area">
+                <label for="inputType1">Phone</label>
+            </div>
+            <div class="col-md-9 showcase_content_area">
+                {!! Form::text('phone', old('phone'),
+                array('class'=>'form-control','placeholder'=>'Phone')) !!}
+                <span id="form-error-phone"></span>
+            </div>
         </div>
     </div>
-</div>
-{!! Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js') !!}
-{!! Html::script('form-handle/ajax-form.js') !!}
-@push('page-specific-script')
-<script>
-    $('.add-more').click(function(e) {
+    {!! Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js') !!}
+    {!! Html::script('form-handle/ajax-form.js') !!}
+    @push('page-specific-script')
+    <script>
+        $('.add-more').click(function(e) {
         e.preventDefault();
         console.log('Clicked');
         $('#contact-person-item').children().clone().appendTo('.contacts');
     })
-</script>
-@endpush
-@stop
+    </script>
+    @endpush
+    @stop

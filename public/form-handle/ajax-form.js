@@ -115,9 +115,9 @@ $(document).ready(function(){
           });
     }
 
-    $('#form-submit').on('click', function(e){
+    $('.form').on('submit', function(e){
         e.preventDefault();
-        var form = $('#data-form');
+        var form = $(this);
         var url = form.attr('action');
         var callback = form.attr('callback') ? form.attr('callback'): url;
         formSave(form, url, callback)
