@@ -50,14 +50,14 @@ $(document).ready(function(){
                 $('#activity-message-alert').find('.alert-icon').html('<i class="flaticon2-information"></i>');
             }
     }
-    
+
     function formSave(form, url, callback){
-        
+
         $('#activity-message-alert').removeClass('alert-success alert-danger alert-warning').addClass('d-none');
         form.find('.invalid-feedback').removeClass('d-inline').html('');
         form.find('.is-invalid').removeClass('is-invalid');
         $('.tab_has_error').removeClass('tab_has_error');
-        
+
         // const editorData = editor.getData();
         // var content = $( 'textarea.html_editor' ).val();
         // console.log(content);
@@ -115,7 +115,7 @@ $(document).ready(function(){
           });
     }
 
-    $('#data-form-save-btn').on('click', function(e){
+    $('#form-submit').on('click', function(e){
         e.preventDefault();
         var form = $('#data-form');
         var url = form.attr('action');
