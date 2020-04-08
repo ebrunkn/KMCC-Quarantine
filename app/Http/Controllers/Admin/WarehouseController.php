@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Model\Warehouse;
 use App\Model\WarehouseStock;
 use App\Model\LogReport;
+use Illuminate\Support\Facades\Validator;
 
 class WarehouseController extends Controller
 {
@@ -28,7 +29,7 @@ class WarehouseController extends Controller
         //save
         $validationRule = array(
             'item_name'=>'required',
-			'qty'=>'required',
+			// 'qty'=>'required',
         );
 
 		$validation = Validator::make($request->input(), $validationRule);
