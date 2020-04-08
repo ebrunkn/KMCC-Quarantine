@@ -13,8 +13,7 @@
 
 Route::namespace('Admin')->group(function(){
     Route::get('login', 'LoginController@login');
-    Route::post('login', 'LoginController@loginProcess');
-
+    Route::post('login', 'LoginController@loginProcess');    
     Route::group(['middleware'=>'auth'], function() {
         Route::get('logout', 'LoginController@logout');
         Route::get('/', 'DashboardController@index');
