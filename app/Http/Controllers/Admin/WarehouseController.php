@@ -17,7 +17,7 @@ class WarehouseController extends Controller
         $data_bundle = [];
         $data_bundle['items'] = Warehouse::paginate(20);
         // dd($data_bundle['items']);
-        return view('admin.warehouse.index', compact($data_bundle));
+        return view('admin.warehouse.index', compact('data_bundle'));
     }
 
     public function create(Request $request){
@@ -82,7 +82,7 @@ class WarehouseController extends Controller
     public function edit(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = Warehouse::findOrFail($id);
-        return view('admin.warehouse.edit', compact($data_bundle));
+        return view('admin.warehouse.edit', compact('data_bundle'));
     }
 
     public function addStock(Request $request, $id) {
@@ -134,6 +134,6 @@ class WarehouseController extends Controller
     public function view(Request $request, $id){
         $data_bundle = [];
         $data_bundle['item'] = Warehouse::findOrFail($id);
-        return view('admin.warehouse.view', compact($data_bundle));
+        return view('admin.warehouse.view', compact('data_bundle'));
     }
 }
