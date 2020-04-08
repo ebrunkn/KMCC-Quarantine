@@ -19,14 +19,15 @@ class CreateRequirementsTable extends Migration
             $table->bigInteger('building_id')->unsigned()->nullable();
             $table->bigInteger('type_id')->unsigned();
             $table->bigInteger('warehouse_item_id')->unsigned()->nullable();
-            $table->integer('qty')->default(0);
+            $table->integer('requested_qty')->default(0);
+            $table->integer('fulfilled_qty')->default(0);
             $table->text('info')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('building_id')->references('id')->on('buildings')->onDelete('cascade');
-            $table->foreign('type_id')->references('id')->on('reqest_types')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('request_types')->onDelete('cascade');
             $table->foreign('warehouse_item_id')->references('id')->on('warehouses')->onDelete('cascade');
         });
     }
