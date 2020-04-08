@@ -27,7 +27,7 @@ Route::namespace('Admin')->group(function(){
         Route::get('buildings','BuildingController@index');
         Route::get('buildings/add','BuildingController@create');
         Route::get('buildings/edit/{id}','BuildingController@edit');
-        Route::post('buildings/save','BuildingController@save');
+        Route::post('buildings/save/{id?}','BuildingController@save');
         Route::get('buildings/view/{id}','BuildingController@view');
 
         Route::get('warehouse', 'WarehouseController@index');

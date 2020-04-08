@@ -26,15 +26,19 @@
             <span id="form-error-occupancy"></span>
         </div>
 
+
         <div style="width:100%;">
-            <input type="text" placeholder="Contact Person name" name="name">
-            <span id="form-error-name"></span>
+            <input type="text" placeholder="Name" name="name[]">
+            <input type="text" placeholder="Phone" name="phone[]">
+            <span id="form-error-phone"></span>
         </div>
 
         <div style="width:100%;">
-            <input type="text" placeholder="Phone" name="phone">
+            <input type="text" placeholder="Name" name="name[]">
+            <input type="text" placeholder="Phone" name="phone[]">
             <span id="form-error-phone"></span>
         </div>
+
 
         @csrf
 

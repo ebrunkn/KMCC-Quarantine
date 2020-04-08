@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 use App\Model\Building;
+use App\Model\BuildingContact;
 
 // Requests
 use App\Http\Requests\BuildingRequest;
@@ -30,10 +33,10 @@ class BuildingController extends Controller
             'building_name'=>'required',
 			'total_rooms'=>'required',
             'occupancy'=>'required',
-            'name'=>'required',
-			'phone'=>'required',
-		);
-        
+            'name'=>'array',
+			'phone'=>'array',
+        );
+               
 		$validation = Validator::make($request->input(), $validationRule);
         
 		if ($validation->fails()) {
@@ -52,11 +55,27 @@ class BuildingController extends Controller
                 $building->occupancy = $request->input('occupancy');
                 $user->save();
             }else{
-                Building::create(array(
+                $building = Building::create(array(
                     'building_name'=> $request->input('building_name'),
                     'total_rooms'=> $request->input('total_rooms'),
                     'occupancy'=> $request->input('occupancy'),
                 ));
+
+                $contacts = [];
+
+                foreach($request->input('name') as $index=>$name){
+                    // Log::info($name);
+                    $contacts[] = [
+                        'building_id'=>$building->id,
+                        'name'=>$name,
+                        'phone'=>$request->input('name')[$index],
+                        'created_at'=>Carbon::now(),
+                        'updated_at'=>Carbon::now(),
+                    ];
+                }    
+                
+                BuildingContact::insert($contacts);
+                
             }
             
             return response()->json([
