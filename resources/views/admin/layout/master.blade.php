@@ -24,9 +24,10 @@
     <!-- partial:partials/_header.html -->
     <nav class="t-header">
         <div class="t-header-brand-wrapper">
-            <a href="/admin/dashboard">
-                {!! Html::image('admin/images/logo.svg', 'PAM', array('class' => 'logo')) !!}
-                <img class="logo-mini" src="../assets/images/logo_mini.svg" alt="">
+            <a href="/" class="text-primary">
+                KMCC
+                {{-- {!! Html::image('admin/images/logo.svg', 'PAM', array('class' => 'logo')) !!}
+                <img class="logo-mini" src="../assets/images/logo_mini.svg" alt=""> --}}
             </a>
         </div>
         <div class="t-header-content-wrapper">
@@ -63,7 +64,7 @@
             <ul class="navigation-menu">
                 <li class="nav-category-divider">MAIN</li>
                 <li>
-                    <a href="{{url('/')}}">
+                    <a href="{{url('admin/dashboard')}}">
                         <span class="link-title">Dashboard</span>
                         <i class="mdi mdi-gauge link-icon"></i>
                     </a>

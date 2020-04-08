@@ -42,7 +42,7 @@
                               <td>{{$building->total_rooms}}</td>
                               <td>{{$building->occupancy}}</td>
                               <td class="actions">
-                                <i class="mdi mdi-dots-vertical"></i>
+                                <a href="{{url('buildings/edit', array($building->id))}}" class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></a></i>
                               </td>
                             </tr>
                           @endforeach
