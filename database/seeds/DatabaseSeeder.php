@@ -9,6 +9,9 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
+use App\Model\Warehouse;
+use App\Model\WarehouseStock;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -19,6 +22,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
+        $this->call(WarehouseTableSeeder::class);
         $this->call(UserPermissionSeeder::class);
         // $this->call(AssignPermissionForUser::class);
     }
@@ -103,6 +107,21 @@ class AssignPermissionForUser extends Seeder {
         foreach($allUsers as $user){
             $user->assignRole($role);
             $user->givePermissionTo($permission);
+        }
+    }
+}
+class WarehouseTableSeeder extends Seeder {
+    public function run() {
+        $items = ['Kettle', 'Bedsheet', 'Mug', 'Pen', 'Note'];
+        foreach($items as $item){
+            $item = Warehouse::create(array(
+                'item_name'=>$item
+            ));
+
+            WarehouseStock::create(array(
+                'item_id'=>$item->id,
+                'qty'=>50,
+            ));
         }
     }
 }
