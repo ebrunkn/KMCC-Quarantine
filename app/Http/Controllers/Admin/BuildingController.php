@@ -115,6 +115,44 @@ class BuildingController extends Controller
         return view('admin.building.edit',compact('data_bundle'));
     }
 
+    public function addContact(Request $request, $id){
+        $validationRule = array(
+            'building_id'=>'required|exists:buildings,id',
+            'name'=>'required',
+			'phone'=>'required',
+        );
+               
+		$validation = Validator::make($request->input(), $validationRule);
+        
+		if ($validation->fails()) {
+			return response()->json([
+				'code' => 400,
+				'status' => 'INVALID_DATA',
+				'errors' => $validation->errors(),
+				'message' => $validation->errors(),
+			], 200);
+		} else {
+
+            BuildingContact::create(array(
+                'building_id'=> $request->input('building_id'),
+                'name'=> $request->input('name'),
+                'phone'=> $request->input('phone'),
+            ));
+
+            LogReport::create(array(
+                'user_id'=>auth()->user()->id,
+                'type'=>'edit building contact',
+                'data'=> $building,
+            ));
+
+            return response()->json([
+				'code' => 200,
+				'status' => 'OK',
+				'message' => 'Data Saved',
+            ], 200);
+        }
+    }
+
     public function delete(Request $request, $id){
         // delete
     }

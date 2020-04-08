@@ -11,6 +11,7 @@ use Spatie\Permission\PermissionRegistrar;
 
 use App\Model\Warehouse;
 use App\Model\WarehouseStock;
+use App\Model\RequestType;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UsersTableSeeder::class);
         $this->call(WarehouseTableSeeder::class);
+        $this->call(RequestTypeTableSeeder::class);
         $this->call(UserPermissionSeeder::class);
         // $this->call(AssignPermissionForUser::class);
     }
@@ -121,6 +123,16 @@ class WarehouseTableSeeder extends Seeder {
             WarehouseStock::create(array(
                 'item_id'=>$item->id,
                 'qty'=>50,
+            ));
+        }
+    }
+}
+class RequestTypeTableSeeder extends Seeder {
+    public function run() {
+        $items = ['Warehouse Items', 'Food', 'Maintenance', 'Other'];
+        foreach($items as $item){
+            RequestType::create(array(
+                'type'=>$item
             ));
         }
     }
