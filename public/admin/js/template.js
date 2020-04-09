@@ -41,18 +41,18 @@ $('.navigation-menu li a', TemplateSidebar).each(function () {
     }
   } else {
     //FOR OTHER URL
-    if ($this.attr('href').indexOf(current) !== -1) {
-      $(this).parents('li').last().addClass('active');
-      if ($(this).parents('.navigation-submenu').length) {
-        $(this).addClass('active');
-      }
-      if (current !== "index.html") {
-        $(this).parents('li').last().find("a").attr("aria-expanded", "true");
-        if ($(this).parents('.navigation-submenu').length) {
-          $(this).closest('.collapse').addClass('show');
-        }
-      }
-    }
+    // if ($this.attr('href').indexOf(current) !== -1) {
+    //   $(this).parents('li').last().addClass('active');
+    //   if ($(this).parents('.navigation-submenu').length) {
+    //     $(this).addClass('active');
+    //   }
+    //   if (current !== "index.html") {
+    //     $(this).parents('li').last().find("a").attr("aria-expanded", "true");
+    //     if ($(this).parents('.navigation-submenu').length) {
+    //       $(this).closest('.collapse').addClass('show');
+    //     }
+    //   }
+    // }
   }
 });
 
