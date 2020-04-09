@@ -38,7 +38,7 @@
                 </button>
                 <div class="nav ml-auto">
                     <ul class="nav">
-                        <li class="d-none" id="notification-global-counter">    
+                        <li class="d-none" id="notification-global-counter">
                             <a href="{{url('requirement')}}" class="badge badge-success mt-2">
                                 <i class="mdi mdi-bell"></i>
                                 <span>
@@ -108,7 +108,7 @@
                 </li>
                 <li>
                     <a href="#food-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Food</span>
+                        <span class="link-title">Food Request</span>
                         <i class="mdi mdi-bullseye link-icon"></i>
                     </a>
                     <ul class="collapse navigation-submenu" id="food-nav">
@@ -122,7 +122,7 @@
                 </li>
                 <li>
                     <a href="#warehouse-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Warehouse</span>
+                        <span class="link-title">Warehouse Request</span>
                         <i class="mdi mdi-bullseye link-icon"></i>
                     </a>
                     <ul class="collapse navigation-submenu" id="warehouse-nav">
@@ -223,7 +223,7 @@
                                 if(total_notification < result.notification_count){
                                     toastr.success('Notification!', 'You have '+(result.notification_count - total_notification)+' new notification');
                                 }
-                            } 
+                            }
                             total_notification = result.notification_count;
                             if(total_notification){
                                 $('#notification-global-counter').removeClass('d-none').find('.badge span').html(total_notification+' Requests');
