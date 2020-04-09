@@ -96,6 +96,15 @@ class RequirementController extends Controller
 
     public function save(Request $request, $id=false){
         //save
+        $message = [
+            'building_id.required'=>'Building name field is required',
+            'type_id.required'=>'Request type is required',
+            'food_time_id.required_if'=>'Food time is required for food request',
+            'food_cuisine_id.required_if'=>'Cuisine is required for food request',
+            'warehouse_item_id.required_if'=>'Item is required for warehouse request',
+            'requested_qty.required_if'=>'Item is required for food & warehouse request',
+        ];
+
         $validationRule = array(
             'building_id'=>'required',
             'type_id'=>'required',
@@ -105,7 +114,7 @@ class RequirementController extends Controller
             'requested_qty'=>'required_if:type_id,1|required_if:type_id,2',
         );
 
-		$validation = Validator::make($request->input(), $validationRule);
+		$validation = Validator::make($request->input(), $validationRule, $message);
 
 		if ($validation->fails()) {
 			return response()->json([
