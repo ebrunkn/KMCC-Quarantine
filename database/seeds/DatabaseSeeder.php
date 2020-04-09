@@ -9,9 +9,13 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
+use App\Model\Building;
 use App\Model\Warehouse;
 use App\Model\WarehouseStock;
 use App\Model\RequestType;
+use App\Model\Requirement;
+use App\Model\FoodTime;
+use App\Model\FoodCuisine;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,8 +27,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
+        $this->call(BuildingTableSeeder::class);
         $this->call(WarehouseTableSeeder::class);
         $this->call(RequestTypeTableSeeder::class);
+        $this->call(FoodTimeTableSeeder::class);
+        $this->call(FoodCuisineTableSeeder::class);
+        $this->call(RequirementTableSeeder::class);
         $this->call(UserPermissionSeeder::class);
         // $this->call(AssignPermissionForUser::class);
     }
@@ -112,6 +120,16 @@ class AssignPermissionForUser extends Seeder {
         }
     }
 }
+class BuildingTableSeeder extends Seeder {
+    public function run() {
+        $items = ['Al Wasel', 'Rockey', 'Aseel', 'Pen'];
+        foreach($items as $item){
+            Building::create(array(
+                'building_name'=>$item
+            ));
+        }
+    }
+}
 class WarehouseTableSeeder extends Seeder {
     public function run() {
         $items = ['Kettle', 'Bedsheet', 'Mug', 'Pen', 'Note'];
@@ -134,6 +152,68 @@ class RequestTypeTableSeeder extends Seeder {
             RequestType::create(array(
                 'type'=>$item
             ));
+        }
+    }
+}
+
+class FoodTimeTableSeeder extends Seeder {
+    public function run() {
+        $items = ['Breakfast', 'Brunch', 'Lunch', 'Snacks', 'Dinner'];
+        foreach($items as $item){
+            FoodTime::create(array(
+                'name'=>$item
+            ));
+        }
+    }
+}
+
+class FoodCuisineTableSeeder extends Seeder {
+    public function run() {
+        $items = ['Arabic', 'Indian', 'Philippino', 'SriLankan'];
+        foreach($items as $item){
+            FoodCuisine::create(array(
+                'name'=>$item
+            ));
+        }
+    }
+}
+
+class RequirementTableSeeder extends Seeder {
+    public function run() {
+        $types = RequestType::get();
+        $building_count = Building::count();
+        foreach($types as $type){
+
+            foreach(range(0, 5) as $index){
+                if($type->id == 1){
+                    $ware_house_item_count = rand(1, Warehouse::count());
+                    $food_time_count = null;
+                    $food_cuisine_count = null;
+                }elseif($type->id == 2){
+                    $ware_house_item_count = null;
+                    $food_time_count = rand(1, FoodTime::count());
+                    $food_cuisine_count = rand(1, FoodCuisine::count());
+                    // dd($food_cuisine_count);
+                }else{
+                    $ware_house_item_count = null;
+                    $food_time_count = null;
+                    $food_cuisine_count = null;
+                }
+    
+    
+                Requirement::create(array(
+                    'user_id'=>1,
+                    'building_id'=>rand(1, $building_count),
+                    'room_no'=>rand(100, 200),
+                    'type_id'=>$type->id,
+                    'food_time_id'=>$food_time_count,
+                    'food_cuisine_id'=>$food_cuisine_count,
+                    'warehouse_item_id'=>$ware_house_item_count,
+                    'requested_qty'=>rand(20, 50),
+                    'info'=>'custom text',
+                ));
+            }
+            
         }
     }
 }

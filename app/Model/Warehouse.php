@@ -12,7 +12,13 @@ class Warehouse extends Model
     protected $table = 'warehouses';
     protected $fillable = ['item_name','threshold'];
 
+    public function getTotalStockAttribute(){
+        $sum = $this->getStocks()->withoutRestock()->sum('qty');
+        return $sum ?? 0;
+    }
+
     public function getStocks(){
         return $this->hasMany('App\Model\WarehouseStock','item_id','id');
     }
+    
 }

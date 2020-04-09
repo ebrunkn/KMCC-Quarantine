@@ -38,6 +38,11 @@ Route::namespace('Admin')->group(function(){
         Route::get('warehouse/view/{id}', 'WarehouseController@view');
         Route::get('warehouse/add-stock/{id}', 'WarehouseController@addStock');
         Route::post('warehouse/add-stock/{id}', 'WarehouseController@addStockSave');
+        
+        Route::get('requirement', 'RequirementController@index');
+        Route::get('requirement/add', 'RequirementController@create');
+        Route::get('requirement/edit/{id}', 'RequirementController@edit');
+        Route::post('requirement/save/{id?}', 'RequirementController@save');
 
     });
 });
