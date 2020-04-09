@@ -31,6 +31,10 @@ class WarehouseController extends Controller
             'item_name'=>'required',
 			// 'threshold'=>'required',
         );
+        
+        // if(strlen($request->input('threshold'))){
+        //     $validationRule['threshold'] = 'bail:integer|min:1';
+        // }
 
 		$validation = Validator::make($request->input(), $validationRule);
 
@@ -82,6 +86,8 @@ class WarehouseController extends Controller
 
             }
 
+            $request->session()->flash('form-save', true);
+
             return response()->json([
 				'code' => 200,
 				'status' => 'OK',
@@ -106,7 +112,7 @@ class WarehouseController extends Controller
     public function addStockSave(Request $request, $id) {
         $validationRule = array(
 			'item_id'=>'required',
-			'qty'=>'required',
+			'qty'=>'required|integer|min:1',
         );
 
 		$validation = Validator::make($request->input(), $validationRule);
@@ -130,6 +136,8 @@ class WarehouseController extends Controller
                 'data'=> $data,
             ));
 
+            $request->session()->flash('form-save', true);
+
             return response()->json([
 				'code' => 200,
 				'status' => 'OK',
@@ -146,7 +154,7 @@ class WarehouseController extends Controller
             'type'=>'delete warehouse item',
             'data'=> $id,
         ));
-        return redirect()->back();
+        return redirect()->back()->with('item-delete', true);
     }
 
     public function view(Request $request, $id){

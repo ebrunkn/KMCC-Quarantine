@@ -13,6 +13,7 @@
     <!-- End vendor css for this page -->
     <!-- inject:css -->
     {!! Html::style('admin/css/shared/style.css') !!}
+    {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css') !!}
     <!-- endinject -->
     <!-- Layout style -->
     {!! Html::style('admin/css/demo_1/style.css') !!}
@@ -149,6 +150,7 @@
     <!-- plugins:js -->
     {!! Html::script('admin/vendors/axios/axios.min.js') !!}
     {!! Html::script('admin/vendors/js/core.js') !!}
+    {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js') !!}
     <!-- endinject -->
     <!-- Vendor Js For This Page-->
     @stack('page-specific-js-lib')
@@ -160,8 +162,15 @@
     @stack('page-specific-script')
 
     <script>
+        toastr.options.escapeHtml = true;
+        toastr.options.closeButton = true;
+        toastr.options.closeHtml = '<button><i class="icon-off"></i></button>';
 
-
+        @if(request()->session()->get('form-save'))
+            toastr.success('OK!', 'Data Saved.')
+        @elseif(request()->session()->get('item-delete'))
+            toastr.warning('OK!', 'Item Deleted')
+        @endif
     </script>
 
 

@@ -90,13 +90,16 @@ $(document).ready(function(){
                     // showAlert('success', 'core.loading.saved');
                     // toastr.success('Saved');
                     window.location.href = bactToUrl;
+                    
                 }
                 else if ( result.status == 'INVALID_DATA' ) {
                     // console.log(result);
                     // showAlert('danger', $trans.get( 'core.loading.invalid_data' ));
+                    toastr.error('Error. Inavlid Data...!', 'Validation Error!')
                     showErrors(result);
                 }
                 else {
+                    toastr.error('Something went wrong!', 'Error!')
                     showAlert('danger', 'Error');
                     // toastr.error($trans.get( 'core.loading.error' ));
                     console.log( result );
