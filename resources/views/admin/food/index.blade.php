@@ -40,12 +40,11 @@
                               <td class="">
                                 {{$item->item_name}}
                               </td>
-                              <td>{{$item->total_stock}}</td>
+                              <td>{{$item->qty}}</td>
                               <td>{{$item->qty_requested}}</td>
                               <td>{{$item->threshold}}</td>
                               <td class="actions">
                                 <a href="{{url('warehouse/edit', array($item->id))}}" class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></a></i>
-                                <a href="{{url('warehouse/add-stock', array($item->id))}}" class="btn btn-xs btn-success"><i class="mdi mdi-plus"></a></i>
                               </td>
                             </tr>
                           @endforeach
