@@ -9,7 +9,7 @@
                   <a href="#">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="#">Buildings</a>
+                  <a href="#">Warehouse Stocks</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">List</li>
               </ol>
@@ -19,30 +19,33 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="grid">
-                  <p class="grid-header">Buildings List</p>
+                  <p class="grid-header">Stock List</p>
                   <div class="item-wrapper">
                     <div class="table-responsive">
                       <table class="table table-hover">
                         <thead>
 
                           <tr>
+                            <th>Item Name</th>
+                            <th>Type</th>
                             <th>Building Name</th>
-                            <th>Rooms</th>
-                            <th>Occupied</th>
+                            <th>Qty Requested</th>
                             <th></th>
                           </tr>
 
                         </thead>
                         <tbody>
-                          @foreach($data_bundle['buildings'] as $building)
+                          @foreach($data_bundle['items'] as $item)
                             <tr>
                               <td class="">
-                                {{$building->building_name}}
+                                {{$item->item_name}}
                               </td>
-                              <td>{{$building->total_rooms}}</td>
-                              <td>{{$building->occupancy}}</td>
+                              <td>{{$item->getRequestType->type}}</td>
+                              <td>{{$item->qty_requested}}</td>
+                              <td>{{$item->threshold}}</td>
                               <td class="actions">
-                                <a href="{{url('buildings/edit', array($building->id))}}" class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></a></i>
+                                <a href="{{url('warehouse/edit', array($item->id))}}" class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></a></i>
+                                <a href="{{url('warehouse/add-stock', array($item->id))}}" class="btn btn-xs btn-success"><i class="mdi mdi-plus"></a></i>
                               </td>
                             </tr>
                           @endforeach

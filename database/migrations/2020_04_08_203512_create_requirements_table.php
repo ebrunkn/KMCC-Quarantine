@@ -26,6 +26,7 @@ class CreateRequirementsTable extends Migration
             $table->integer('fulfilled_qty')->default(0);
             $table->boolean('completed')->default(0);
             $table->text('info')->nullable();
+            $table->boolean('visited')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

@@ -102,6 +102,8 @@ class BuildingController extends Controller
                 ));
             }
 
+            $request->session()->flash('form-save', true);
+
             return response()->json([
                 'code' => 200,
                 'status' => 'OK',
@@ -150,6 +152,8 @@ class BuildingController extends Controller
                 'data' => $contact,
             ));
 
+            $request->session()->flash('form-save', true);
+
             return response()->json([
                 'code' => 200,
                 'status' => 'OK',
@@ -178,6 +182,7 @@ class BuildingController extends Controller
             'type' => 'delete building contact',
             'data' => $id,
         ));
-        return redirect()->back();
+
+        return redirect()->back()->with('item-delete', true);
     }
 }

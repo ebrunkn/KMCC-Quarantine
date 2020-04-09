@@ -13,6 +13,7 @@
     <!-- End vendor css for this page -->
     <!-- inject:css -->
     {!! Html::style('admin/css/shared/style.css') !!}
+    {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css') !!}
     <!-- endinject -->
     <!-- Layout style -->
     {!! Html::style('admin/css/demo_1/style.css') !!}
@@ -37,8 +38,16 @@
                 </button>
                 <div class="nav ml-auto">
                     <ul class="nav">
+                        <li class="d-none" id="notification-global-counter">    
+                            <a href="{{url('requirement')}}" class="badge badge-success mt-2">
+                                <i class="mdi mdi-bell"></i>
+                                <span>
+                                    0 Requests
+                                </span>
+                            </a>
+                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{url('admin/logout')}}">
+                            <a class="nav-link" href="{{url('logout')}}">
                                 <i class="mdi mdi-logout mdi-1x"></i>
                             </a>
                         </li>
@@ -70,11 +79,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#reports-nav" data-toggle="collapse" aria-expanded="false">
+                    <a href="#buildings-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Buildings</span>
                         <i class="mdi mdi-bullseye link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu" id="reports-nav">
+                    <ul class="collapse navigation-submenu" id="buildings-nav">
                         <li>
                             <a href="{{url('buildings')}}">List</a>
                         </li>
@@ -84,16 +93,44 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#reports-nav" data-toggle="collapse" aria-expanded="false">
+                    <a href="#stock-nav" data-toggle="collapse" aria-expanded="false">
+                        <span class="link-title">Stock</span>
+                        <i class="mdi mdi-bullseye link-icon"></i>
+                    </a>
+                    <ul class="collapse navigation-submenu" id="stock-nav">
+                        <li>
+                            <a href="{{url('stock')}}">List</a>
+                        </li>
+                        <li>
+                            <a href="{{url('stock/add')}}">Add New</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#food-nav" data-toggle="collapse" aria-expanded="false">
+                        <span class="link-title">Food</span>
+                        <i class="mdi mdi-bullseye link-icon"></i>
+                    </a>
+                    <ul class="collapse navigation-submenu" id="food-nav">
+                        <li>
+                            <a href="{{url('requirement/food')}}">List</a>
+                        </li>
+                        <li>
+                            <a href="{{url('requirement/food/add')}}">Add New</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#warehouse-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Warehouse</span>
                         <i class="mdi mdi-bullseye link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu" id="reports-nav">
+                    <ul class="collapse navigation-submenu" id="warehouse-nav">
                         <li>
-                            <a href="{{url('warehouse')}}">List</a>
+                            <a href="{{url('requirement/warehouse')}}">List</a>
                         </li>
                         <li>
-                            <a href="{{url('warehouse/add')}}">Add New</a>
+                            <a href="{{url('requirement/warehouse/add')}}">Add New</a>
                         </li>
                     </ul>
                 </li>
@@ -149,6 +186,7 @@
     <!-- plugins:js -->
     {!! Html::script('admin/vendors/axios/axios.min.js') !!}
     {!! Html::script('admin/vendors/js/core.js') !!}
+    {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js') !!}
     <!-- endinject -->
     <!-- Vendor Js For This Page-->
     @stack('page-specific-js-lib')
@@ -160,8 +198,48 @@
     @stack('page-specific-script')
 
     <script>
+        toastr.options.escapeHtml = true;
+        toastr.options.closeButton = true;
+        toastr.options.closeHtml = '<button><i class="icon-off"></i></button>';
 
+        @if(request()->session()->get('form-save'))
+            toastr.success('OK!', 'Data Saved.')
+        @elseif(request()->session()->get('item-delete'))
+            toastr.warning('OK!', 'Item Deleted')
+        @endif
 
+        @if(auth()->check())
+
+            var total_notification = 0;
+            var ajax_notification_call = function(initial=false) {
+                $.ajax({
+                    type: "get",
+                    url: "{{url('notifications')}}",
+                    // data: sendData, // serializes the form's elements.
+                    dataType: 'json',
+                    success: function(result) {
+                        if( result.status == 'OK' ) {
+                            if(!initial){
+                                if(total_notification < result.notification_count){
+                                    toastr.success('Notification!', 'You have '+(result.notification_count - total_notification)+' new notification');
+                                }
+                            } 
+                            total_notification = result.notification_count;
+                            if(total_notification){
+                                $('#notification-global-counter').removeClass('d-none').find('.badge span').html(total_notification+' Requests');
+                            }else{
+                                $('#notification-global-counter').addClass('d-none').find('.badge span').html('0 Requests');
+                            }
+                        }
+                    },
+                });
+            };
+
+            ajax_notification_call('init');
+            var interval = 30000;
+            setInterval(ajax_notification_call, interval);
+
+        @endif
     </script>
 
 
