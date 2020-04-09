@@ -38,7 +38,7 @@ class DashboardController extends Controller
             'pending'=>Requirement::maintennace()->pending()->count(),
         ];
 
-        dd($data_bundle);
+        // dd($data_bundle);
         return view('admin/dashboard/index', compact('data_bundle'));
     }
 }
