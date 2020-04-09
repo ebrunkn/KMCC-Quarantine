@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Requirement extends Model
 {
     protected $table = 'requirements';
-    protected $fillable = ['user_id','building_id','room_no','type_id', 'food_time_id', 'food_cuisine_id', 'warehouse_item_id', 'requested_qty', 'fulfilled_qty','completed', 'info'];
+    protected $fillable = ['user_id','building_id','room_no','type_id', 'food_time_id', 'food_cuisine_id', 'warehouse_item_id', 'requested_qty', 'fulfilled_qty','completed', 'info','visited'];
 
+
+    public function scopeUnread($query){
+        return $query->where('visited',0);
+    }
 
     public function scopeWarehouse($query){
         return $query->where('type_id',1);

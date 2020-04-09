@@ -38,6 +38,14 @@
                 </button>
                 <div class="nav ml-auto">
                     <ul class="nav">
+                        @if($unread_requests)
+                            <li>    
+                                <a href="{{url('requirement')}}" class="badge badge-success mt-2">
+                                    <i class="mdi mdi-bell"></i>
+                                    {{$unread_requests}} Requests
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{url('admin/logout')}}">
                                 <i class="mdi mdi-logout mdi-1x"></i>
