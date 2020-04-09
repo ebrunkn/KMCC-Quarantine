@@ -44,5 +44,7 @@ Route::namespace('Admin')->group(function(){
         Route::post('requirement/save/{id?}', 'RequirementController@save');
         Route::get('requirement/{type?}', 'RequirementController@index');
 
+        Route::get('notifications', 'NotificationController@index');
+
     });
 });

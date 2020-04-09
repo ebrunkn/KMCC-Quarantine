@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Model\Requirement;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +25,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*', function($view){
-            $view->with('unread_requests', 100);
+            $total = Requirement::unread()->count();
+            $view->with('unread_requests', $total);
         });
     }
 }
