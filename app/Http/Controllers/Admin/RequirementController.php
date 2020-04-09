@@ -11,10 +11,22 @@ use Illuminate\Support\Facades\Validator;
 
 class RequirementController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request, $type=false){
         $data_bundle = [];
-        $data_bundle['items'] = Requirement::paginate(20);
-        // dd($data_bundle['requirements']);
+        $query = Requirement::whereNotNull('type_id');
+        
+        if($type == 'warehouse'){
+            $query->where('type_id',1);
+        }elseif($type == 'food'){
+            $query->where('type_id',2);
+        }elseif($type == 'maintenance'){
+            $query->where('type_id',3);
+        }elseif($type == 'other'){
+            $query->where('type_id',4);
+        }
+        
+        $data_bundle['items'] = $query->paginate(20);
+        dd($data_bundle['items']);
         return view('admin.requirement.index', compact('data_bundle'));
     }
 
