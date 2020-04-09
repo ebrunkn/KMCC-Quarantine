@@ -18,11 +18,11 @@ class WarehouseController extends Controller
         $data_bundle = [];
         $data_bundle['items'] = Warehouse::paginate(20);
         // dd($data_bundle['items']);
-        return view('admin.warehouse.index', compact('data_bundle'));
+        return view('admin.stock.index', compact('data_bundle'));
     }
 
     public function create(Request $request){
-        return view('admin.warehouse.create');
+        return view('admin.stock.create');
     }
 
     public function save(Request $request, $id=false){
@@ -31,7 +31,7 @@ class WarehouseController extends Controller
             'item_name'=>'required',
 			// 'threshold'=>'required',
         );
-        
+
         // if(strlen($request->input('threshold'))){
         //     $validationRule['threshold'] = 'bail:integer|min:1';
         // }
@@ -100,13 +100,13 @@ class WarehouseController extends Controller
     public function edit(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = Warehouse::findOrFail($id);
-        return view('admin.warehouse.edit', compact('data_bundle'));
+        return view('admin.stock.edit', compact('data_bundle'));
     }
 
     public function addStock(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = Warehouse::findOrFail($id);
-        return view('admin.warehouse.add-stock', compact('data_bundle'));
+        return view('admin.stock.add-stock', compact('data_bundle'));
     }
 
     public function addStockSave(Request $request, $id) {
@@ -160,6 +160,6 @@ class WarehouseController extends Controller
     public function view(Request $request, $id){
         $data_bundle = [];
         $data_bundle['item'] = Warehouse::findOrFail($id);
-        return view('admin.warehouse.view', compact('data_bundle'));
+        return view('admin.stock.view', compact('data_bundle'));
     }
 }

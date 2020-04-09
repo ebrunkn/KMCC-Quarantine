@@ -39,7 +39,7 @@
                 <div class="nav ml-auto">
                     <ul class="nav">
                         @if($unread_requests)
-                            <li>    
+                            <li>
                                 <a href="{{url('requirement')}}" class="badge badge-success mt-2">
                                     <i class="mdi mdi-bell"></i>
                                     {{$unread_requests}} Requests
@@ -79,11 +79,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#reports-nav" data-toggle="collapse" aria-expanded="false">
+                    <a href="#buildings-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Buildings</span>
                         <i class="mdi mdi-bullseye link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu" id="reports-nav">
+                    <ul class="collapse navigation-submenu" id="buildings-nav">
                         <li>
                             <a href="{{url('buildings')}}">List</a>
                         </li>
@@ -93,16 +93,44 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#reports-nav" data-toggle="collapse" aria-expanded="false">
+                    <a href="#stock-nav" data-toggle="collapse" aria-expanded="false">
+                        <span class="link-title">Stock</span>
+                        <i class="mdi mdi-bullseye link-icon"></i>
+                    </a>
+                    <ul class="collapse navigation-submenu" id="stock-nav">
+                        <li>
+                            <a href="{{url('stock')}}">List</a>
+                        </li>
+                        <li>
+                            <a href="{{url('stock/add')}}">Add New</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#food-nav" data-toggle="collapse" aria-expanded="false">
+                        <span class="link-title">Food</span>
+                        <i class="mdi mdi-bullseye link-icon"></i>
+                    </a>
+                    <ul class="collapse navigation-submenu" id="food-nav">
+                        <li>
+                            <a href="{{url('requirement/food')}}">List</a>
+                        </li>
+                        <li>
+                            <a href="{{url('requirement/food/add')}}">Add New</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#warehouse-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Warehouse</span>
                         <i class="mdi mdi-bullseye link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu" id="reports-nav">
+                    <ul class="collapse navigation-submenu" id="warehouse-nav">
                         <li>
-                            <a href="{{url('warehouse')}}">List</a>
+                            <a href="{{url('requirement/warehouse')}}">List</a>
                         </li>
                         <li>
-                            <a href="{{url('warehouse/add')}}">Add New</a>
+                            <a href="{{url('requirement/warehouse/add')}}">Add New</a>
                         </li>
                     </ul>
                 </li>

@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="grid">
-                  <p class="grid-header">Stock List</p>
+                  <p class="grid-header">Warehouse Request List</p>
                   <div class="item-wrapper">
                     <div class="table-responsive">
                       <table class="table table-hover">
@@ -27,9 +27,8 @@
 
                           <tr>
                             <th>Item Name</th>
-                            <th>Current Stock</th>
                             <th>Qty Requested</th>
-                            <th>Stock Threshold</th>
+                            <th>Building</th>
                             <th></th>
                           </tr>
 
@@ -38,14 +37,12 @@
                           @foreach($data_bundle['items'] as $item)
                             <tr>
                               <td class="">
-                                {{$item->item_name}}
+                                {{$item->getWarehouseItem->item_name}}
                               </td>
-                              <td>{{$item->total_stock}}</td>
-                              <td>{{$item->qty_requested}}</td>
-                              <td>{{$item->threshold}}</td>
+                              <td>{{$item->requested_qty}}</td>
+                              <td>{{$item->getBuilding->building_name}}</td>
                               <td class="actions">
                                 <a href="{{url('warehouse/edit', array($item->id))}}" class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></a></i>
-                                <a href="{{url('warehouse/add-stock', array($item->id))}}" class="btn btn-xs btn-success"><i class="mdi mdi-plus"></a></i>
                               </td>
                             </tr>
                           @endforeach
