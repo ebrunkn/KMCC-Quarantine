@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public function index(){
 
         $data_bundle = [];
-        
+
         $data_bundle['buildings'] = [
             'total'=> Building::count(),
         ];
@@ -24,6 +24,7 @@ class DashboardController extends Controller
             'received'=>Requirement::food()->count(),
             'completed'=>Requirement::food()->completed()->count(),
             'pending'=>Requirement::food()->pending()->count(),
+            'processing'=>Requirement::food()->processing()->count(),
         ];
 
         $data_bundle['warehouse_request'] = [
@@ -36,6 +37,7 @@ class DashboardController extends Controller
             'received'=>Requirement::maintennace()->count(),
             'completed'=>Requirement::maintennace()->completed()->count(),
             'pending'=>Requirement::maintennace()->pending()->count(),
+            'processing'=>Requirement::maintennace()->processing()->count(),
         ];
 
         // dd($data_bundle);

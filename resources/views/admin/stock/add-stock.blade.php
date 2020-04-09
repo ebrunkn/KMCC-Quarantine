@@ -55,6 +55,17 @@
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Restocked</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                {!! Form::checkbox('restock', 1, false,
+                                                array('class'=>'form-control','placeholder'=>'Restock')) !!}
+                                                <span id="form-error-restock"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
 
                                             </div>
                                             <div class="col-md-9 showcase_content_area">

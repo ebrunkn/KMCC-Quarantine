@@ -28,22 +28,52 @@
                             <div class="row mb-3">
 
                                 <div class="col-md-8 mx-auto">
-                                    <form id="data-form" class="form"
-                                        action="{{url('warehouse/save', array($data_bundle['item']->id))}}"
-                                        callback="{{url('warehouse')}}"
-                                        method="POST">
+                                    <form id="data-form" class="form" action="{{url('requirement/save', $data_bundle['item']->id)}}"
+                                        callback="{{url('requirement/warehouse')}}" method="POST">
                                         {{-- {!! Form::open(['url' => 'buildings/save', 'callback' => url('buildings')]) !!} --}}
                                         @csrf
+                                        {!! Form::hidden('type_id', $data_bundle['item']->type_id) !!}
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Select Item</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                {!! Form::select('warehouse_item_id', $data_bundle['ware_house_items'], $data_bundle['item']->warehouse_item_id,
+                                                array('class'=>'form-control','placeholder'=>'Meal Type')) !!}
+                                                <span id="form-error-food_time_id"></span>
+                                            </div>
+                                        </div>
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Item Name</label>
+                                                <label for="inputType1">Building</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::text('item_name',
-                                                $data_bundle['item']->item_name,
-                                                array('class'=>'form-control','placeholder'=>'Item Name')) !!}
-                                                <span id="form-error-item_name"></span>
+                                                {!! Form::select('building_id', $data_bundle['buildings'], $data_bundle['item']->building_id,
+                                                array('class'=>'form-control','placeholder'=>'Building')) !!}
+                                                <span id="form-error-building_id"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Quantity</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                {!! Form::text('requested_qty', $data_bundle['item']->requested_qty,
+                                                array('class'=>'form-control','placeholder'=>'Quantity')) !!}
+                                                <span id="form-error-requested_qty"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Room Number</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                {!! Form::text('room_no', $data_bundle['item']->room_no,
+                                                array('class'=>'form-control','placeholder'=>'Room Number')) !!}
+                                                <span id="form-error-room_no"></span>
                                             </div>
                                         </div>
 

@@ -25,7 +25,7 @@
                 </h3>
               </div>
               <hr>
-              <p class="text-black text-center">Total Buildings</p>
+              <p class="text-black text-center"><a href="buildings" class="">Total Buildings</a></p>
             </div>
           </div>
         </div>
@@ -34,17 +34,17 @@
             <div class="grid-body text-gray">
               <div class="text-center">
                 <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['food_request']['received']}} <small>Total Requests</small>
+                  {{$data_bundle['food_request']['received']}} <small> &nbsp; Total Requests</small>
                 </h3>
                 <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['food_request']['completed']}} <small>Completed Requests</small>
+                  {{$data_bundle['food_request']['completed']}} <small> &nbsp; Completed Requests</small>
                 </h3>
                 <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['food_request']['pending']}} <small>Pending Requests</small>
+                  {{$data_bundle['food_request']['pending']}} <small> &nbsp; Pending Requests</small>
                 </h3>
               </div>
               <hr>
-              <p class="text-black text-center">Food Request</p>
+              <p class="text-black text-center"><a href="requirement/food" class="">Food Requests</a></p>
             </div>
           </div>
         </div>
@@ -53,37 +53,36 @@
             <div class="grid-body text-gray">
               <div class="text-center">
                 <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['warehouse_request']['received']}} <small>Total Requests</small>
+                  {{$data_bundle['warehouse_request']['received']}} &nbsp; <small> Total Requests</small>
                 </h3>
                 <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['warehouse_request']['completed']}} <small>Completed Requests</small>
+                  {{$data_bundle['warehouse_request']['completed']}} &nbsp; <small> Completed Requests</small>
                 </h3>
                 <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['warehouse_request']['pending']}} <small>Pending Requests</small>
+                  {{$data_bundle['warehouse_request']['pending']}} &nbsp; <small> Pending Requests</small>
                 </h3>
               </div>
               <hr>
-              <p class="text-black text-center">Warehouse Request</p>
+              <p class="text-black text-center"><a href="requirement/warehouse" class="">Warehouse Requests</a></p>
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-6 equel-grid">
           <div class="grid">
-            <div class="grid-body text-gray">
               <div class="grid-body text-gray">
                 <div class="text-center">
                   <h3 class="d-flex align-items-center justify-content-center">
-                    {{$data_bundle['maintenence_request']['received']}} <small>Total Requests</small>
+                    {{$data_bundle['maintenence_request']['received']}} &nbsp; <small> Total Requests</small>
                   </h3>
                   <h3 class="d-flex align-items-center justify-content-center">
-                    {{$data_bundle['maintenence_request']['completed']}} <small>Completed Requests</small>
+                    {{$data_bundle['maintenence_request']['completed']}} &nbsp; <small> Completed Requests</small>
                   </h3>
                   <h3 class="d-flex align-items-center justify-content-center">
-                    {{$data_bundle['maintenence_request']['pending']}} <small>Pending Requests</small>
+                    {{$data_bundle['maintenence_request']['pending']}} &nbsp; <small> Pending Requests</small>
                   </h3>
                 </div>
                 <hr>
-                <p class="text-black text-center">Maintenance Request</p>
+                <p class="text-black text-center"><a href="requirement/maintenance" class="">Maintenance Requests</a></p>
             </div>
           </div>
         </div>

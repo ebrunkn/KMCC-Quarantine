@@ -99,10 +99,10 @@
                     </a>
                     <ul class="collapse navigation-submenu" id="stock-nav">
                         <li>
-                            <a href="{{url('stock')}}">List</a>
+                            <a href="{{url('stock')}}">View All Stock</a>
                         </li>
                         <li>
-                            <a href="{{url('stock/add')}}">Add New</a>
+                            <a href="{{url('stock/add')}}">Add New Item</a>
                         </li>
                     </ul>
                 </li>
@@ -113,10 +113,10 @@
                     </a>
                     <ul class="collapse navigation-submenu" id="food-nav">
                         <li>
-                            <a href="{{url('requirement/food')}}">List</a>
+                            <a href="{{url('requirement/food')}}">View All Request</a>
                         </li>
                         <li>
-                            <a href="{{url('requirement/food/add')}}">Add New</a>
+                            <a href="{{url('requirement/food/add')}}">Order Food</a>
                         </li>
                     </ul>
                 </li>
@@ -127,10 +127,10 @@
                     </a>
                     <ul class="collapse navigation-submenu" id="warehouse-nav">
                         <li>
-                            <a href="{{url('requirement/warehouse')}}">List</a>
+                            <a href="{{url('requirement/warehouse')}}">View All Request</a>
                         </li>
                         <li>
-                            <a href="{{url('requirement/warehouse/add')}}">Add New</a>
+                            <a href="{{url('requirement/warehouse/add')}}">Order Items</a>
                         </li>
                     </ul>
                 </li>
