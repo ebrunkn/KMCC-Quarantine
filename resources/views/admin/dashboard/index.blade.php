@@ -56,7 +56,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 equel-grid">
+        {{-- <div class="col-lg-4 col-md-6 equel-grid">
           <div class="grid">
             <div class="grid-body d-flex flex-column h-100">
               <div class="wrapper">
@@ -369,7 +369,7 @@
               <small class="font-weight-medium"><i class="mdi mdi-chevron-down mr-2"></i> View All </small>
             </a>
           </div>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>
