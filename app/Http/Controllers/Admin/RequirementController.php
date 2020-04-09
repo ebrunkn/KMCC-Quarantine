@@ -103,6 +103,8 @@ class RequirementController extends Controller
     public function edit(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = Requirement::findOrFail($id);
+        $data_bundle['item']->visited = 1;
+        $data_bundle['item']->save();
         return view('admin.requirement.edit', compact('data_bundle'));
     }
 
@@ -120,6 +122,8 @@ class RequirementController extends Controller
     public function view(Request $request, $id){
         $data_bundle = [];
         $data_bundle['item'] = Requirement::findOrFail($id);
+        $data_bundle['item']->visited = 1;
+        $data_bundle['item']->save();
         return view('admin.requirement.view', compact('data_bundle'));
     }
 }
