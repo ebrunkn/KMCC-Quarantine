@@ -13,7 +13,7 @@ class RequirementController extends Controller
 {
     public function index(Request $request){
         $data_bundle = [];
-        $data_bundle['requirements'] = Requirement::paginate(20);
+        $data_bundle['items'] = Requirement::paginate(20);
         // dd($data_bundle['requirements']);
         return view('admin.requirement.index', compact('data_bundle'));
     }
@@ -80,57 +80,16 @@ class RequirementController extends Controller
 
     public function edit(Request $request, $id) {
         $data_bundle = [];
-        $data_bundle['item'] = Warehouse::findOrFail($id);
+        $data_bundle['item'] = Requirement::findOrFail($id);
         return view('admin.requirement.edit', compact('data_bundle'));
-    }
-
-    public function addStock(Request $request, $id) {
-        $data_bundle = [];
-        $data_bundle['item'] = Warehouse::findOrFail($id);
-        return view('admin.requirement.add-stock', compact('data_bundle'));
-    }
-
-    public function addStockSave(Request $request, $id) {
-        $validationRule = array(
-			'item_id'=>'required',
-			'qty'=>'required',
-        );
-
-		$validation = Validator::make($request->input(), $validationRule);
-
-		if ($validation->fails()) {
-			return response()->json([
-				'code' => 400,
-				'status' => 'INVALID_DATA',
-				'errors' => $validation->errors(),
-				'message' => $validation->errors(),
-			], 200);
-		} else {
-            $data = WarehouseStock::create(array(
-                'item_id'=> $item->id,
-                'qty'=> $request->input('qty'),
-            ));
-
-            LogReport::create(array(
-                'user_id'=>auth()->user()->id,
-                'type'=>'add warehouse stock',
-                'data'=> $data,
-            ));
-
-            return response()->json([
-				'code' => 200,
-				'status' => 'OK',
-				'message' => 'Data Saved',
-            ], 200);
-        }
     }
 
     public function delete(Request $request, $id){
         // delete
-        Warehouse::where('id', $id)->delete();
+        Requirement::where('id', $id)->delete();
         LogReport::create(array(
             'user_id'=>auth()->user()->id,
-            'type'=>'delete warehouse item',
+            'type'=>'delete requirement request',
             'data'=> $id,
         ));
         return redirect()->back();
@@ -138,7 +97,7 @@ class RequirementController extends Controller
 
     public function view(Request $request, $id){
         $data_bundle = [];
-        $data_bundle['item'] = Warehouse::findOrFail($id);
+        $data_bundle['item'] = Requirement::findOrFail($id);
         return view('admin.requirement.view', compact('data_bundle'));
     }
 }
