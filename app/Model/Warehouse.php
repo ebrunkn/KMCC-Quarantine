@@ -10,7 +10,7 @@ class Warehouse extends Model
     use SoftDeletes;
     
     protected $table = 'warehouses';
-    protected $fillable = ['item_name'];
+    protected $fillable = ['item_name','threshold'];
 
     public function getStocks(){
         return $this->hasMany('App\Model\WarehouseStock','item_id','id');

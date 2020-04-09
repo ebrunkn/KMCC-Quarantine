@@ -29,7 +29,7 @@ class WarehouseController extends Controller
         //save
         $validationRule = array(
             'item_name'=>'required',
-			// 'qty'=>'required',
+			// 'threshold'=>'required',
         );
 
 		$validation = Validator::make($request->input(), $validationRule);
@@ -54,20 +54,26 @@ class WarehouseController extends Controller
                     'data'=> $item,
                 ));
             }else{
-                $item = Warehouse::create(array(
-                    'item_name'=> $request->input('item_name'),
+
+                $request->merge(array(
+                    'threshold'=> $request->input('threshold') ?? 25,
                 ));
 
-                $data = WarehouseStock::create(array(
-                    'item_id'=> $item->id,
-                    'qty'=> $request->input('qty'),
-                ));
+                $item = Warehouse::create($request->input());
 
-                LogReport::create(array(
-                    'user_id'=>auth()->user()->id,
-                    'type'=>'add warehouse item',
-                    'data'=> $data,
-                ));
+                // dd($request->input());
+
+                if($request->input('qty')){
+                    $data = WarehouseStock::create(array(
+                        'item_id'=> $item->id,
+                        'qty'=> $request->input('qty'),
+                    ));
+                    LogReport::create(array(
+                        'user_id'=>auth()->user()->id,
+                        'type'=>'add warehouse item',
+                        'data'=> $data,
+                    ));
+                }
 
             }
 
@@ -87,6 +93,12 @@ class WarehouseController extends Controller
     }
 
     public function addStock(Request $request, $id) {
+        $data_bundle = [];
+        $data_bundle['item'] = Warehouse::findOrFail($id);
+        return view('admin.warehouse.edit', compact('data_bundle'));
+    }
+
+    public function addStockSave(Request $request, $id) {
         $validationRule = array(
 			'item_id'=>'required',
 			'qty'=>'required',

@@ -36,7 +36,8 @@ Route::namespace('Admin')->group(function(){
         Route::get('warehouse/edit/{id}', 'WarehouseController@edit');
         Route::post('warehouse/save/{id?}', 'WarehouseController@save');
         Route::get('warehouse/view/{id}', 'WarehouseController@view');
-        Route::post('warehouse/add-stock', 'WarehouseController@addStock');
+        Route::get('warehouse/add-stock/{id}', 'WarehouseController@addStock');
+        Route::post('warehouse/add-stock/{id}', 'WarehouseController@addStockSave');
 
     });
 });
