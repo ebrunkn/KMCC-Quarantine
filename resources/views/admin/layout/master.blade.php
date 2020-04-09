@@ -47,7 +47,7 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{url('admin/logout')}}">
+                            <a class="nav-link" href="{{url('logout')}}">
                                 <i class="mdi mdi-logout mdi-1x"></i>
                             </a>
                         </li>

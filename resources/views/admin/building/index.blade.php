@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="grid">
-                  <p class="grid-header">Users List</p>
+                  <p class="grid-header">Buildings List</p>
                   <div class="item-wrapper">
                     <div class="table-responsive">
                       <table class="table table-hover">
