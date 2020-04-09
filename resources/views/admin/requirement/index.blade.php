@@ -6,10 +6,10 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb has-arrow">
                 <li class="breadcrumb-item">
-                  <a href="#">Dashboard</a>
+                  <a href="/">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="#">Warehouse Stocks</a>
+                  <a href="/requirement">Requirement </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">List</li>
               </ol>
@@ -28,8 +28,8 @@
                           <tr>
                             <th>Item Name</th>
                             <th>Type</th>
-                            <th>Building Name</th>
                             <th>Qty Requested</th>
+                            <th>Building Name</th>
                             <th></th>
                           </tr>
 
@@ -38,11 +38,11 @@
                           @foreach($data_bundle['items'] as $item)
                             <tr>
                               <td class="">
-                                {{$item->item_name}}
+                                {{$item->getFoodTime->name ?? $item->getWarehouseItem->item_name ?? '-'}}
                               </td>
                               <td>{{$item->getRequestType->type}}</td>
-                              <td>{{$item->qty_requested}}</td>
-                              <td>{{$item->threshold}}</td>
+                              <td>{{$item->requested_qty}}</td>
+                              <td>{{$item->getBuilding->building_name}}</td>
                               <td class="actions">
                                 <a href="{{url('warehouse/edit', array($item->id))}}" class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></a></i>
                                 <a href="{{url('warehouse/add-stock', array($item->id))}}" class="btn btn-xs btn-success"><i class="mdi mdi-plus"></a></i>

@@ -54,6 +54,19 @@ class RequirementController extends Controller
 
     public function create(Request $request, $type = false){
         $data_bundle = [];
+
+        if($type){
+            if($type == 'warehouse'){
+                $type_id = 1;
+            }elseif($type == 'food'){
+                $type_id = 2;
+            }elseif($type == 'maintenance'){
+                $type_id = 3;
+            }elseif($type == 'other'){
+                $type_id = 4;
+            }
+            $data_bundle['type_id'] = RequestType::find($type_id);
+        }
         $data_bundle['request_types'] = RequestType::pluck('type', 'id');
         $data_bundle['food_times'] = FoodTime::pluck('name', 'id');
         $data_bundle['food_cuisines'] = FoodCuisine::pluck('name', 'id');
@@ -115,9 +128,9 @@ class RequirementController extends Controller
                 ));
             }else{
 
-                // $request->merge(array(
-                //     'threshold'=> $request->input('threshold') ?? 25,
-                // ));
+                $request->merge(array(
+                    'user_id'=>auth()->user()->id,
+                ));
 
                 $item = Requirement::create($request->input());
                 LogReport::create(array(
