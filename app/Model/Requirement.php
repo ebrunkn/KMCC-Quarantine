@@ -57,7 +57,7 @@ class Requirement extends Model
     }
 
     public function getFoodTime(){
-        return $this->hasOne('App\Model\Foodtime','id','food_time_id');
+        return $this->hasOne('App\Model\FoodTime','id','food_time_id');
     }
 
     public function getFoodCuisine(){

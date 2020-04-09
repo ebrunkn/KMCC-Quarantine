@@ -6,10 +6,10 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb has-arrow">
                 <li class="breadcrumb-item">
-                    <a href="#">Dashboard</a>
+                  <a href="/">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="#">Warehouse</a>
+                  <a href="/requirement">Requirement </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Add</li>
             </ol>

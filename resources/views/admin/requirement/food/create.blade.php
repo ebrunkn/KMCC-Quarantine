@@ -6,10 +6,13 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb has-arrow">
                 <li class="breadcrumb-item">
-                    <a href="#">Dashboard</a>
+                    <a href="/">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="#">Requirement</a>
+                  <a href="/requirement">Requirement </a>
+                </li>
+                <li class="breadcrumb-item">
+                  <a href="/requirement/food">Food </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Food Request</li>
             </ol>
@@ -25,11 +28,11 @@
                             <div class="row mb-3">
 
                                 <div class="col-md-8 mx-auto">
-                                    <form id="data-form" class="form" action="{{url('warehouse/save')}}"
-                                        callback="{{url('warehouse')}}" method="POST">
+                                    <form id="data-form" class="form" action="{{url('requirement/save')}}"
+                                        callback="{{url('requirement/food')}}" method="POST">
                                         {{-- {!! Form::open(['url' => 'buildings/save', 'callback' => url('buildings')]) !!} --}}
                                         @csrf
-
+                                        {!! Form::hidden('type_id', $data_bundle['type_id']->id) !!}
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
                                                 <label for="inputType1">Meal Type</label>
