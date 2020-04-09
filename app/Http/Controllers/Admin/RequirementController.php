@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Model\Building;
 use App\Model\RequestType;
 use App\Model\FoodTime;
 use App\Model\FoodCuisine;
@@ -18,7 +18,7 @@ class RequirementController extends Controller
     public function index(Request $request, $type=false){
         $data_bundle = [];
         $query = Requirement::whereNotNull('type_id');
-        
+
         if($type == 'warehouse'){
             $query->where('type_id',1);
         }elseif($type == 'food'){
@@ -28,20 +28,57 @@ class RequirementController extends Controller
         }elseif($type == 'other'){
             $query->where('type_id',4);
         }
-        
+
         $data_bundle['items'] = $query->paginate(20);
         // dd($data_bundle['items']);
-        return view('admin.requirement.index', compact('data_bundle'));
+        $view = 'admin.requirement.index';
+        switch ($type) {
+            case 'food':
+                $view = 'admin.requirement.food.index';
+            break;
+
+            case 'warehouse':
+                $view = 'admin.requirement.warehouse.index';
+            break;
+
+            case 'warehouse':
+                $view = 'admin.requirement.maintenance.index';
+            break;
+
+            default:
+                $view = 'admin.requirement.index';
+            break;
+        }
+        return view($view, compact('data_bundle'));
     }
 
-    public function create(Request $request){
+    public function create(Request $request, $type = false){
         $data_bundle = [];
         $data_bundle['request_types'] = RequestType::pluck('type', 'id');
         $data_bundle['food_times'] = FoodTime::pluck('name', 'id');
         $data_bundle['food_cuisines'] = FoodCuisine::pluck('name', 'id');
+        $data_bundle['buildings'] = Building::pluck('building_name', 'id');
         $data_bundle['ware_house_items'] = Warehouse::pluck('item_name', 'id');
         // dd($data_bundle);
-        return view('admin.requirement.create', compact('data_bundle'));
+        $view = 'admin.requirement.create';
+        switch ($type) {
+            case 'food':
+                $view = 'admin.requirement.food.create';
+            break;
+
+            case 'warehouse':
+                $view = 'admin.requirement.warehouse.create';
+            break;
+
+            case 'warehouse':
+                $view = 'admin.requirement.maintenance.create';
+            break;
+
+            default:
+                $view = 'admin.requirement.create';
+            break;
+        }
+        return view($view, compact('data_bundle'));
     }
 
     public function save(Request $request, $id=false){
