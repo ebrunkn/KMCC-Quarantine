@@ -19,40 +19,71 @@
         <div class="col-md-3 col-sm-6 col-6 equel-grid">
           <div class="grid">
             <div class="grid-body text-gray">
-              <div class="d-flex justify-content-between">
-                <h2>4</h2>
+              <div class="text-center">
+                <h3 class="d-flex align-items-center justify-content-center">
+                  {{$data_bundle['buildings']['total']}}
+                </h3>
               </div>
-              <p class="text-black">Buildings</p>
+              <hr>
+              <p class="text-black text-center">Total Buildings</p>
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-6 equel-grid">
           <div class="grid">
             <div class="grid-body text-gray">
-              <div class="d-flex justify-content-between">
-                <h2>200</h2>
+              <div class="text-center">
+                <h3 class="d-flex align-items-center justify-content-center">
+                  {{$data_bundle['food_request']['received']}} <small>Total Requests</small>
+                </h3>
+                <h3 class="d-flex align-items-center justify-content-center">
+                  {{$data_bundle['food_request']['completed']}} <small>Completed Requests</small>
+                </h3>
+                <h3 class="d-flex align-items-center justify-content-center">
+                  {{$data_bundle['food_request']['pending']}} <small>Pending Requests</small>
+                </h3>
               </div>
-              <p class="text-black">Occupants</p>
+              <hr>
+              <p class="text-black text-center">Food Request</p>
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-6 equel-grid">
           <div class="grid">
             <div class="grid-body text-gray">
-              <div class="d-flex justify-content-between">
-                <h2>200</h2>
+              <div class="text-center">
+                <h3 class="d-flex align-items-center justify-content-center">
+                  {{$data_bundle['warehouse_request']['received']}} <small>Total Requests</small>
+                </h3>
+                <h3 class="d-flex align-items-center justify-content-center">
+                  {{$data_bundle['warehouse_request']['completed']}} <small>Completed Requests</small>
+                </h3>
+                <h3 class="d-flex align-items-center justify-content-center">
+                  {{$data_bundle['warehouse_request']['pending']}} <small>Pending Requests</small>
+                </h3>
               </div>
-              <p class="text-black">Occupants</p>
+              <hr>
+              <p class="text-black text-center">Warehouse Request</p>
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-6 equel-grid">
           <div class="grid">
             <div class="grid-body text-gray">
-              <div class="d-flex justify-content-between">
-                <h2>200</h2>
-              </div>
-              <p class="text-black">Occupants</p>
+              <div class="grid-body text-gray">
+                <div class="text-center">
+                  <h3 class="d-flex align-items-center justify-content-center">
+                    {{$data_bundle['maintenence_request']['received']}} <small>Total Requests</small>
+                  </h3>
+                  <h3 class="d-flex align-items-center justify-content-center">
+                    {{$data_bundle['maintenence_request']['completed']}} <small>Completed Requests</small>
+                  </h3>
+                  <h3 class="d-flex align-items-center justify-content-center">
+                    {{$data_bundle['maintenence_request']['pending']}} <small>Pending Requests</small>
+                  </h3>
+                </div>
+                <hr>
+                <p class="text-black text-center">Maintenance Request</p>
             </div>
           </div>
         </div>
