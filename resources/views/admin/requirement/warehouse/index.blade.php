@@ -9,7 +9,7 @@
                   <a href="#">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="#">Warehouse Stocks</a>
+                  <a href="#">Warehouse </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">List</li>
               </ol>

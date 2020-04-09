@@ -25,7 +25,7 @@
                             <div class="row mb-3">
 
                                 <div class="col-md-8 mx-auto">
-                                    <form id="data-form" class="form" action="{{url('warehouse/save')}}"
+                                    <form id="data-form" class="form" action="{{url('requirement/warehouse/save')}}"
                                         callback="{{url('warehouse')}}" method="POST">
                                         {{-- {!! Form::open(['url' => 'buildings/save', 'callback' => url('buildings')]) !!} --}}
                                         @csrf
@@ -35,20 +35,9 @@
                                                 <label for="inputType1">Meal Type</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::select('food_time_id', $data_bundle['food_times'], null,
-                                                array('class'=>'form-control','placeholder'=>'Meal Type')) !!}
-                                                <span id="form-error-food_time_id"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Cuisine Type</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {!! Form::select('food_cuisine_id', $data_bundle['food_cuisines'], null,
-                                                array('class'=>'form-control','placeholder'=>'Meal Type')) !!}
-                                                <span id="form-error-food_cuisine_id"></span>
+                                                {!! Form::select('warehouse_item_id', $data_bundle['ware_house_items'], null,
+                                                array('class'=>'form-control','placeholder'=>'Item')) !!}
+                                                <span id="form-error-warehouse_item_id"></span>
                                             </div>
                                         </div>
 
