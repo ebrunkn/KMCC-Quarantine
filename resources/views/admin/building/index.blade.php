@@ -56,7 +56,7 @@
 
             <div class="row">
               <div class="col-12">
-                {{-- {!! $data_bundle['buildings']->render() !!} --}}
+                {!! $data_bundle['buildings']->render() !!}
               </div>
             </div>
           </div>

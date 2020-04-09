@@ -44,8 +44,7 @@
                               <td>{{$item->requested_qty}}</td>
                               <td>{{$item->getBuilding->building_name}}</td>
                               <td class="actions">
-                                <a href="{{url('warehouse/edit', array($item->id))}}" class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></a></i>
-                                <a href="{{url('warehouse/add-stock', array($item->id))}}" class="btn btn-xs btn-success"><i class="mdi mdi-plus"></a></i>
+                                {{-- <a href="{{url('warehouse/edit', array($item->id))}}" class="btn btn-xs btn-info"><a class="mdi mdi-pencil"></a></a> --}}
                               </td>
                             </tr>
                           @endforeach
@@ -59,7 +58,7 @@
 
             <div class="row">
               <div class="col-12">
-                {{-- {!! $data_bundle['buildings']->render() !!} --}}
+                {!! $data_bundle['items']->render() !!}
               </div>
             </div>
           </div>
