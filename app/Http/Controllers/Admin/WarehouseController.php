@@ -120,7 +120,7 @@ class WarehouseController extends Controller
 			], 200);
 		} else {
             $data = WarehouseStock::create(array(
-                'item_id'=> $item->id,
+                'item_id'=> $request->input('item_id'),
                 'qty'=> $request->input('qty'),
             ));
 
