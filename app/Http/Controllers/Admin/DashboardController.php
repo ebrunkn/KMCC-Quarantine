@@ -5,11 +5,21 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Model\Building;
+use App\Model\BuildingContact;
+use App\Model\Requirement;
+use App\Model\LogReport;
+
 class DashboardController extends Controller
 {
     public function index(){
+
         $data_bundle = [];
         
+        $data_bundle['buildings'] = [
+            'total'=> Building::count(),
+        ];
+
         $data_bundle['food_request'] = [
             'received'=>0,
             'completed'=>0,
@@ -27,6 +37,8 @@ class DashboardController extends Controller
             'completed'=>0,
             'pending'=>0,
         ];
+
+        dd($data_bundle['buildings']['total']);
         return view('admin/dashboard/index', compact('data_bundle'));
     }
 }

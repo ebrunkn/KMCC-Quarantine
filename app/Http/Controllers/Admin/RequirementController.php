@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Model\RequestType;
+use App\Model\FoodTime;
+use App\Model\FoodCuisine;
 use App\Model\Requirement;
+use App\Model\Warehouse;
 use App\Model\LogReport;
 use Illuminate\Support\Facades\Validator;
 
@@ -26,12 +30,18 @@ class RequirementController extends Controller
         }
         
         $data_bundle['items'] = $query->paginate(20);
-        dd($data_bundle['items']);
+        // dd($data_bundle['items']);
         return view('admin.requirement.index', compact('data_bundle'));
     }
 
     public function create(Request $request){
-        return view('admin.requirement.create');
+        $data_bundle = [];
+        $data_bundle['request_types'] = RequestType::pluck('type', 'id');
+        $data_bundle['food_times'] = FoodTime::pluck('name', 'id');
+        $data_bundle['food_cuisines'] = FoodCuisine::pluck('name', 'id');
+        $data_bundle['ware_house_items'] = Warehouse::pluck('item_name', 'id');
+        // dd($data_bundle);
+        return view('admin.requirement.create', compact('data_bundle'));
     }
 
     public function save(Request $request, $id=false){
