@@ -102,7 +102,7 @@ class RequirementController extends Controller
             'food_time_id.required_if'=>'Food time is required for food request',
             'food_cuisine_id.required_if'=>'Cuisine is required for food request',
             'warehouse_item_id.required_if'=>'Item is required for warehouse request',
-            'requested_qty.required_if'=>'Item is required for food & warehouse request',
+            'requested_qty.required_if'=>'Quantity is required for food & warehouse request',
         ];
 
         $validationRule = array(
