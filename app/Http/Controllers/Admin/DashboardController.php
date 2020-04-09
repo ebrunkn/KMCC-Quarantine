@@ -21,24 +21,24 @@ class DashboardController extends Controller
         ];
 
         $data_bundle['food_request'] = [
-            'received'=>0,
-            'completed'=>0,
-            'pending'=>0,
+            'received'=>Requirement::food()->count(),
+            'completed'=>Requirement::food()->completed()->count(),
+            'pending'=>Requirement::food()->pending()->count(),
         ];
 
         $data_bundle['warehouse_request'] = [
-            'received'=>0,
-            'completed'=>0,
-            'pending'=>0,
+            'received'=>Requirement::warehouse()->count(),
+            'completed'=>Requirement::warehouse()->fullfilled()->count(),
+            'pending'=>Requirement::warehouse()->unFullfilled()->count(),
         ];
 
         $data_bundle['maintenence_request'] = [
-            'received'=>0,
-            'completed'=>0,
-            'pending'=>0,
+            'received'=>Requirement::maintennace()->count(),
+            'completed'=>Requirement::maintennace()->completed()->count(),
+            'pending'=>Requirement::maintennace()->pending()->count(),
         ];
 
-        dd($data_bundle['buildings']['total']);
+        dd($data_bundle);
         return view('admin/dashboard/index', compact('data_bundle'));
     }
 }

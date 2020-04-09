@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Requirement extends Model
 {
     protected $table = 'requirements';
-    protected $fillable = ['user_id','building_id','room_no','type_id', 'food_time_id', 'food_cuisine_id', 'warehouse_item_id', 'requested_qty', 'fulfilled_qty', 'info'];
+    protected $fillable = ['user_id','building_id','room_no','type_id', 'food_time_id', 'food_cuisine_id', 'warehouse_item_id', 'requested_qty', 'fulfilled_qty','completed', 'info'];
 
 
     public function scopeWarehouse($query){
@@ -24,6 +24,22 @@ class Requirement extends Model
 
     public function scopeOther($query){
         return $query->where('type_id',4);
+    }
+
+    public function scopeCompleted($query){
+        return $query->where('completed',1);
+    }
+
+    public function scopePending($query){
+        return $query->where('completed',0);
+    }
+
+    public function scopeFullfilled($query){
+        // return $query->where('requested_qty','=','fulfilled_qty');
+    }
+
+    public function scopeUnFullfilled($query){
+        // return $query->where('requested_qty','!=','fulfilled_qty');
     }
 
     public function getBuilding(){

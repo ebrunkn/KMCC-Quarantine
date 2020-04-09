@@ -24,6 +24,7 @@ class CreateRequirementsTable extends Migration
             $table->bigInteger('warehouse_item_id')->unsigned()->nullable();
             $table->integer('requested_qty')->default(0);
             $table->integer('fulfilled_qty')->default(0);
+            $table->boolean('completed')->default(0);
             $table->text('info')->nullable();
             $table->timestamps();
             $table->softDeletes();
