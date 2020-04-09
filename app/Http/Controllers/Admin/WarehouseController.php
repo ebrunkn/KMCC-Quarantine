@@ -95,7 +95,7 @@ class WarehouseController extends Controller
     public function addStock(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = Warehouse::findOrFail($id);
-        return view('admin.warehouse.edit', compact('data_bundle'));
+        return view('admin.warehouse.add-stock', compact('data_bundle'));
     }
 
     public function addStockSave(Request $request, $id) {
