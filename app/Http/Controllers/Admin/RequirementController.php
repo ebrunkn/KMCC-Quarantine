@@ -4,25 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Log;
-use Carbon\Carbon;
 
-use App\Model\Warehouse;
-use App\Model\WarehouseStock;
+use App\Model\Requirement;
 use App\Model\LogReport;
 use Illuminate\Support\Facades\Validator;
 
-class WarehouseController extends Controller
+class RequirementController extends Controller
 {
     public function index(Request $request){
         $data_bundle = [];
-        $data_bundle['items'] = Warehouse::paginate(20);
-        // dd($data_bundle['items']);
-        return view('admin.warehouse.index', compact('data_bundle'));
+        $data_bundle['requirements'] = Requirement::paginate(20);
+        dd($data_bundle['requirements']);
+        return view('admin.requirement.index', compact('data_bundle'));
     }
 
     public function create(Request $request){
-        return view('admin.warehouse.create');
+        return view('admin.requirement.create');
     }
 
     public function save(Request $request, $id=false){
@@ -89,13 +86,13 @@ class WarehouseController extends Controller
     public function edit(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = Warehouse::findOrFail($id);
-        return view('admin.warehouse.edit', compact('data_bundle'));
+        return view('admin.requirement.edit', compact('data_bundle'));
     }
 
     public function addStock(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = Warehouse::findOrFail($id);
-        return view('admin.warehouse.add-stock', compact('data_bundle'));
+        return view('admin.requirement.add-stock', compact('data_bundle'));
     }
 
     public function addStockSave(Request $request, $id) {
@@ -147,6 +144,6 @@ class WarehouseController extends Controller
     public function view(Request $request, $id){
         $data_bundle = [];
         $data_bundle['item'] = Warehouse::findOrFail($id);
-        return view('admin.warehouse.view', compact('data_bundle'));
+        return view('admin.requirement.view', compact('data_bundle'));
     }
 }

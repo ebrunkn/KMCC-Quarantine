@@ -19,6 +19,8 @@ class CreateRequirementsTable extends Migration
             $table->bigInteger('building_id')->unsigned()->nullable();
             $table->bigInteger('room_no')->unsigned()->nullable();
             $table->bigInteger('type_id')->unsigned();
+            $table->bigInteger('food_time_id')->unsigned()->nullable();
+            $table->bigInteger('food_cuisine_id')->unsigned()->nullable();
             $table->bigInteger('warehouse_item_id')->unsigned()->nullable();
             $table->integer('requested_qty')->default(0);
             $table->integer('fulfilled_qty')->default(0);
@@ -30,6 +32,8 @@ class CreateRequirementsTable extends Migration
             $table->foreign('building_id')->references('id')->on('buildings')->onDelete('cascade');
             $table->foreign('type_id')->references('id')->on('request_types')->onDelete('cascade');
             $table->foreign('warehouse_item_id')->references('id')->on('warehouses')->onDelete('cascade');
+            $table->foreign('food_time_id')->references('id')->on('food_times')->onDelete('cascade');
+            $table->foreign('food_cuisine_id')->references('id')->on('food_cuisines')->onDelete('cascade');
         });
     }
 
@@ -44,6 +48,8 @@ class CreateRequirementsTable extends Migration
 			$table->dropForeign(['user_id']);
 			$table->dropForeign(['building_id']);
 			$table->dropForeign(['type_id']);
+			$table->dropForeign(['food_time_id']);
+			$table->dropForeign(['food_cuisine_id']);
 			$table->dropForeign(['warehouse_item_id']);
 		});
         Schema::dropIfExists('requirements');
