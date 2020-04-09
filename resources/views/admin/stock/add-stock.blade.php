@@ -25,8 +25,8 @@
                             <div class="row mb-3">
 
                                 <div class="col-md-8 mx-auto">
-                                    <form id="data-form" class="form" action="{{url('warehouse/add-stock', $data_bundle['item']->id)}}"
-                                        callback="{{url('warehouse')}}" method="POST">
+                                    <form id="data-form" class="form" action="{{url('stock/add-stock', $data_bundle['item']->id)}}"
+                                        callback="{{url('stock')}}" method="POST">
                                         {{-- {!! Form::open(['url' => 'buildings/save', 'callback' => url('buildings')]) !!} --}}
                                         @csrf
                                         {!! Form::hidden('item_id', $data_bundle['item']->id) !!}
