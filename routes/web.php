@@ -12,7 +12,7 @@
 */
 
 Route::namespace('Admin')->group(function(){
-    Route::get('login', 'LoginController@login');
+    Route::get('login', 'LoginController@login')->name('login');
     Route::post('login', 'LoginController@loginProcess');
     Route::group(['middleware'=>'auth'], function() {
         Route::get('logout', 'LoginController@logout');
@@ -38,7 +38,7 @@ Route::namespace('Admin')->group(function(){
         Route::get('warehouse/view/{id}', 'WarehouseController@view');
         Route::get('warehouse/add-stock/{id}', 'WarehouseController@addStock');
         Route::post('warehouse/add-stock/{id}', 'WarehouseController@addStockSave');
-        
+
         Route::get('requirement/add', 'RequirementController@create');
         Route::get('requirement/edit/{id}', 'RequirementController@edit');
         Route::post('requirement/save/{id?}', 'RequirementController@save');
