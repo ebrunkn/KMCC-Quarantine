@@ -14,7 +14,7 @@ class RequirementController extends Controller
     public function index(Request $request){
         $data_bundle = [];
         $data_bundle['requirements'] = Requirement::paginate(20);
-        dd($data_bundle['requirements']);
+        // dd($data_bundle['requirements']);
         return view('admin.requirement.index', compact('data_bundle'));
     }
 
@@ -25,8 +25,12 @@ class RequirementController extends Controller
     public function save(Request $request, $id=false){
         //save
         $validationRule = array(
-            'item_name'=>'required',
-			// 'threshold'=>'required',
+            'building_id'=>'required',
+            'type_id'=>'required',
+            'food_time_id'=>'required_if:type_id,2',
+            'food_cuisine_id'=>'required_if:type_id,2',
+            'warehouse_item_id'=>'required_if:type_id,1',
+            'requested_qty'=>'required_if:type_id,1|required_if:type_id,2',
         );
 
 		$validation = Validator::make($request->input(), $validationRule);
@@ -41,36 +45,27 @@ class RequirementController extends Controller
 		} else {
             // $validated = $request->validated();
             if($id){
-                $item = Warehouse::find($id);
-                $item->item_name = $request->input('item_name');
+                $item = Requirement::find($id);
+                // $item->item_name = $request->input('item_name');
                 $item->save();
 
                 LogReport::create(array(
                     'user_id'=>auth()->user()->id,
-                    'type'=>'edit warehouse item',
+                    'type'=>'edit requirement request',
                     'data'=> $item,
                 ));
             }else{
 
-                $request->merge(array(
-                    'threshold'=> $request->input('threshold') ?? 25,
+                // $request->merge(array(
+                //     'threshold'=> $request->input('threshold') ?? 25,
+                // ));
+
+                $item = Requirement::create($request->input());
+                LogReport::create(array(
+                    'user_id'=>auth()->user()->id,
+                    'type'=>'add requirement request',
+                    'data'=> $item,
                 ));
-
-                $item = Warehouse::create($request->input());
-
-                // dd($request->input());
-
-                if($request->input('qty')){
-                    $data = WarehouseStock::create(array(
-                        'item_id'=> $item->id,
-                        'qty'=> $request->input('qty'),
-                    ));
-                    LogReport::create(array(
-                        'user_id'=>auth()->user()->id,
-                        'type'=>'add warehouse item',
-                        'data'=> $data,
-                    ));
-                }
 
             }
 

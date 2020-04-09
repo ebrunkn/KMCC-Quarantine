@@ -60,6 +60,11 @@ class WarehouseController extends Controller
                 ));
 
                 $item = Warehouse::create($request->input());
+                LogReport::create(array(
+                    'user_id'=>auth()->user()->id,
+                    'type'=>'add warehouse item',
+                    'data'=> $item,
+                ));
 
                 // dd($request->input());
 
@@ -70,7 +75,7 @@ class WarehouseController extends Controller
                     ));
                     LogReport::create(array(
                         'user_id'=>auth()->user()->id,
-                        'type'=>'add warehouse item',
+                        'type'=>'add warehouse stock',
                         'data'=> $data,
                     ));
                 }
