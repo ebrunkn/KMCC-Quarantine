@@ -38,16 +38,16 @@
                 </button>
                 <div class="nav ml-auto">
                     <ul class="nav">
-                        @if($unread_requests)
-                            <li>
-                                <a href="{{url('requirement')}}" class="badge badge-success mt-2">
-                                    <i class="mdi mdi-bell"></i>
-                                    {{$unread_requests}} Requests
-                                </a>
-                            </li>
-                        @endif
+                        <li class="d-none" id="notification-global-counter">    
+                            <a href="{{url('requirement')}}" class="badge badge-success mt-2">
+                                <i class="mdi mdi-bell"></i>
+                                <span>
+                                    0 Requests
+                                </span>
+                            </a>
+                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{url('admin/logout')}}">
+                            <a class="nav-link" href="{{url('logout')}}">
                                 <i class="mdi mdi-logout mdi-1x"></i>
                             </a>
                         </li>
@@ -206,6 +206,39 @@
             toastr.success('OK!', 'Data Saved.')
         @elseif(request()->session()->get('item-delete'))
             toastr.warning('OK!', 'Item Deleted')
+        @endif
+
+        @if(auth()->check())
+
+            var total_notification = 0;
+            var ajax_notification_call = function(initial=false) {
+                $.ajax({
+                    type: "get",
+                    url: "{{url('notifications')}}",
+                    // data: sendData, // serializes the form's elements.
+                    dataType: 'json',
+                    success: function(result) {
+                        if( result.status == 'OK' ) {
+                            if(!initial){
+                                if(total_notification < result.notification_count){
+                                    toastr.success('Notification!', 'You have '+(result.notification_count - total_notification)+' new notification');
+                                }
+                            } 
+                            total_notification = result.notification_count;
+                            if(total_notification){
+                                $('#notification-global-counter').removeClass('d-none').find('.badge span').html(total_notification+' Requests');
+                            }else{
+                                $('#notification-global-counter').addClass('d-none').find('.badge span').html('0 Requests');
+                            }
+                        }
+                    },
+                });
+            };
+
+            ajax_notification_call('init');
+            var interval = 30000;
+            setInterval(ajax_notification_call, interval);
+
         @endif
     </script>
 
