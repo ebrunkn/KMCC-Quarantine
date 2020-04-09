@@ -25,8 +25,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*', function($view){
-            $total = Requirement::unread()->count();
-            $view->with('unread_requests', $total);
+            // $total = Requirement::unread()->count();
+            // $total = 0;
+            // $view->with('unread_requests', $total);
         });
     }
 }
