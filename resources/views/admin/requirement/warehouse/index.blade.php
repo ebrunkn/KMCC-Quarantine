@@ -22,7 +22,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="grid">
-                    <p class="grid-header">Warehouse Request List</p>
+                    <p class="grid-header">
+                        Warehouse Request List
+                        <a href="{{url('requirement/warehouse/add')}}" class="btn btn-sm btn-success float-right">
+                            <i class="mdi mdi-plus"></i>
+                            Order
+                        </a>
+                    </p>
                     <div class="item-wrapper">
                         <div class="table-responsive">
                             <table class="table table-hover">
@@ -45,24 +51,26 @@
                                         </td>
                                         <td>{{$item->requested_qty}}</td>
                                         <td>{{$item->getBuilding->building_name}}</td>
-                                        <td>{{Carbon::parse($item->created_at)->format('d-m-Y h:i a')}}</td>
+                                        <td>{{Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
                                         <td class="actions">
-                                            <a href="{{url('requirement/warehouse/edit', array($item->id))}}"
-                                                class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></i></a>
-                                                @switch($item->status)
-                                                    @case(2)
-                                                    <a href="#" class="btn btn-xs
-                                                    btn-success" title="Change to Processing">Delivered</a>
-                                                        @break
-                                                    @case(1)
-                                                    <a href="{{url('requirement/update', array($item->id, 2))}}" class="btn btn-xs
-                                                    btn-primary" title="Change to Processing">Processing</a>
-                                                        @break
-                                                    @default
-                                                    <a href="{{url('requirement/update', array($item->id, 1))}}" class="btn btn-xs
+                                            {{-- <a href="{{url('requirement/' . $item->type . '/edit', array($item->id))}}"
+                                            class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></i></a> --}}
+                                            @switch($item->status)
+                                            @case(2)
+                                            <a href="#" class="btn btn-xs
+                                                    btn-success" title="Delivered">Delivered</a>
+                                            @break
+                                            @case(1)
+                                            <a href="{{url('requirement/' . $item->type . '/edit', array($item->id))}}"
+                                                class="btn btn-xs
+                                                    btn-primary" title="Change to Delivered">Processing</a>
+                                            @break
+                                            @default
+                                            <a href="{{url('requirement/' . $item->type . '/edit', array($item->id))}}"
+                                                class="btn btn-xs
                                                     btn-danger" title="Change to Processing">New</a>
-                                                        @break
-                                                @endswitch
+                                            @break
+                                            @endswitch
                                         </td>
                                     </tr>
                                     @endforeach

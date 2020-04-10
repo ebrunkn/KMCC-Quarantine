@@ -147,7 +147,10 @@ class WarehouseTableSeeder extends Seeder {
 }
 class RequestTypeTableSeeder extends Seeder {
     public function run() {
-        $items = ['Warehouse Items', 'Food', 'Maintenance', 'Other'];
+        $items = [
+            'Warehouse Items', 'Food'
+            // 'Maintenance', 'Other'
+        ];
         foreach($items as $item){
             RequestType::create(array(
                 'type'=>$item

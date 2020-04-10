@@ -29,8 +29,8 @@ class DashboardController extends Controller
 
         $data_bundle['warehouse_request'] = [
             'received'=>Requirement::warehouse()->count(),
-            'completed'=>Requirement::warehouse()->fullfilled()->count(),
-            'pending'=>Requirement::warehouse()->unFullfilled()->count(),
+            'completed'=>Requirement::warehouse()->fulfilled()->count(),
+            'pending'=>Requirement::warehouse()->unFulfilled()->count(),
         ];
 
         $data_bundle['maintenence_request'] = [

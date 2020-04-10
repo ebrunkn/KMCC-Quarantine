@@ -19,7 +19,13 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="grid">
-                  <p class="grid-header">Buildings List</p>
+                  <p class="grid-header">
+                    Buildings List
+                    <a href="{{url('buildings/add')}}" class="btn btn-sm btn-success float-right">
+                      <i class="mdi mdi-plus"></i>
+                      Add New
+                    </a>
+                  </p>
                   <div class="item-wrapper">
                     <div class="table-responsive">
                       <table class="table table-hover">

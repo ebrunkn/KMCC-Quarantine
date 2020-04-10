@@ -46,7 +46,7 @@
                                                 <label for="inputType1">Initial Quantity</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::text('qty', old('qty'),
+                                                {!! Form::text('qty', old('qty', 0),
                                                 array('class'=>'form-control','placeholder'=>'Quantity')) !!}
                                                 <span id="form-error-qty"></span>
                                             </div>
@@ -57,7 +57,7 @@
                                                 <label for="inputType1">Minimum Threshold</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::text('threshold', old('threshold'),
+                                                {!! Form::text('threshold', old('threshold', 0),
                                                 array('class'=>'form-control','placeholder'=>'Threshold')) !!}
                                                 <span id="form-error-threshold"></span>
                                             </div>

@@ -57,7 +57,7 @@ class RequirementController extends Controller
     public function create(Request $request, $type = false){
         $data_bundle = [];
 
-        if($type){
+        if($type) {
             if($type == 'warehouse'){
                 $type_id = 1;
             }elseif($type == 'food'){
@@ -134,6 +134,19 @@ class RequirementController extends Controller
                 $item->food_cuisine_id = $request->input('food_cuisine_id');
                 $item->warehouse_item_id = $request->input('warehouse_item_id');
                 $item->requested_qty = $request->input('requested_qty');
+                $fulfilled_qty = $request->input('fulfilled_qty');
+
+                //@todo Check if enough stock. Otherwise set fulfilled to available stock.
+                $item->fulfilled_qty = $fulfilled_qty;
+
+                $status = 0;
+                if ($request->input('fulfilled_qty') > 0);
+                    $status = 1;
+                if ($request->input('fulfilled_qty') == $request->input('requested_qty'))
+                    $status = 2;
+
+                $item->status = $status;
+
                 $item->save();
 
                 LogReport::create(array(
@@ -155,6 +168,8 @@ class RequirementController extends Controller
                 ));
 
             }
+
+            $request->session()->flash('form-save', true);
 
             return response()->json([
 				'code' => 200,
@@ -207,7 +222,7 @@ class RequirementController extends Controller
             'data'=> $id,
             // 'data'=> ['id' => $id, 'status' => $status],
         ));
-        return redirect()->back();
+        return redirect()->back()->with('form-save', true);;
     }
 
     public function delete(Request $request, $id){
@@ -218,7 +233,7 @@ class RequirementController extends Controller
             'type'=>'delete requirement request',
             'data'=> $id,
         ));
-        return redirect()->back();
+        return redirect()->back()->with('item-delete', true);
     }
 
     public function view(Request $request, $id){
