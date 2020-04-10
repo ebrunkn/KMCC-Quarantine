@@ -19,7 +19,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="grid">
-                    <p class="grid-header">Stock List</p>
+                    <p class="grid-header">
+                        Stock List
+                        <a href="{{url('stock/add')}}" class="btn btn-sm btn-success float-right">
+                            <i class="mdi mdi-plus"></i>
+                            Add New
+                        </a>
+                    </p>
                     <div class="item-wrapper">
                         <div class="table-responsive">
                             <table class="table table-hover">
@@ -38,7 +44,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($data_bundle['items'] as $item)
-                                    <tr class="@if($item->is_threshold) is-threshold @elsif($item->is_stockout) is-stockout @endif">
+                                    <tr class="@if($item->is_threshold) is-threshold @elseif($item->is_stockout) is-stockout @elseif($item->is_over_request) is-overrequest  @endif">
                                         <td class="">
                                             {{$item->item_name}}
                                         </td>

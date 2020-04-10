@@ -23,7 +23,7 @@ class Warehouse extends Model
     }
 
     public function getIsThresholdAttribute(){
-        if($this->current_stock <= $this->threshold){
+        if($this->current_stock <= $this->threshold && $this->current_stock > 0){
             return true;
         }
         return false;
@@ -31,6 +31,13 @@ class Warehouse extends Model
 
     public function getIsStockoutAttribute(){
         if($this->current_stock <= 0){
+            return true;
+        }
+        return false;
+    }
+
+    public function getIsOverRequestAttribute(){
+        if($this->current_stock <= $this->pending_requested_sum){
             return true;
         }
         return false;
@@ -45,6 +52,12 @@ class Warehouse extends Model
     //Virtualf field for total sum of requested quantitiy of a warehouse item
     public function getRequestedSumAttribute(){
         $sum = $this->getWarehouseRequirements()->sum('requested_qty');
+        return $sum ?? 0;
+    }
+
+    //Virtualf field for total sum of requested quantitiy (not finshed) of a warehouse item
+    public function getPendingRequestedSumAttribute(){
+        $sum = $this->getWarehouseRequirements()->where('status','<', 2)->sum('requested_qty');
         return $sum ?? 0;
     }
 

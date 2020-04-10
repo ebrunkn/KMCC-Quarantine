@@ -169,6 +169,8 @@ class RequirementController extends Controller
 
             }
 
+            $request->session()->flash('form-save', true);
+
             return response()->json([
 				'code' => 200,
 				'status' => 'OK',
@@ -220,7 +222,7 @@ class RequirementController extends Controller
             'data'=> $id,
             // 'data'=> ['id' => $id, 'status' => $status],
         ));
-        return redirect()->back();
+        return redirect()->back()->with('form-save', true);;
     }
 
     public function delete(Request $request, $id){
@@ -231,7 +233,7 @@ class RequirementController extends Controller
             'type'=>'delete requirement request',
             'data'=> $id,
         ));
-        return redirect()->back();
+        return redirect()->back()->with('item-delete', true);
     }
 
     public function view(Request $request, $id){
