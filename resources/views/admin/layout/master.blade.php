@@ -19,6 +19,20 @@
     {!! Html::style('admin/css/demo_1/style.css') !!}
     <!-- Layout style -->
     <link rel="shortcut icon" href="../asssets/images/favicon.ico" />
+    
+
+    <style>
+        .is-threshold {
+            background-color: orange !important;
+        }
+        .is-stockout {
+            background-color: orangered !important;
+        }
+        .is-stockout td {
+            color: white !important;
+        }
+    </style>
+
 </head>
 
 <body class="header-fixed">

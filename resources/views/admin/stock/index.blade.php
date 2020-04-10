@@ -27,8 +27,10 @@
 
                                     <tr>
                                         <th>Item Name</th>
-                                        <th>Current Stock</th>
+                                        <th>Total Stock</th>
                                         <th>Qty Requested</th>
+                                        <th>Qty Fullfilled</th>
+                                        <th>Current Stock</th>
                                         <th>Stock Threshold</th>
                                         <th></th>
                                     </tr>
@@ -36,12 +38,14 @@
                                 </thead>
                                 <tbody>
                                     @foreach($data_bundle['items'] as $item)
-                                    <tr>
+                                    <tr class="@if($item->is_threshold) is-threshold @elsif($item->is_stockout) is-stockout @endif">
                                         <td class="">
                                             {{$item->item_name}}
                                         </td>
-                                        <td>{{$item->total_stock}}</td>
-                                        <td>{{$item->qty_requested}}</td>
+                                        <td>{{$item->total_stock}}</td> 
+                                        <td>{{$item->requested_sum}}</td>
+                                        <td>{{$item->fullfilled_sum}}</td>
+                                        <td>{{$item->current_stock}}</td>
                                         <td>{{$item->threshold}}</td>
                                         <td class="actions">
                                             <a href="{{url('stock/edit', array($item->id))}}"
