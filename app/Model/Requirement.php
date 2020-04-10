@@ -68,12 +68,12 @@ class Requirement extends Model
         return $query->where('status',0);
     }
 
-    public function scopeFullfilled($query){
+    public function scopeFulfilled($query){
         // return $query->where('requested_qty','=','fulfilled_qty');
         $query->whereRaw('requested_qty <= fulfilled_qty');
     }
 
-    public function scopeUnFullfilled($query){
+    public function scopeUnFulfilled($query){
         // return $query->where('requested_qty','!=','fulfilled_qty');
         $query->whereRaw('requested_qty > fulfilled_qty');
     }

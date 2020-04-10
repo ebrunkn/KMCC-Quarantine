@@ -45,7 +45,7 @@
                                                 <label for="inputType1">Total Rooms</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::text('total_rooms', old('total_rooms'),
+                                                {!! Form::text('total_rooms', old('total_rooms', 0),
                                                 array('class'=>'form-control','placeholder'=>'Total Rooms')) !!}
                                                 <span id="form-error-total_rooms"></span>
                                             </div>
@@ -56,7 +56,7 @@
                                                 <label for="inputType1">Current Occupancy</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::text('occupancy', old('occupancy'),
+                                                {!! Form::text('occupancy', old('occupancy', 0),
                                                 array('class'=>'form-control','placeholder'=>'Occupancy')) !!}
                                                 <span id="form-error-occupancy"></span>
                                             </div>

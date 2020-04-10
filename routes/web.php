@@ -42,7 +42,7 @@ Route::namespace('Admin')->group(function(){
         Route::get('requirement/{type}/add', 'RequirementController@create');
         Route::get('requirement/{type}/edit/{id}', 'RequirementController@edit');
         Route::post('requirement/save/{id?}', 'RequirementController@save');
-        Route::get('requirement/update/{id}/{status}', 'RequirementController@updateStatus');
+        // Route::get('requirement/update/{id}/{status}', 'RequirementController@updateStatus');
         Route::get('requirement/{type?}', 'RequirementController@index');
 
         Route::get('notifications', 'NotificationController@index');
