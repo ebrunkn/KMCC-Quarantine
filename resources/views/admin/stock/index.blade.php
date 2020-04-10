@@ -51,7 +51,7 @@
                                             <a href="{{url('stock/edit', array($item->id))}}"
                                                 class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></a></i>
                                             <a href="{{url('stock/add-stock', array($item->id))}}"
-                                                class="btn btn-xs btn-success"><i class="mdi mdi-plus"></a></i>
+                                                class="btn btn-xs btn-success" title="Add Stock"><i class="mdi mdi-plus"></i> Add Stock</a>
                                         </td>
                                     </tr>
                                     @endforeach
