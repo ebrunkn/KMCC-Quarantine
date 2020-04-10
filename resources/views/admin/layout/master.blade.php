@@ -80,10 +80,10 @@
                 </li>
                 <li>
                     <a href="#buildings-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Buildings</span>
-                        <i class="mdi mdi-bullseye link-icon"></i>
+                    <span class="link-title">Buildings</span>
+                        <i class="mdi mdi-hospital-building link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu" id="buildings-nav">
+                    <ul class="collapse navigation-submenu @if(request()->path() == 'buildings' || request()->path() == 'buildings/add') show @endif" id="buildings-nav">
                         <li>
                             <a href="{{url('buildings')}}">List</a>
                         </li>
@@ -95,9 +95,9 @@
                 <li>
                     <a href="#stock-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Stock</span>
-                        <i class="mdi mdi-bullseye link-icon"></i>
+                        <i class="mdi mdi-factory link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu" id="stock-nav">
+                    <ul class="collapse navigation-submenu @if(request()->path() == 'stock' || request()->path() == 'stock/add') show @endif" id="stock-nav">
                         <li>
                             <a href="{{url('stock')}}">View All Stock</a>
                         </li>
@@ -109,9 +109,9 @@
                 <li>
                     <a href="#food-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Food Request</span>
-                        <i class="mdi mdi-bullseye link-icon"></i>
+                        <i class="mdi mdi-food link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu" id="food-nav">
+                    <ul class="collapse navigation-submenu @if(request()->path() == 'requirement/food' || request()->path() == 'requirement/food/add') show @endif" id="food-nav">
                         <li>
                             <a href="{{url('requirement/food')}}">View All Request</a>
                         </li>
@@ -123,9 +123,9 @@
                 <li>
                     <a href="#warehouse-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Warehouse Request</span>
-                        <i class="mdi mdi-bullseye link-icon"></i>
+                        <i class="mdi mdi-webhook link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu" id="warehouse-nav">
+                    <ul class="collapse navigation-submenu @if(request()->path() == 'requirement/warehouse' || request()->path() == 'requirement/warehouse/add') show @endif" id="warehouse-nav">
                         <li>
                             <a href="{{url('requirement/warehouse')}}">View All Request</a>
                         </li>
