@@ -32,6 +32,7 @@
                                         <th>Item Name</th>
                                         <th>Qty Requested</th>
                                         <th>Building</th>
+                                        <th>Date Requested</th>
                                         <th></th>
                                     </tr>
 
@@ -44,9 +45,24 @@
                                         </td>
                                         <td>{{$item->requested_qty}}</td>
                                         <td>{{$item->getBuilding->building_name}}</td>
+                                        <td>{{Carbon::parse($item->created_at)->format('d-m-Y h:i a')}}</td>
                                         <td class="actions">
-                                            <a href="{{url('warehouse/edit', array($item->id))}}"
-                                                class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></a></i>
+                                            <a href="{{url('requirement/warehouse/edit', array($item->id))}}"
+                                                class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></i></a>
+                                                @switch($item->status)
+                                                    @case(2)
+                                                    <a href="#" class="btn btn-xs
+                                                    btn-success" title="Change to Processing">Delivered</a>
+                                                        @break
+                                                    @case(1)
+                                                    <a href="{{url('requirement/update', array($item->id, 2))}}" class="btn btn-xs
+                                                    btn-primary" title="Change to Processing">Processing</a>
+                                                        @break
+                                                    @default
+                                                    <a href="{{url('requirement/update', array($item->id, 1))}}" class="btn btn-xs
+                                                    btn-danger" title="Change to Processing">New</a>
+                                                        @break
+                                                @endswitch
                                         </td>
                                     </tr>
                                     @endforeach
@@ -58,8 +74,8 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12">
+        <div class="row justify-content-end">
+            <div class="col align-self-end">
                 {!! $data_bundle['items']->render() !!}
             </div>
         </div>

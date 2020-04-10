@@ -35,7 +35,7 @@
                                         {!! Form::hidden('type_id', $data_bundle['type_id']->id) !!}
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Meal Type</label>
+                                                <label for="inputType1">Select Item</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
                                                 {!! Form::select('warehouse_item_id', $data_bundle['ware_house_items'],

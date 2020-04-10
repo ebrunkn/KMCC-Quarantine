@@ -29,6 +29,8 @@ class RequirementController extends Controller
             $query->where('type_id',4);
         }
 
+        $query->orderBy('id', 'desc');
+
         $data_bundle['items'] = $query->paginate(20);
         // dd($data_bundle['items']);
         $view = 'admin.requirement.index';
@@ -127,7 +129,11 @@ class RequirementController extends Controller
             // $validated = $request->validated();
             if($id){
                 $item = Requirement::find($id);
-                // $item->item_name = $request->input('item_name');
+                $item->building_id = $request->input('building_id');
+                $item->food_time_id = $request->input('food_time_id');
+                $item->food_cuisine_id = $request->input('food_cuisine_id');
+                $item->warehouse_item_id = $request->input('warehouse_item_id');
+                $item->requested_qty = $request->input('requested_qty');
                 $item->save();
 
                 LogReport::create(array(
@@ -159,12 +165,49 @@ class RequirementController extends Controller
         }
     }
 
-    public function edit(Request $request, $id) {
+    public function edit(Request $request, $type, $id) {
         $data_bundle = [];
         $data_bundle['item'] = Requirement::findOrFail($id);
         $data_bundle['item']->visited = 1;
         $data_bundle['item']->save();
-        return view('admin.requirement.edit', compact('data_bundle'));
+
+        $data_bundle['request_types'] = RequestType::pluck('type', 'id');
+        $data_bundle['food_times'] = FoodTime::pluck('name', 'id');
+        $data_bundle['food_cuisines'] = FoodCuisine::pluck('name', 'id');
+        $data_bundle['buildings'] = Building::pluck('building_name', 'id');
+        $data_bundle['ware_house_items'] = Warehouse::pluck('item_name', 'id');
+
+        $view = 'admin.requirement.edit';
+        switch ($type) {
+            case 'food':
+                $view = 'admin.requirement.food.edit';
+            break;
+
+            case 'warehouse':
+                $view = 'admin.requirement.warehouse.edit';
+            break;
+
+            case 'warehouse':
+                $view = 'admin.requirement.maintenance.edit';
+            break;
+
+            default:
+                $view = 'admin.requirement.edit';
+            break;
+        }
+        return view($view, compact('data_bundle'));
+    }
+
+    public function updateStatus(Request $request, $id, $status){
+        // delete
+        Requirement::where('id', $id)->update(['status' => $status]);
+        LogReport::create(array(
+            'user_id'=>auth()->user()->id,
+            'type'=>'Update status',
+            'data'=> $id,
+            // 'data'=> ['id' => $id, 'status' => $status],
+        ));
+        return redirect()->back();
     }
 
     public function delete(Request $request, $id){

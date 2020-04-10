@@ -50,7 +50,7 @@
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
                                                 {!! Form::select('food_cuisine_id', $data_bundle['food_cuisines'], null,
-                                                array('class'=>'form-control','placeholder'=>'Meal Type')) !!}
+                                                array('class'=>'form-control','placeholder'=>'Select Cuisine Type')) !!}
                                                 <span id="form-error-food_cuisine_id"></span>
                                             </div>
                                         </div>
