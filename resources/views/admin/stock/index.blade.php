@@ -19,7 +19,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="grid">
-                    <p class="grid-header">Stock List</p>
+                    <p class="grid-header">
+                        Stock List
+                        <a href="{{url('stock/add')}}" class="btn btn-sm btn-success float-right">
+                            <i class="mdi mdi-plus"></i>
+                            Add New
+                        </a>
+                    </p>
                     <div class="item-wrapper">
                         <div class="table-responsive">
                             <table class="table table-hover">
@@ -27,8 +33,10 @@
 
                                     <tr>
                                         <th>Item Name</th>
-                                        <th>Current Stock</th>
+                                        <th>Total Stock</th>
                                         <th>Qty Requested</th>
+                                        <th>Qty Fullfilled</th>
+                                        <th>Current Stock</th>
                                         <th>Stock Threshold</th>
                                         <th></th>
                                     </tr>
@@ -36,12 +44,14 @@
                                 </thead>
                                 <tbody>
                                     @foreach($data_bundle['items'] as $item)
-                                    <tr>
+                                    <tr class="@if($item->is_threshold) is-threshold @elseif($item->is_stockout) is-stockout @elseif($item->is_over_request) is-overrequest  @endif">
                                         <td class="">
                                             {{$item->item_name}}
                                         </td>
-                                        <td>{{$item->total_stock}}</td>
-                                        <td>{{$item->qty_requested}}</td>
+                                        <td>{{$item->total_stock}}</td> 
+                                        <td>{{$item->requested_sum}}</td>
+                                        <td>{{$item->fullfilled_sum}}</td>
+                                        <td>{{$item->current_stock}}</td>
                                         <td>{{$item->threshold}}</td>
                                         <td class="actions">
                                             <a href="{{url('stock/edit', array($item->id))}}"

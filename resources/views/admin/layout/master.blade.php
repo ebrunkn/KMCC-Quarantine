@@ -19,6 +19,24 @@
     {!! Html::style('admin/css/demo_1/style.css') !!}
     <!-- Layout style -->
     <link rel="shortcut icon" href="../asssets/images/favicon.ico" />
+    
+
+    <style>
+        .is-overrequest {
+            background-color: yellow !important;
+        }
+
+        .is-threshold {
+            background-color: orange !important;
+        }
+        .is-stockout {
+            background-color: orangered !important;
+        }
+        .is-stockout td {
+            color: white !important;
+        }
+    </style>
+
 </head>
 
 <body class="header-fixed">
@@ -162,17 +180,17 @@
             <!-- partial:partials/_footer.html -->
             <footer class="footer">
                 <div class="row">
-                    <div class="col-sm-6 text-center text-sm-right order-sm-1">
+                    {{-- <div class="col-sm-6 text-center text-sm-right order-sm-1">
                         <ul class="text-gray">
                             <li><a href="#">Terms of use</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <div class="col-sm-6 text-center text-sm-left mt-3 mt-sm-0">
                         <small class="text-muted d-block">Copyright © {{Carbon::now()->year}} <a
                                 href="https://www.landmarkgroup.com/" target="_blank">KMCC</a>. All rights
                             reserved</small>
-                        <small class="text-gray mt-2">Handcrafted With digi2<i
+                        <small class="text-gray mt-2">Handcrafted With iotics<i
                                 class="mdi mdi-heart text-danger"></i></small>
                     </div>
                 </div>

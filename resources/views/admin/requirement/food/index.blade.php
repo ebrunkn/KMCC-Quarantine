@@ -22,7 +22,14 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="grid">
-                  <p class="grid-header">Food Request List</p>
+                  <p class="grid-header">
+                    Food Request List
+                  
+                    <a href="{{url('requirement/food/add')}}" class="btn btn-sm btn-success float-right">
+                      <i class="mdi mdi-plus"></i>
+                      Order
+                    </a>
+                  </p>
                   <div class="item-wrapper">
                     <div class="table-responsive">
                       <table class="table table-hover">
@@ -49,7 +56,7 @@
                               </td>
                               <td>{{$item->requested_qty}}</td>
                               <td>{{$item->getBuilding->building_name}}</td>
-                              <td>{{Carbon::parse($item->created_at)->format('d-m-Y h:i a')}}</td>
+                              <td>{{Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
                               <td class="actions">
                                 {{-- <a href="{{url('requirement/' . $item->type . '/edit', array($item->id))}}"
                                 class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></i></a> --}}
