@@ -152,6 +152,26 @@
                         </li>
                     </ul>
                 </li>
+
+                <li>
+                    <a href="#delivery-nav" data-toggle="collapse" aria-expanded="false">
+                        <span class="link-title">Door Delivery</span>
+                        <i class="mdi mdi-truck-delivery link-icon"></i>
+                    </a>
+                    <ul class="collapse navigation-submenu @if(request()->path() == 'delivery/*') show @endif" id="delivery-nav">
+                        <li>
+                            <a href="{{url('delivery/requirements')}}">List Requests</a>
+                        </li>
+                        <li>
+                            <a href="{{url('delivery/add')}}">List Items</a>
+                        </li>
+                        <li>
+                            <a href="{{url('delivery/edit')}}">Dispatch</a>
+                        </li>
+                    </ul>
+                </li>
+
+
                 <li class="nav-category-divider">DOCS</li>
                 <li>
                     <a href="#">

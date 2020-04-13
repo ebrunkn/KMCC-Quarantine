@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Requirement extends Model
 {
     protected $table = 'requirements';
-    protected $fillable = ['user_id','building_id','room_no','type_id', 'food_time_id', 'food_cuisine_id', 'warehouse_item_id', 'requested_qty', 'fulfilled_qty','status', 'info','visited'];
+    protected $fillable = ['user_id','assigned_user','building_id','room_no','type_id', 'food_time_id', 'food_cuisine_id', 'warehouse_item_id', 'requested_qty', 'fulfilled_qty','status', 'info','visited'];
 
 
     public function getTypeAttribute($query){
@@ -34,6 +34,11 @@ class Requirement extends Model
         }
 
         return $type;
+    }
+
+
+    public function scopeAssigned($query){
+        return $query->where('assigned_user',auth()->user()->id);
     }
 
     public function scopeUnread($query){

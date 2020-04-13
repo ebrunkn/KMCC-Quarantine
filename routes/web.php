@@ -47,5 +47,11 @@ Route::namespace('Admin')->group(function(){
 
         Route::get('notifications', 'NotificationController@index');
 
+        Route::group(['middleware' => ['can:delivery add']], function () {
+            Route::get('delivery/requirements', 'DeliveryController@index');
+            Route::get('delivery/requirements/{id}', 'DeliveryController@viewRequirement');
+            Route::get('delivery/add', 'DeliveryController@create');
+        });
+
     });
 });
