@@ -89,7 +89,77 @@ $(document).ready(function(){
                 if( result.status == 'OK' ) {
                     // showAlert('success', 'core.loading.saved');
                     // toastr.success('Saved');
+
+                    // $('.form-submit-btn').prop('disabled', false);
+                    // $('.form-submit-btn').find('.label').removeClass('d-none');
+                    // $('.form-submit-btn').find('.preloader').addClass('d-none');
+
                     window.location.href = bactToUrl;
+                    
+                }
+                else if ( result.status == 'INVALID_DATA' ) {
+                    // console.log(result);
+                    // showAlert('danger', $trans.get( 'core.loading.invalid_data' ));
+                    toastr.error('Error. Inavlid Data...!', 'Validation Error!')
+                    $('.form-submit-btn').prop('disabled', false);
+                    $('.form-submit-btn').find('.label').removeClass('d-none');
+                    $('.form-submit-btn').find('.preloader').addClass('d-none');
+                    showErrors(result);
+                }
+                else {
+                    toastr.error('Something went wrong!', 'Error!')
+                    // showAlert('danger', 'Error');
+                    $('.form-submit-btn').prop('disabled', false);
+                    $('.form-submit-btn').find('.label').removeClass('d-none');
+                    $('.form-submit-btn').find('.preloader').addClass('d-none');
+                    console.log( result );
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                // console.log(url);
+                // console.log(sendData);
+                // console.log(XMLHttpRequest);
+                // console.log(textStatus);
+                $('.form-submit-btn').prop('disabled', false);
+                $('.form-submit-btn').find('.label').removeClass('d-none');
+                $('.form-submit-btn').find('.preloader').addClass('d-none');
+                console.error(errorThrown);
+                // showAlert('danger', 'core.loading.error');
+                toastr.error('Something went wrong!', 'Error!')
+                // showAlert('danger', 'Error');
+             }
+          });
+    }
+
+    $('.form').on('submit', function(e){
+        e.preventDefault();
+        $('.form-submit-btn').prop('disabled', true);
+        $('.form-submit-btn').find('.label').addClass('d-none');
+        $('.form-submit-btn').find('.preloader').removeClass('d-none');
+        var form = $(this);
+        var url = form.attr('action');
+        var callback = form.attr('callback') ? form.attr('callback'): url;
+        formSave(form, url, callback)
+    });
+
+    // ===========================Delete Items=============================
+
+
+    $('.ajax-call-btn').on('click', function(e){
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $.ajax({
+            type: "GET",
+            url: url,
+            // data: sendData, // serializes the form's elements.
+            dataType: 'json',
+            success: function(result)
+            {
+                // console.log(result); // show response from the php script.
+                if( result.status == 'OK' ) {
+                    // showAlert('success', 'core.loading.saved');
+                    toastr.success('Saved');
+                    // window.location.href = bactToUrl;
                     
                 }
                 else if ( result.status == 'INVALID_DATA' ) {
@@ -112,22 +182,9 @@ $(document).ready(function(){
                 // console.log(textStatus);
                 console.error(errorThrown);
                 // showAlert('danger', 'core.loading.error');
-                // toastr.error($trans.get( 'core.loading.error' ));
+                toastr.error('Error');
                 // showAlert('danger', 'Error');
              }
           });
-    }
-
-    $('.form').on('submit', function(e){
-        e.preventDefault();
-        var form = $(this);
-        var url = form.attr('action');
-        var callback = form.attr('callback') ? form.attr('callback'): url;
-        formSave(form, url, callback)
     });
-
-    // ===========================Delete Items=============================
-
-
-
 });

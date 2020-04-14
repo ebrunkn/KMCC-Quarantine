@@ -9,8 +9,10 @@ use App\Model\RequestType;
 use App\Model\FoodTime;
 use App\Model\FoodCuisine;
 use App\Model\Requirement;
+use App\Model\User;
 use App\Model\Warehouse;
 use App\Model\LogReport;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class RequirementController extends Controller
@@ -114,6 +116,7 @@ class RequirementController extends Controller
             'food_cuisine_id'=>'required_if:type_id,2',
             'warehouse_item_id'=>'required_if:type_id,1',
             'requested_qty'=>'required_if:type_id,1|required_if:type_id,2',
+            // 'assigned_user'=>'exists:users,id',
         );
 
 		$validation = Validator::make($request->input(), $validationRule, $message);
@@ -127,6 +130,7 @@ class RequirementController extends Controller
 			], 200);
 		} else {
             // $validated = $request->validated();
+            
             if($id){
                 $item = Requirement::find($id);
                 $item->building_id = $request->input('building_id');
@@ -134,6 +138,12 @@ class RequirementController extends Controller
                 $item->food_cuisine_id = $request->input('food_cuisine_id');
                 $item->warehouse_item_id = $request->input('warehouse_item_id');
                 $item->requested_qty = $request->input('requested_qty');
+                $item->assigned_user = $request->input('assigned_user') ?? null;
+                
+                if($request->input('assigned_user')){
+                    $item->assigned_time = Carbon::now();
+                }
+
                 $fulfilled_qty = $request->input('fulfilled_qty');
 
                 //@todo Check if enough stock. Otherwise set fulfilled to available stock.
@@ -191,6 +201,8 @@ class RequirementController extends Controller
         $data_bundle['food_cuisines'] = FoodCuisine::pluck('name', 'id');
         $data_bundle['buildings'] = Building::pluck('building_name', 'id');
         $data_bundle['ware_house_items'] = Warehouse::pluck('item_name', 'id');
+
+        $data_bundle['volunteers'] = User::pluck('name','id');
 
         $view = 'admin.requirement.edit';
         switch ($type) {
