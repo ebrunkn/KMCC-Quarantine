@@ -12,6 +12,7 @@ use App\Model\Requirement;
 use App\Model\User;
 use App\Model\Warehouse;
 use App\Model\LogReport;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class RequirementController extends Controller
@@ -115,7 +116,7 @@ class RequirementController extends Controller
             'food_cuisine_id'=>'required_if:type_id,2',
             'warehouse_item_id'=>'required_if:type_id,1',
             'requested_qty'=>'required_if:type_id,1|required_if:type_id,2',
-            'assigned_user'=>'exists:users,id',
+            // 'assigned_user'=>'exists:users,id',
         );
 
 		$validation = Validator::make($request->input(), $validationRule, $message);
@@ -138,6 +139,11 @@ class RequirementController extends Controller
                 $item->warehouse_item_id = $request->input('warehouse_item_id');
                 $item->requested_qty = $request->input('requested_qty');
                 $item->assigned_user = $request->input('assigned_user') ?? null;
+                
+                if($request->input('assigned_user')){
+                    $item->assigned_time = Carbon::now();
+                }
+
                 $fulfilled_qty = $request->input('fulfilled_qty');
 
                 //@todo Check if enough stock. Otherwise set fulfilled to available stock.

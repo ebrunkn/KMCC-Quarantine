@@ -31,6 +31,7 @@
                                         <th>Qty Requested</th>
                                         <th>Building Name</th>
                                         <th>Date Requested</th>
+                                        <th>Status</th>
                                         <th></th>
                                     </tr>
 
@@ -45,10 +46,12 @@
                                         <td>{{$item->requested_qty}}</td>
                                         <td>{{$item->getBuilding->building_name}}</td>
                                         <td>{{Carbon::parse($item->created_at)->format('d-m-Y h:i a')}}</td>
+                                        <td>
+                                            <a href="#" class="btn btn-xs btn-success" title="Delivered">{{$item->status_label}}</a>
+                                        </td>
                                         <td class="actions">
-                                            {{-- <a href="{{url('requirement/' . $item->type . '/edit', array($item->id))}}"
-                                            class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></i></a> --}}
-                                            @switch($item->status)
+                                            
+                                            {{-- @switch($item->status)
                                             @case(2)
                                             <a href="#" class="btn btn-xs
                                                     btn-success" title="Delivered">Delivered</a>
@@ -63,7 +66,10 @@
                                                 class="btn btn-xs
                                                     btn-danger" title="Change to Processing">New</a>
                                             @break
-                                            @endswitch
+                                            @endswitch --}}
+
+                                            <a href="{{url('requirement/' . $item->type . '/edit', array($item->id))}}"
+                                                class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
