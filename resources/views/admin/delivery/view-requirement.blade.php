@@ -122,10 +122,32 @@
 
                             <div class="row">
                                 <div class="col-12 mx-auto text-center">
-                                    <a href="#" class="btn btn-success">
-                                        <i class="mdi mdi-truck-delivery mr-2"></i>
-                                         Start Delivery
-                                    </a>
+                                        
+                                    @if($data_bundle['requirement']->status == 3)
+
+                                        <a href="#" class="btn btn-danger">
+                                            <i class="mdi mdi-truck-delivery mr-2"></i>
+                                            Stop Delivery
+                                        </a>
+                                        <a href="#" class="btn btn-success">
+                                            <i class="mdi mdi-truck-delivery mr-2"></i>
+                                            Finish Delivery
+                                        </a>
+                                        <a href="{{ url('delivery/entry') }}" class="btn btn-info">
+                                            <i class="mdi mdi-truck-delivery mr-2"></i>
+                                            Delivery Entry
+                                        </a>
+
+                                    @else
+
+                                        <a href="{{ url('delivery/change-status', array($data_bundle['requirement']->id, 3)) }}" class="btn btn-info">
+                                            <i class="mdi mdi-truck-delivery mr-2"></i>
+                                            Start Delivery
+                                        </a>
+
+                                    @endif
+
+
                                 </div>
                             </div>
 

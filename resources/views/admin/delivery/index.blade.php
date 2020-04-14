@@ -21,10 +21,10 @@
                 <div class="grid">
                   <p class="grid-header">
                     My Assigned List
-                    <a href="{{url('buildings/add')}}" class="btn btn-sm btn-success float-right">
+                    {{-- <a href="{{url('buildings/add')}}" class="btn btn-sm btn-success float-right">
                       <i class="mdi mdi-plus"></i>
                       Add New
-                    </a>
+                    </a> --}}
                   </p>
                   <div class="item-wrapper">
                     <div class="table-responsive">
@@ -50,7 +50,7 @@
                               <td>{{ $requirement->getBuilding['building_name'] }}</td>
                               <td>{{ $requirement->getRequestType['type'] }}</td>
                               <td>{{ $requirement->assigned_time ?? 'NA' }}</td>
-                              <td>{{ $requirement->status ? 'Finished' : 'Pending' }}</td>
+                              <td>{{ $requirement->status_label }}</td>
                               <td class="actions">
                                 <a href="{{ url('delivery/requirements', array($requirement->id)) }}" class="btn btn-xs btn-success">
                                   <i class="mdi mdi-eye"></i>
