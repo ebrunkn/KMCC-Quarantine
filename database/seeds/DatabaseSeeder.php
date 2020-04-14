@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FoodCuisineTableSeeder::class);
         $this->call(RequirementTableSeeder::class);
         $this->call(UserPermissionSeeder::class);
-        // $this->call(AssignPermissionForUser::class);
+        $this->call(AssignPermissionForUser::class);
     }
 }
 
@@ -93,6 +93,24 @@ class UserPermissionSeeder extends seeder {
         Permission::create(['name' => 'building view']);
         Permission::create(['name' => 'building delete']);
 
+        Permission::create(['name' => 'warehouse add']);
+        Permission::create(['name' => 'warehouse edit']);
+        Permission::create(['name' => 'warehouse list']);
+        Permission::create(['name' => 'warehouse view']);
+        Permission::create(['name' => 'warehouse delete']);
+
+        Permission::create(['name' => 'food add']);
+        Permission::create(['name' => 'food edit']);
+        Permission::create(['name' => 'food list']);
+        Permission::create(['name' => 'food view']);
+        Permission::create(['name' => 'food delete']);
+
+        Permission::create(['name' => 'delivery add']);
+        Permission::create(['name' => 'delivery edit']);
+        Permission::create(['name' => 'delivery list']);
+        Permission::create(['name' => 'delivery view']);
+        Permission::create(['name' => 'delivery delete']);
+
         // create roles and assign existing permissions
         $role1 = Role::create(['name' => 'building manager']);
         $role1->givePermissionTo('building add');
@@ -100,6 +118,27 @@ class UserPermissionSeeder extends seeder {
         $role1->givePermissionTo('building list');
         $role1->givePermissionTo('building view');
         $role1->givePermissionTo('building delete');
+
+        $role2 = Role::create(['name' => 'warehouse manager']);
+        $role2->givePermissionTo('warehouse add');
+        $role2->givePermissionTo('warehouse edit');
+        $role2->givePermissionTo('warehouse list');
+        $role2->givePermissionTo('warehouse view');
+        $role2->givePermissionTo('warehouse delete');
+
+        $role3 = Role::create(['name' => 'food manager']);
+        $role3->givePermissionTo('food add');
+        $role3->givePermissionTo('food edit');
+        $role3->givePermissionTo('food list');
+        $role3->givePermissionTo('food view');
+        $role3->givePermissionTo('food delete');
+
+        $role4 = Role::create(['name' => 'delivery manager']);
+        $role4->givePermissionTo('delivery add');
+        $role4->givePermissionTo('delivery edit');
+        $role4->givePermissionTo('delivery list');
+        $role4->givePermissionTo('delivery view');
+        $role4->givePermissionTo('delivery delete');
 
         // $role3 = Role::create(['name' => 'super-admin']);
         // gets all permissions via Gate::before rule; see AuthServiceProvider
@@ -111,13 +150,25 @@ class UserPermissionSeeder extends seeder {
 
 class AssignPermissionForUser extends Seeder {
     public function run() {
-        $allUsers = User::get();
+        $allUsers = User::where('id', 1)->get();
         $role = Role::find(1);
         $permission = Permission::all();
+        // dd($allUsers);
         foreach($allUsers as $user){
-            $user->assignRole($role);
+            // $user->assignRole($role);
             $user->givePermissionTo($permission);
         }
+
+        $delivery_user = User::where('id', 2)->first();
+        $role = Role::find(4);
+        $delivery_user->givePermissionTo([
+            'delivery add',
+            'delivery edit',
+            'delivery list',
+            'delivery view',
+            'delivery delete'
+        ]);
+
     }
 }
 class BuildingTableSeeder extends Seeder {
@@ -187,7 +238,7 @@ class RequirementTableSeeder extends Seeder {
         $building_count = Building::count();
         foreach($types as $type){
 
-            foreach(range(0, 5) as $index){
+            foreach(range(0, 20) as $index){
                 if($type->id == 1){
                     $ware_house_item_count = rand(1, Warehouse::count());
                     $food_time_count = null;

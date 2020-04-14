@@ -27,10 +27,13 @@ class CreateRequirementsTable extends Migration
             $table->boolean('status')->default(0);
             $table->text('info')->nullable();
             $table->boolean('visited')->default(0);
+            $table->bigInteger('assigned_user')->unsigned()->nullable();
+            $table->dateTime('assigned_time')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('assigned_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('building_id')->references('id')->on('buildings')->onDelete('cascade');
             $table->foreign('type_id')->references('id')->on('request_types')->onDelete('cascade');
             $table->foreign('warehouse_item_id')->references('id')->on('warehouses')->onDelete('cascade');
@@ -48,6 +51,7 @@ class CreateRequirementsTable extends Migration
     {
         Schema::table('requirements', function(Blueprint $table) {
 			$table->dropForeign(['user_id']);
+			$table->dropForeign(['assigned_user']);
 			$table->dropForeign(['building_id']);
 			$table->dropForeign(['type_id']);
 			$table->dropForeign(['food_time_id']);
