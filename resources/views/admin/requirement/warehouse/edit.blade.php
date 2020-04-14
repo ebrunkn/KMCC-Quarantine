@@ -92,6 +92,16 @@
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Assign volunteer</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                {!! Form::select('assigned_user', $data_bundle['volunteers'] ,'', array('class'=>'form-control','placeholder'=>'Assign A Volunteer')) !!}
+                                                <span id="form-error-fulfilled_qty"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
 
                                             </div>
                                             <div class="col-md-9 showcase_content_area">

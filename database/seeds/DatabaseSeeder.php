@@ -56,6 +56,20 @@ class UsersTableSeeder extends Seeder
 			'name' => 'Thaha',
 			'email' => 'thahaac@gmail.com',
 			'password' => Hash::make('password'),
+        ));
+        
+		User::create(array(
+			// 'location_id' => $faker->numberBetween(1, 5),
+			'name' => 'Vahab',
+			'email' => 'vahabz@gmail.com',
+			'password' => Hash::make('kmcc123'),
+        ));
+        
+		User::create(array(
+			// 'location_id' => $faker->numberBetween(1, 5),
+			'name' => 'Sameer',
+			'email' => 'smr_kp@yahoo.com',
+			'password' => Hash::make('kmcc123'),
 		));
 
         $data = [];

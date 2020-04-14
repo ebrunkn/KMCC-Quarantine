@@ -23,6 +23,30 @@
 
     
         <style type="text/css">
+
+        .is-overrequest {
+            background-color: yellow !important;
+        }
+        .is-threshold {
+            background-color: orange !important;
+        }
+        .is-stockout {
+            background-color: orangered !important;
+        }
+        .is-stockout td {
+            color: white !important;
+        }
+
+        .display-avatar span{
+            background-color: blue;
+            border: 1px solid red;
+            width: 70px;
+            height: 70px;
+            border-radius: 100%;
+            font-size: 45px;
+            padding: 0 15px;
+        }
+
         @keyframes ldio-d2abanf8u0n {
           0% { transform: rotate(0deg) }
           50% { transform: rotate(180deg) }
@@ -64,10 +88,10 @@
     <!-- partial:partials/_header.html -->
     <nav class="t-header">
         <div class="t-header-brand-wrapper">
-            <a href="/" class="text-primary">
-                KMCC
-                {{-- {!! Html::image('admin/images/logo.svg', 'PAM', array('class' => 'logo')) !!}
-                <img class="logo-mini" src="../assets/images/logo_mini.svg" alt=""> --}}
+            <a href="/" class="text-primary mx-auto mt-lg-5">
+                {{-- KMCC --}}
+                {!! Html::image('images/kmcc_azhikode.png', 'PAM', array('class' => 'logo')) !!}
+                {!! Html::image('images/kmcc_azhikode.png', 'PAM', array('class' => 'logo-mini', 'style'=>'width:50px;')) !!}
             </a>
         </div>
         <div class="t-header-content-wrapper">
@@ -100,12 +124,11 @@
         <!-- partial:partials/_sidebar.html -->
         <div class="sidebar">
             <div class="user-profile">
-                {{-- <div class="display-avatar animated-avatar">
-          {!! Html::image('admin/images/profile/male/image_1.png', 'profile image',
-          array('class'=>'profile-img img-lg rounded-circle')) !!}
-        </div> --}}
+                {{-- <div class="display-avatar">
+                    <span>E</span>
+                </div> --}}
                 <div class="info-wrapper">
-                    {{-- <p class="user-name">{{auth('admin')->user()->name}}</p> --}}
+                    <p class="user-name">{{auth()->user()->name}}</p>
                     {{--            <h6 class="display-income">$3,400,00</h6>--}}
                 </div>
             </div>
