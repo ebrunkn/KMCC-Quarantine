@@ -12,6 +12,10 @@ class Building extends Model
     protected $table = 'buildings';
     protected $fillable = ['building_name','emirate_id','total_rooms','occupancy'];
 
+    public function scopeAuthEmirate($query){
+        return $query->where('emirate_id',auth()->user()->emirate_id);
+    }
+
     public function getContacts(){
         return $this->hasMany('App\Model\BuildingContact','building_id','id');
     }

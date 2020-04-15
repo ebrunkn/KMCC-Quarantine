@@ -67,6 +67,7 @@ class BuildingController extends Controller
             } else {
                 $building = Building::create(array(
                     'building_name' => $request->input('building_name'),
+                    'emirate_id' => auth()->user()->emirate_id,
                     'total_rooms' => $request->input('total_rooms'),
                     'occupancy' => $request->input('occupancy'),
                 ));

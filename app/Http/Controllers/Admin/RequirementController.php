@@ -168,6 +168,7 @@ class RequirementController extends Controller
 
                 $request->merge(array(
                     'user_id'=>auth()->user()->id,
+                    'emirate_id' => auth()->user()->emirate_id,
                 ));
 
                 $item = Requirement::create($request->input());

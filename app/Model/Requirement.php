@@ -82,6 +82,10 @@ class Requirement extends Model
         return $query->where('status', self::DELIVERY_STARTED_STATUS);
     }
 
+    public function scopeAuthEmirate($query){
+        return $query->where('emirate_id',auth()->user()->emirate_id);
+    }
+
     public function scopeUnread($query){
         return $query->where('visited',0);
     }
