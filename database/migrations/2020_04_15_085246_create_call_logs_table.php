@@ -23,7 +23,7 @@ class CreateCallLogsTable extends Migration
             $table->tinyInteger('residence_type')->default(0);
             $table->string('contact_time')->nullable();
             $table->string('follow_up_status')->nullable();
-            $table->tinyInteger('covid_tested')->default(0);
+            $table->tinyInteger('covid_tested')->nullable()->default(0);
             $table->tinyInteger('emirate');
             $table->text('remarks')->nullable();
             $table->softDeletes();

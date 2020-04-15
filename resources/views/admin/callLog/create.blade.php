@@ -57,15 +57,7 @@
                                                 <label for="inputType1">Emirate</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::select('emirate', [
-                                                    'Abu Dhabi' => 'Abu Dhabi',
-                                                    'Dubai' => 'Dubai',
-                                                    'Sharjah' => 'Sharjah',
-                                                    'Ajman' => 'Ajman',
-                                                    'RAK' => 'RAK',
-                                                    'Fujairah' => 'Fujairah',
-                                                    'UAQ' => 'UAQ'
-                                                ], old('mobile', 0),
+                                                {!! Form::select('emirate', $data_bundle['emirates'], old('mobile', 0),
                                                 array('class'=>'form-control','placeholder'=>'Emirate')) !!}
                                                 <span id="form-error-emirate"></span>
                                             </div>
@@ -438,29 +430,6 @@
                     </div>
                     {!! Form::close() !!}
             </div>
-        </div>
-    </div>
-</div>
-<div class="d-none" id="contact-person-item">
-    <div class="form-group row showcase_row_area border-top pt-3">
-        <div class="col-md-3 showcase_text_area">
-            <label for="inputType1">Name</label>
-        </div>
-        <div class="col-md-9 showcase_content_area">
-            {!! Form::text('name[]', old('name[]'),
-            array('class'=>'form-control','placeholder'=>'Name')) !!}
-            <span id="form-error-name"></span>
-        </div>
-    </div>
-
-    <div class="form-group row showcase_row_area">
-        <div class="col-md-3 showcase_text_area">
-            <label for="inputType1">Phone</label>
-        </div>
-        <div class="col-md-9 showcase_content_area">
-            {!! Form::text('phone[]', old('phone[]'),
-            array('class'=>'form-control','placeholder'=>'Phone')) !!}
-            <span id="form-error-phone"></span>
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\CallLog;
+use App\Model\Emirate;
 use App\Model\LogReport;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,12 +22,14 @@ class CallLogController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.callLog.create');
+        $data_bundle['emirates'] = Emirate::pluck('name', 'id');
+        return view('admin.callLog.create', compact('data_bundle'));
     }
 
     public function edit(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = CallLog::findOrFail($id);
+        $data_bundle['emirates'] = Emirate::pluck('name', 'id');
         return view('admin.callLog.edit', compact('data_bundle'));
     }
 
@@ -35,7 +38,7 @@ class CallLogController extends Controller
         $validationRule = array(
             'name' => 'required',
             'mobile' => 'required',
-            'comments' => 'required',
+            'remarks' => 'required',
         );
 
         $validation = Validator::make($request->input(), $validationRule);

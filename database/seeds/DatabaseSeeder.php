@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(EmirateTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        // $this->call(BuildingTableSeeder::class);
-        // $this->call(WarehouseTableSeeder::class);
+        $this->call(BuildingTableSeeder::class);
+        $this->call(WarehouseTableSeeder::class);
         $this->call(RequestTypeTableSeeder::class);
         $this->call(FoodTimeTableSeeder::class);
         $this->call(FoodCuisineTableSeeder::class);
@@ -226,7 +226,8 @@ class WarehouseTableSeeder extends Seeder {
         $items = ['Kettle', 'Bedsheet', 'Mug', 'Pen', 'Note'];
         foreach($items as $item){
             $item = Warehouse::create(array(
-                'item_name'=>$item
+                'item_name'=>$item,
+                'emirate_id'=>3,
             ));
 
             WarehouseStock::create(array(
@@ -305,6 +306,7 @@ class RequirementTableSeeder extends Seeder {
                     'warehouse_item_id'=>$ware_house_item_count,
                     'requested_qty'=>rand(20, 50),
                     'info'=>'custom text',
+                    'emirate_id'=>3,
                 ));
             }
 
