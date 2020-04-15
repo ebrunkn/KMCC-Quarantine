@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(EmirateTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        // $this->call(BuildingTableSeeder::class);
-        // $this->call(WarehouseTableSeeder::class);
+        $this->call(BuildingTableSeeder::class);
+        $this->call(WarehouseTableSeeder::class);
         $this->call(RequestTypeTableSeeder::class);
         $this->call(FoodTimeTableSeeder::class);
         $this->call(FoodCuisineTableSeeder::class);
@@ -78,7 +78,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('password'),
             'role_id' => User::DEVELOPER,
         ));
-        
+
 		User::create(array(
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Vahab',
@@ -87,7 +87,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => User::ADMIN,
             'emirate_id' => 3,
         ));
-        
+
 		User::create(array(
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Sameer',
@@ -183,7 +183,7 @@ class UsersTableSeeder extends Seeder
 //         // gets all permissions via Gate::before rule; see AuthServiceProvider
 
 //         // // create demo users
-        
+
 //     }
 // }
 
@@ -226,7 +226,8 @@ class WarehouseTableSeeder extends Seeder {
         $items = ['Kettle', 'Bedsheet', 'Mug', 'Pen', 'Note'];
         foreach($items as $item){
             $item = Warehouse::create(array(
-                'item_name'=>$item
+                'item_name'=>$item,
+                'emirate_id'=>3,
             ));
 
             WarehouseStock::create(array(
@@ -293,8 +294,8 @@ class RequirementTableSeeder extends Seeder {
                     $food_time_count = null;
                     $food_cuisine_count = null;
                 }
-    
-    
+
+
                 Requirement::create(array(
                     'user_id'=>1,
                     'building_id'=>rand(1, $building_count),
@@ -305,9 +306,10 @@ class RequirementTableSeeder extends Seeder {
                     'warehouse_item_id'=>$ware_house_item_count,
                     'requested_qty'=>rand(20, 50),
                     'info'=>'custom text',
+                    'emirate_id'=>3,
                 ));
             }
-            
+
         }
     }
 }

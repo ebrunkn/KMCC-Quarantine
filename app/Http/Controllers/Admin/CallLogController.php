@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\CallLog;
+use App\Model\Emirate;
 use App\Model\LogReport;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,12 +22,14 @@ class CallLogController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.callLog.create');
+        $data_bundle['emirates'] = Emirate::pluck('name', 'id');
+        return view('admin.callLog.create', compact('data_bundle'));
     }
 
     public function edit(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = CallLog::findOrFail($id);
+        $data_bundle['emirates'] = Emirate::pluck('name', 'id');
         return view('admin.callLog.edit', compact('data_bundle'));
     }
 
@@ -35,7 +38,7 @@ class CallLogController extends Controller
         $validationRule = array(
             'name' => 'required',
             'mobile' => 'required',
-            'comments' => 'required',
+            'remarks' => 'required',
         );
 
         $validation = Validator::make($request->input(), $validationRule);
@@ -53,10 +56,18 @@ class CallLogController extends Controller
                 $item = CallLog::find($id);
                 $item->name = $request->input('name');
                 $item->mobile = $request->input('mobile');
-                $item->area = $request->input('area');
+                $item->dob = $request->input('dob');
+                $item->emirate = $request->input('emirate');
                 $item->address = $request->input('address');
-                $item->comments = $request->input('comments');
+                $item->nationality = $request->input('nationality');
+                $item->residence_type = $request->input('residence_type');
+                $item->contact_time = $request->input('contact_time');
+                $item->follow_up_status = $request->input('follow_up_status');
+                $item->covid_tested = $request->input('covid_tested');
+                $item->remarks = $request->input('remarks');
                 $item->save();
+
+                $fillable = ['name', 'mobile', 'nationality', 'dob', 'residence_type', 'contact_time', 'follow_up_status', 'covid_tested', 'emirate', 'address', 'remarks'];
 
                 LogReport::create(array(
                     'user_id' => auth()->user()->id,
