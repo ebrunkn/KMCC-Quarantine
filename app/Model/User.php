@@ -18,10 +18,17 @@ class User extends Authenticatable
      * @var array
      */
 
+    const DEVELOPER = 0; 
+    const GLOBAL_ADMIN = 1; 
+    const ADMIN = 2; 
+    const VOLUNTEER = 3; 
+    // const WAREHOUSE_MANAGER = 4; 
+    // const FOOD_MANAGER = 5; 
+
     protected $guard = 'web';
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','role_id','emirate_id','state_id','district_id','constituency_id'
     ];
 
     /**

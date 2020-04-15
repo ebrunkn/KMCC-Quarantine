@@ -25,7 +25,7 @@ class Requirement extends Model
 
 
     protected $table = 'requirements';
-    protected $fillable = ['user_id','assigned_user','building_id','room_no','type_id', 'food_time_id', 'food_cuisine_id', 'warehouse_item_id', 'requested_qty', 'fulfilled_qty','status', 'info','visited'];
+    protected $fillable = ['user_id','emirate_id','assigned_user','building_id','room_no','type_id', 'food_time_id', 'food_cuisine_id', 'warehouse_item_id', 'requested_qty', 'fulfilled_qty','status', 'info','visited'];
 
 
     public function getTypeAttribute($query){
