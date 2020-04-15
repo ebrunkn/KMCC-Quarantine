@@ -45,6 +45,12 @@ Route::namespace('Admin')->group(function(){
         // Route::get('requirement/update/{id}/{status}', 'RequirementController@updateStatus');
         Route::get('requirement/{type?}', 'RequirementController@index');
 
+        Route::get('call-logs', 'CallLogController@index');
+        Route::get('call-logs/add', 'CallLogController@create');
+        Route::get('call-logs/edit/{id}', 'CallLogController@edit');
+        Route::post('call-logs/save/{id?}', 'CallLogController@save');
+        Route::get('call-logs/delete/{id}', 'CallLogController@delete');
+
         Route::get('notifications', 'NotificationController@index');
 
         Route::group(['middleware' => ['can:delivery add']], function () {
