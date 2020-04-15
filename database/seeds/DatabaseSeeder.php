@@ -11,6 +11,9 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 use App\Model\Building;
+use App\Model\State;
+use App\Model\District;
+use App\Model\Constituency;
 use App\Model\Warehouse;
 use App\Model\WarehouseStock;
 use App\Model\RequestType;
@@ -28,6 +31,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(EmirateTableSeeder::class);
+        $this->call(StateTableSeeder::class);
+        $this->call(DistrictTableSeeder::class);
+        $this->call(ConstituencyTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(BuildingTableSeeder::class);
         $this->call(WarehouseTableSeeder::class);
@@ -57,6 +63,98 @@ class EmirateTableSeeder extends Seeder
 
 	}
 }
+class StateTableSeeder extends Seeder
+{
+	public function run()
+	{
+        $data = [];
+        $states = [
+            'Kerala',
+        ];
+        foreach($states as $state){
+            $data[] = [
+                // 'location_id' => $faker->numberBetween(1, 5),
+                'name' => $state,
+            ];
+        }
+
+        State::insert($data);
+
+	}
+}
+class DistrictTableSeeder extends Seeder
+{
+	public function run()
+	{
+        $data = [];
+        $districts = [
+            'Kasargod',
+            'Kannur',
+            'Wayanad',
+            'Kozhikode',
+            'Malappuram',
+            'Palakkad',
+            'Thrissur',
+            'Ernakulam',
+            'Idukki',
+            'Kottayam',
+            'Alappuza',
+            'Pathanamthitta',
+            'Kollam',
+            'Thiruvananthapuram',
+        ];
+        foreach($districts as $district){
+            $data[] = [
+                // 'location_id' => $faker->numberBetween(1, 5),
+                'state_id' => 1,
+                'name' => $district,
+            ];
+        }
+
+        District::insert($data);
+
+	}
+}
+class ConstituencyTableSeeder extends Seeder
+{
+	public function run()
+	{
+        $data = [];
+        $constituencies = [
+            [
+                'Manjeshwaram',
+                'Kasaragod',
+                'Udma',
+                'Kanhangad',
+                'Thrikaripur',
+            ],
+            [
+                'Payyanur',
+                'Kalliasseri',
+                'Taliparamba',
+                'Irikkur',
+                'Azhikode',
+                'Kannur',
+                'Dharmadom',
+                'Thalassery',
+                'Kuthuparamba',
+                'Mattanur',
+                'Peravoor',
+            ]
+        ];
+        foreach($constituencies as $index=>$constituency_dist_group){
+            foreach($constituency_dist_group as $constituency){
+                $data[] = [
+                    'district_id' => $index+1,
+                    'name' => $constituency,
+                ];
+            }
+        }
+
+        Constituency::insert($data);
+
+	}
+}
 class UsersTableSeeder extends Seeder
 {
 	public function run()
@@ -79,6 +177,15 @@ class UsersTableSeeder extends Seeder
             'role_id' => User::DEVELOPER,
         ));
 
+        User::create(array(
+			// 'location_id' => $faker->numberBetween(1, 5),
+			'name' => 'Test Abudhabi',
+			'email' => 'testab@gmail.com',
+            'password' => Hash::make('password'),
+            'role_id' => User::ADMIN,
+            'emirate_id' => 1,
+        ));
+
 		User::create(array(
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Vahab',
@@ -95,6 +202,8 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('kmcc123'),
             'role_id' => User::VOLUNTEER,
             'emirate_id' => 3,
+            'district_id' => 2,
+            'constituency_id' => 10,
 		));
 
         // $data = [];

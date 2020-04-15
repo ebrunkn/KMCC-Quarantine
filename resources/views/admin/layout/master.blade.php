@@ -128,7 +128,11 @@
                     <span>E</span>
                 </div> --}}
                 <div class="info-wrapper">
-                    <p class="user-name">{{auth()->user()->name}}</p>
+                    <p class="user-name">{{auth()->user()->name}}
+                        @if(auth()->user()->constituency_id)
+                            <small>({{ auth()->user()->getConstituency['name'] }})</small>
+                        @endif
+                    </p>
                     {{--            <h6 class="display-income">$3,400,00</h6>--}}
                 </div>
             </div>
@@ -140,34 +144,38 @@
                         <i class="mdi mdi-gauge link-icon"></i>
                     </a>
                 </li>
-                <li>
-                    <a href="#buildings-nav" data-toggle="collapse" aria-expanded="false">
-                    <span class="link-title">Buildings</span>
-                        <i class="mdi mdi-hospital-building link-icon"></i>
-                    </a>
-                    <ul class="collapse navigation-submenu @if(request()->path() == 'buildings' || request()->path() == 'buildings/add') show @endif" id="buildings-nav">
-                        <li>
-                            <a href="{{url('buildings')}}">List</a>
-                        </li>
-                        <li>
-                            <a href="{{url('buildings/add')}}">Add New</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#stock-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Stock</span>
-                        <i class="mdi mdi-factory link-icon"></i>
-                    </a>
-                    <ul class="collapse navigation-submenu @if(request()->path() == 'stock' || request()->path() == 'stock/add') show @endif" id="stock-nav">
-                        <li>
-                            <a href="{{url('stock')}}">View All Stock</a>
-                        </li>
-                        <li>
-                            <a href="{{url('stock/add')}}">Add New Item</a>
-                        </li>
-                    </ul>
-                </li>
+
+                @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                    <li>
+                        <a href="#buildings-nav" data-toggle="collapse" aria-expanded="false">
+                        <span class="link-title">Buildings</span>
+                            <i class="mdi mdi-hospital-building link-icon"></i>
+                        </a>
+                        <ul class="collapse navigation-submenu @if(request()->path() == 'buildings' || request()->path() == 'buildings/add') show @endif" id="buildings-nav">
+                            <li>
+                                <a href="{{url('buildings')}}">List</a>
+                            </li>
+                            <li>
+                                <a href="{{url('buildings/add')}}">Add New</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#stock-nav" data-toggle="collapse" aria-expanded="false">
+                            <span class="link-title">Stock</span>
+                            <i class="mdi mdi-factory link-icon"></i>
+                        </a>
+                        <ul class="collapse navigation-submenu @if(request()->path() == 'stock' || request()->path() == 'stock/add') show @endif" id="stock-nav">
+                            <li>
+                                <a href="{{url('stock')}}">View All Stock</a>
+                            </li>
+                            <li>
+                                <a href="{{url('stock/add')}}">Add New Item</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+
                 <li>
                     <a href="#food-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Food Request</span>
@@ -197,20 +205,24 @@
                     </ul>
                 </li>
 
-                <li>
-                    <a href="#delivery-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Door Delivery</span>
-                        <i class="mdi mdi-truck-delivery link-icon"></i>
-                    </a>
-                    <ul class="collapse navigation-submenu @if(request()->path() == 'delivery/*') show @endif" id="delivery-nav">
-                        <li>
-                            <a href="{{url('delivery/requirements')}}">List Requests</a>
-                        </li>
-                        {{-- <li>
-                            <a href="{{url('delivery/add')}}">List Items</a>
-                        </li> --}}
-                    </ul>
-                </li>
+                @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 3)
+
+                    <li>
+                        <a href="#delivery-nav" data-toggle="collapse" aria-expanded="false">
+                            <span class="link-title">Door Delivery</span>
+                            <i class="mdi mdi-truck-delivery link-icon"></i>
+                        </a>
+                        <ul class="collapse navigation-submenu @if(request()->path() == 'delivery/*') show @endif" id="delivery-nav">
+                            <li>
+                                <a href="{{url('delivery/requirements')}}">List Requests</a>
+                            </li>
+                            {{-- <li>
+                                <a href="{{url('delivery/add')}}">List Items</a>
+                            </li> --}}
+                        </ul>
+                    </li>
+
+                @endif
 
                 <li>
                     <a href="#call-logs-nav" data-toggle="collapse" aria-expanded="false">

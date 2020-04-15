@@ -203,7 +203,7 @@ class RequirementController extends Controller
         $data_bundle['buildings'] = Building::pluck('building_name', 'id');
         $data_bundle['ware_house_items'] = Warehouse::pluck('item_name', 'id');
 
-        $data_bundle['volunteers'] = User::pluck('name','id');
+        $data_bundle['volunteers'] = User::authEmirate()->volunteer()->get();
 
         $view = 'admin.requirement.edit';
         switch ($type) {

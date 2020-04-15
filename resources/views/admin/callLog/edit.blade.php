@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="grid">
-                    <p class="grid-header">Edit Building</p>
+                    <p class="grid-header">Edit Call Log</p>
                     <div class="grid-body">
                         <div class="item-wrapper">
                             <div class="row mb-3">
@@ -27,7 +27,7 @@
                                 <div class="col-md-8 mx-auto">
                                     <form id="data-form" class="form"
                                         action="{{url('call-logs/save', array($data_bundle['item']->id))}}"
-                                        callback="{{url('call-logs')}}"
+                                        callback="{{url('call-logs/view', array($data_bundle['item']->id))}}"
                                         method="POST">
                                         {{-- {!! Form::open(['url' => 'buildings/save', 'callback' => url('buildings')]) !!} --}}
                                         @csrf

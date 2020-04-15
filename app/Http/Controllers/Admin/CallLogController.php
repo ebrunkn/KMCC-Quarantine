@@ -15,7 +15,7 @@ class CallLogController extends Controller
     public function index(Request $request)
     {
         $data_bundle = [];
-        $data_bundle['items'] = CallLog::paginate(20);
+        $data_bundle['items'] = CallLog::orderBy('updated_at','desc')->paginate(20);
         // dd($data_bundle['items']);
         return view('admin.callLog.index', compact('data_bundle'));
     }
@@ -24,6 +24,12 @@ class CallLogController extends Controller
     {
         $data_bundle['emirates'] = Emirate::pluck('name', 'id');
         return view('admin.callLog.create', compact('data_bundle'));
+    }
+
+    public function view(Request $request, $id) {
+        $data_bundle = [];
+        $data_bundle['item'] = CallLog::findOrFail($id);
+        return view('admin.callLog.view', compact('data_bundle'));
     }
 
     public function edit(Request $request, $id) {
@@ -38,7 +44,11 @@ class CallLogController extends Controller
         $validationRule = array(
             'name' => 'required',
             'mobile' => 'required',
+            'emirate' => 'required',
             'remarks' => 'required',
+            'residence_type' => 'required',
+            'covid_tested' => 'required',
+            'follow_up_status' => 'required',
         );
 
         $validation = Validator::make($request->input(), $validationRule);
@@ -75,6 +85,9 @@ class CallLogController extends Controller
                     'data' => $item,
                 ));
             } else {
+                $request->merge(array(
+                    'user_id'=> auth()->user()->id,
+                ));
                 $item = CallLog::create($request->input());
                 LogReport::create(array(
                     'user_id' => auth()->user()->id,

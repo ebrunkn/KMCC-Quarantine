@@ -15,6 +15,7 @@ class CreateCallLogsTable extends Migration
     {
         Schema::create('call_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
             $table->string('name');
             $table->date('dob')->nullable();
             $table->string('nationality')->default('India');
@@ -26,8 +27,10 @@ class CreateCallLogsTable extends Migration
             $table->tinyInteger('covid_tested')->nullable()->default(0);
             $table->tinyInteger('emirate');
             $table->text('remarks')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -38,6 +41,9 @@ class CreateCallLogsTable extends Migration
      */
     public function down()
     {
+        Schema::table('call_logs', function(Blueprint $table) {
+			$table->dropForeign(['user_id']);
+		});
         Schema::dropIfExists('call_logs');
     }
 }

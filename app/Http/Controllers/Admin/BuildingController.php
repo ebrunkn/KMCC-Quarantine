@@ -20,7 +20,8 @@ class BuildingController extends Controller
     public function index(Request $request)
     {
         $data_bundle = [];
-        $data_bundle['buildings'] = Building::paginate(20);
+        $data_bundle['buildings'] = Building::authEmirate()->paginate(20);
+        // dd(auth()->user());
         // dd($data_bundle['buildings']);
         return view('admin.building.index', compact('data_bundle'));
     }
@@ -53,7 +54,7 @@ class BuildingController extends Controller
         } else {
             // $validated = $request->validated();
             if ($id) {
-                $building = Building::find($id);
+                $building = Building::authEmirate()->findOrFail($id);
                 $building->building_name = $request->input('building_name');
                 $building->total_rooms = $request->input('total_rooms');
                 $building->occupancy = $request->input('occupancy');
@@ -67,7 +68,7 @@ class BuildingController extends Controller
             } else {
                 $building = Building::create(array(
                     'building_name' => $request->input('building_name'),
-                    'emirate_id' => auth()->user()->emirate_id,
+                    'emirate_id' => auth()->user()->emirate_id ?? 1,
                     'total_rooms' => $request->input('total_rooms'),
                     'occupancy' => $request->input('occupancy'),
                 ));
@@ -118,7 +119,7 @@ class BuildingController extends Controller
     public function edit(Request $request, $id)
     {
         $data_bundle = [];
-        $data_bundle['buildings'] = Building::findOrFail($id);
+        $data_bundle['buildings'] = Building::authEmirate()->findOrFail($id);
         return view('admin.building.edit', compact('data_bundle'));
     }
 
@@ -171,13 +172,13 @@ class BuildingController extends Controller
     public function view(Request $request, $id)
     {
         $data_bundle = [];
-        $data_bundle['buildings'] = Building::findOrFail($id);
+        $data_bundle['buildings'] = Building::authEmirate()->findOrFail($id);
         return view('admin.building.view', compact('data_bundle'));
     }
 
     public function deleteContact(Request $request, $id)
     {
-        BuildingContact::where('id', $id)->delete();
+        BuildingContact::authEmirate()->where('id', $id)->delete();
         LogReport::create(array(
             'user_id' => auth()->user()->id,
             'type' => 'delete building contact',

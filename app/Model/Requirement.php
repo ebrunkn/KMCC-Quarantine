@@ -83,7 +83,10 @@ class Requirement extends Model
     }
 
     public function scopeAuthEmirate($query){
-        return $query->where('emirate_id',auth()->user()->emirate_id);
+        if(auth()->user()->emirate_id){
+            return $query->where('emirate_id',auth()->user()->emirate_id);
+        }
+        return;
     }
 
     public function scopeUnread($query){

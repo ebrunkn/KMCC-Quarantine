@@ -48,4 +48,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeAuthEmirate($query){
+        if(auth()->user()->emirate_id){
+            return $query->where('emirate_id',auth()->user()->emirate_id);
+        }
+        return;
+    }
+
+    public function scopeVolunteer($query){
+        return $query->where('role_id',self::VOLUNTEER);
+    }
+
+    public function getDistrict(){
+        return $this->hasOne('App\Model\District','id','district_id');
+    }
+
+    public function getConstituency(){
+        return $this->hasOne('App\Model\Constituency','id','constituency_id');
+    }
 }

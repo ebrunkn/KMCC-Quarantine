@@ -34,7 +34,7 @@
                           <tr>
                             <th>Name</th>
                             <th>Mobile</th>
-                            <th>Area</th>
+                            <th>Emirate</th>
                             <th>Address</th>
                             <th>Comments</th>
                             <th></th>
@@ -48,11 +48,12 @@
                                 {{$callLog->name}}
                               </td>
                               <td>{{$callLog->mobile}}</td>
-                              <td>{{$callLog->area}}</td>
+                              <td>{{$callLog->getEmirate['name']}}</td>
                               <td>{{$callLog->address}}</td>
                               <td>{{$callLog->comments}}</td>
                               <td class="actions">
                                 <a href="{{url('call-logs/edit', array($callLog->id))}}" class="btn btn-xs btn-info"><i class="mdi mdi-pencil"></a></i>
+                                <a href="{{url('call-logs/view', array($callLog->id))}}" class="btn btn-xs btn-success"><i class="mdi mdi-eye"></a></i>
                               </td>
                             </tr>
                           @endforeach

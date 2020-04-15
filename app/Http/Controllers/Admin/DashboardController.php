@@ -17,27 +17,27 @@ class DashboardController extends Controller
         $data_bundle = [];
 
         $data_bundle['buildings'] = [
-            'total'=> Building::count(),
+            'total'=> Building::authEmirate()->count(),
         ];
 
         $data_bundle['food_request'] = [
-            'received'=>Requirement::food()->count(),
-            'completed'=>Requirement::food()->completed()->count(),
-            'pending'=>Requirement::food()->pending()->count(),
-            'processing'=>Requirement::food()->processing()->count(),
+            'received'=>Requirement::authEmirate()->food()->count(),
+            'completed'=>Requirement::authEmirate()->food()->completed()->count(),
+            'pending'=>Requirement::authEmirate()->food()->pending()->count(),
+            'processing'=>Requirement::authEmirate()->food()->processing()->count(),
         ];
 
         $data_bundle['warehouse_request'] = [
-            'received'=>Requirement::warehouse()->count(),
-            'completed'=>Requirement::warehouse()->fulfilled()->count(),
-            'pending'=>Requirement::warehouse()->unFulfilled()->count(),
+            'received'=>Requirement::authEmirate()->warehouse()->count(),
+            'completed'=>Requirement::authEmirate()->warehouse()->fulfilled()->count(),
+            'pending'=>Requirement::authEmirate()->warehouse()->unFulfilled()->count(),
         ];
 
         $data_bundle['maintenence_request'] = [
-            'received'=>Requirement::maintennace()->count(),
-            'completed'=>Requirement::maintennace()->completed()->count(),
-            'pending'=>Requirement::maintennace()->pending()->count(),
-            'processing'=>Requirement::maintennace()->processing()->count(),
+            'received'=>Requirement::authEmirate()->maintennace()->count(),
+            'completed'=>Requirement::authEmirate()->maintennace()->completed()->count(),
+            'pending'=>Requirement::authEmirate()->maintennace()->pending()->count(),
+            'processing'=>Requirement::authEmirate()->maintennace()->processing()->count(),
         ];
 
         // dd($data_bundle);

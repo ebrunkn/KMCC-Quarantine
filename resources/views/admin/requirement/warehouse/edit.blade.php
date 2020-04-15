@@ -90,15 +90,29 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Assign volunteer</label>
+                                        @if(auth()->user()->role_id == 2)
+
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Assign volunteer</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    <select class="form-control" name="assigned_user" id="">
+                                                        <option value="">Assign A Volunteer</option>
+                                                        @foreach($data_bundle['volunteers'] as $volunteer)
+                                                            <option value="{{$volunteer->id}}">
+                                                                {{$volunteer->name}}
+                                                                @if($volunteer->constituency_id)
+                                                                    <small>({{ $volunteer->getConstituency['name'] }})</small>
+                                                                @endif
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <span id="form-error-fulfilled_qty"></span>
+                                                </div>
                                             </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {!! Form::select('assigned_user', $data_bundle['volunteers'] ,'', array('class'=>'form-control','placeholder'=>'Assign A Volunteer')) !!}
-                                                <span id="form-error-fulfilled_qty"></span>
-                                            </div>
-                                        </div>
+
+                                        @endif
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">

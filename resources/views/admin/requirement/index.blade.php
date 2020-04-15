@@ -47,7 +47,7 @@
                                         <td>{{$item->getBuilding->building_name}}</td>
                                         <td>{{Carbon::parse($item->created_at)->format('d-m-Y h:i a')}}</td>
                                         <td>
-                                            <a href="#" class="btn btn-xs btn-success" title="Delivered">{{$item->status_label}}</a>
+                                            <span class="badge badge-warning">{{$item->status_label}}</span>
                                         </td>
                                         <td class="actions">
                                             

@@ -7,16 +7,34 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
+use App\Model\User;
 use App\Model\Warehouse;
 use App\Model\WarehouseStock;
 use App\Model\LogReport;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class WarehouseController extends Controller
 {
+
+    public function __construct(Request $request){
+
+        $this->middleware(function ($request, $next) {
+            $this->user= Auth::user();
+            // dd($this->user);
+            if(auth()->user()->role_id != User::DEVELOPER){
+                if(auth()->user()->role_id != User::ADMIN){
+                    abort(404);
+                }
+            }
+            return $next($request);
+        });
+
+    }
+
     public function index(Request $request){
         $data_bundle = [];
-        $data_bundle['items'] = Warehouse::paginate(20);
+        $data_bundle['items'] = Warehouse::authEmirate()->paginate(20);
         // dd($data_bundle['items']);
         return view('admin.stock.index', compact('data_bundle'));
     }
@@ -48,7 +66,7 @@ class WarehouseController extends Controller
 		} else {
             // $validated = $request->validated();
             if($id){
-                $item = Warehouse::find($id);
+                $item = Warehouse::authEmirate()->findOrFail($id);
                 $item->item_name = $request->input('item_name');
                 $item->save();
 
@@ -60,6 +78,7 @@ class WarehouseController extends Controller
             }else{
 
                 $request->merge(array(
+                    'emirate_id'=> auth()->user()->emirate_id ?? 1,
                     'threshold'=> $request->input('threshold') ?? 25,
                 ));
 
@@ -99,13 +118,13 @@ class WarehouseController extends Controller
 
     public function edit(Request $request, $id) {
         $data_bundle = [];
-        $data_bundle['item'] = Warehouse::findOrFail($id);
+        $data_bundle['item'] = Warehouse::authEmirate()->findOrFail($id);
         return view('admin.stock.edit', compact('data_bundle'));
     }
 
     public function addStock(Request $request, $id) {
         $data_bundle = [];
-        $data_bundle['item'] = Warehouse::findOrFail($id);
+        $data_bundle['item'] = Warehouse::authEmirate()->findOrFail($id);
         return view('admin.stock.add-stock', compact('data_bundle'));
     }
 
@@ -148,7 +167,7 @@ class WarehouseController extends Controller
 
     public function delete(Request $request, $id){
         // delete
-        Warehouse::where('id', $id)->delete();
+        Warehouse::authEmirate()->where('id', $id)->delete();
         LogReport::create(array(
             'user_id'=>auth()->user()->id,
             'type'=>'delete warehouse item',
@@ -159,7 +178,7 @@ class WarehouseController extends Controller
 
     public function view(Request $request, $id){
         $data_bundle = [];
-        $data_bundle['item'] = Warehouse::findOrFail($id);
+        $data_bundle['item'] = Warehouse::authEmirate()->findOrFail($id);
         return view('admin.stock.view', compact('data_bundle'));
     }
 }
