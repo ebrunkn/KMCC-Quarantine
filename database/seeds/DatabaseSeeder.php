@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use Carbon\Carbon;
 use App\Model\User;
+use App\Model\Emirate;
 
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -26,18 +27,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(EmirateTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        $this->call(BuildingTableSeeder::class);
-        $this->call(WarehouseTableSeeder::class);
+        // $this->call(BuildingTableSeeder::class);
+        // $this->call(WarehouseTableSeeder::class);
         $this->call(RequestTypeTableSeeder::class);
         $this->call(FoodTimeTableSeeder::class);
         $this->call(FoodCuisineTableSeeder::class);
-        $this->call(RequirementTableSeeder::class);
-        $this->call(UserPermissionSeeder::class);
-        $this->call(AssignPermissionForUser::class);
+        // $this->call(RequirementTableSeeder::class);
+        // $this->call(UserPermissionSeeder::class);
+        // $this->call(AssignPermissionForUser::class);
     }
 }
 
+class EmirateTableSeeder extends Seeder
+{
+	public function run()
+	{
+        $data = [];
+        $emirates = ['Abu Dhabi','Dubai','Sharjah','Fujairah','Al Ain','Ras Al Khaima', 'Umm Ul Quoom'];
+        foreach($emirates as $emirate){
+            $data[] = [
+                // 'location_id' => $faker->numberBetween(1, 5),
+                'name' => $emirate,
+            ];
+        }
+
+        Emirate::insert($data);
+
+	}
+}
 class UsersTableSeeder extends Seeder
 {
 	public function run()
@@ -50,26 +69,32 @@ class UsersTableSeeder extends Seeder
 			'name' => 'Ebrahim',
 			'email' => 'ebru.nkn@gmail.com',
 			'password' => Hash::make('password'),
+			'role_id' => User::DEVELOPER,
 		));
 		User::create(array(
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Thaha',
 			'email' => 'thahaac@gmail.com',
-			'password' => Hash::make('password'),
+            'password' => Hash::make('password'),
+            'role_id' => User::DEVELOPER,
         ));
 
 		User::create(array(
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Vahab',
 			'email' => 'vahabz@gmail.com',
-			'password' => Hash::make('kmcc123'),
+            'password' => Hash::make('kmcc123'),
+            'role_id' => User::ADMIN,
+            'emirate_id' => 3,
         ));
 
 		User::create(array(
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Sameer',
 			'email' => 'smr_kp@yahoo.com',
-			'password' => Hash::make('kmcc123'),
+            'password' => Hash::make('kmcc123'),
+            'role_id' => User::VOLUNTEER,
+            'emirate_id' => 3,
 		));
 
         // $data = [];
@@ -88,109 +113,110 @@ class UsersTableSeeder extends Seeder
 	}
 }
 
-class UserPermissionSeeder extends seeder {
-    public function run(){
+// class UserPermissionSeeder extends seeder {
+//     public function run(){
 
-        DB::statement("SET foreign_key_checks=0");
-		DB::table('role_has_permissions')->truncate();
-		Role::truncate();
-		Permission::truncate();
-        DB::statement("SET foreign_key_checks=1");
+//         DB::statement("SET foreign_key_checks=0");
+// 		DB::table('role_has_permissions')->truncate();
+// 		Role::truncate();
+// 		Permission::truncate();
+//         DB::statement("SET foreign_key_checks=1");
 
-        // Reset cached roles and permissions
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+//         // Reset cached roles and permissions
+//         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // create permissions
-        Permission::create(['name' => 'building add']);
-        Permission::create(['name' => 'building edit']);
-        Permission::create(['name' => 'building list']);
-        Permission::create(['name' => 'building view']);
-        Permission::create(['name' => 'building delete']);
+//         // create permissions
+//         Permission::create(['name' => 'building add']);
+//         Permission::create(['name' => 'building edit']);
+//         Permission::create(['name' => 'building list']);
+//         Permission::create(['name' => 'building view']);
+//         Permission::create(['name' => 'building delete']);
 
-        Permission::create(['name' => 'warehouse add']);
-        Permission::create(['name' => 'warehouse edit']);
-        Permission::create(['name' => 'warehouse list']);
-        Permission::create(['name' => 'warehouse view']);
-        Permission::create(['name' => 'warehouse delete']);
+//         Permission::create(['name' => 'warehouse add']);
+//         Permission::create(['name' => 'warehouse edit']);
+//         Permission::create(['name' => 'warehouse list']);
+//         Permission::create(['name' => 'warehouse view']);
+//         Permission::create(['name' => 'warehouse delete']);
 
-        Permission::create(['name' => 'food add']);
-        Permission::create(['name' => 'food edit']);
-        Permission::create(['name' => 'food list']);
-        Permission::create(['name' => 'food view']);
-        Permission::create(['name' => 'food delete']);
+//         Permission::create(['name' => 'food add']);
+//         Permission::create(['name' => 'food edit']);
+//         Permission::create(['name' => 'food list']);
+//         Permission::create(['name' => 'food view']);
+//         Permission::create(['name' => 'food delete']);
 
-        Permission::create(['name' => 'delivery add']);
-        Permission::create(['name' => 'delivery edit']);
-        Permission::create(['name' => 'delivery list']);
-        Permission::create(['name' => 'delivery view']);
-        Permission::create(['name' => 'delivery delete']);
+//         Permission::create(['name' => 'delivery add']);
+//         Permission::create(['name' => 'delivery edit']);
+//         Permission::create(['name' => 'delivery list']);
+//         Permission::create(['name' => 'delivery view']);
+//         Permission::create(['name' => 'delivery delete']);
 
-        // create roles and assign existing permissions
-        $role1 = Role::create(['name' => 'building manager']);
-        $role1->givePermissionTo('building add');
-        $role1->givePermissionTo('building edit');
-        $role1->givePermissionTo('building list');
-        $role1->givePermissionTo('building view');
-        $role1->givePermissionTo('building delete');
+//         // create roles and assign existing permissions
+//         $role1 = Role::create(['name' => 'building manager']);
+//         $role1->givePermissionTo('building add');
+//         $role1->givePermissionTo('building edit');
+//         $role1->givePermissionTo('building list');
+//         $role1->givePermissionTo('building view');
+//         $role1->givePermissionTo('building delete');
 
-        $role2 = Role::create(['name' => 'warehouse manager']);
-        $role2->givePermissionTo('warehouse add');
-        $role2->givePermissionTo('warehouse edit');
-        $role2->givePermissionTo('warehouse list');
-        $role2->givePermissionTo('warehouse view');
-        $role2->givePermissionTo('warehouse delete');
+//         $role2 = Role::create(['name' => 'warehouse manager']);
+//         $role2->givePermissionTo('warehouse add');
+//         $role2->givePermissionTo('warehouse edit');
+//         $role2->givePermissionTo('warehouse list');
+//         $role2->givePermissionTo('warehouse view');
+//         $role2->givePermissionTo('warehouse delete');
 
-        $role3 = Role::create(['name' => 'food manager']);
-        $role3->givePermissionTo('food add');
-        $role3->givePermissionTo('food edit');
-        $role3->givePermissionTo('food list');
-        $role3->givePermissionTo('food view');
-        $role3->givePermissionTo('food delete');
+//         $role3 = Role::create(['name' => 'food manager']);
+//         $role3->givePermissionTo('food add');
+//         $role3->givePermissionTo('food edit');
+//         $role3->givePermissionTo('food list');
+//         $role3->givePermissionTo('food view');
+//         $role3->givePermissionTo('food delete');
 
-        $role4 = Role::create(['name' => 'delivery manager']);
-        $role4->givePermissionTo('delivery add');
-        $role4->givePermissionTo('delivery edit');
-        $role4->givePermissionTo('delivery list');
-        $role4->givePermissionTo('delivery view');
-        $role4->givePermissionTo('delivery delete');
+//         $role4 = Role::create(['name' => 'delivery manager']);
+//         $role4->givePermissionTo('delivery add');
+//         $role4->givePermissionTo('delivery edit');
+//         $role4->givePermissionTo('delivery list');
+//         $role4->givePermissionTo('delivery view');
+//         $role4->givePermissionTo('delivery delete');
 
-        // $role3 = Role::create(['name' => 'super-admin']);
-        // gets all permissions via Gate::before rule; see AuthServiceProvider
+//         // $role3 = Role::create(['name' => 'super-admin']);
+//         // gets all permissions via Gate::before rule; see AuthServiceProvider
 
-        // // create demo users
+//         // // create demo users
 
-    }
-}
+//     }
+// }
 
-class AssignPermissionForUser extends Seeder {
-    public function run() {
-        $allUsers = User::where('id', 1)->get();
-        $role = Role::find(1);
-        $permission = Permission::all();
-        // dd($allUsers);
-        foreach($allUsers as $user){
-            // $user->assignRole($role);
-            $user->givePermissionTo($permission);
-        }
+// class AssignPermissionForUser extends Seeder {
+//     public function run() {
+//         $allUsers = User::where('id', 1)->get();
+//         $role = Role::find(1);
+//         $permission = Permission::all();
+//         // dd($allUsers);
+//         foreach($allUsers as $user){
+//             // $user->assignRole($role);
+//             $user->givePermissionTo($permission);
+//         }
 
-        $delivery_user = User::where('id', 2)->first();
-        $role = Role::find(4);
-        $delivery_user->givePermissionTo([
-            'delivery add',
-            'delivery edit',
-            'delivery list',
-            'delivery view',
-            'delivery delete'
-        ]);
+//         $delivery_user = User::where('id', 2)->first();
+//         $role = Role::find(4);
+//         $delivery_user->givePermissionTo([
+//             'delivery add',
+//             'delivery edit',
+//             'delivery list',
+//             'delivery view',
+//             'delivery delete'
+//         ]);
 
-    }
-}
+//     }
+// }
 class BuildingTableSeeder extends Seeder {
     public function run() {
         $items = ['Al Wasel', 'Rockey', 'Aseel', 'Pen'];
         foreach($items as $item){
             Building::create(array(
-                'building_name'=>$item
+                'building_name'=>$item,
+                'emirate_id'=>3,
             ));
         }
     }
