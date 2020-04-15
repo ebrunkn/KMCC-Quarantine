@@ -27,12 +27,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
-        $this->call(BuildingTableSeeder::class);
-        $this->call(WarehouseTableSeeder::class);
+        // $this->call(BuildingTableSeeder::class);
+        // $this->call(WarehouseTableSeeder::class);
         $this->call(RequestTypeTableSeeder::class);
         $this->call(FoodTimeTableSeeder::class);
         $this->call(FoodCuisineTableSeeder::class);
-        $this->call(RequirementTableSeeder::class);
+        // $this->call(RequirementTableSeeder::class);
         $this->call(UserPermissionSeeder::class);
         $this->call(AssignPermissionForUser::class);
     }
@@ -56,20 +56,34 @@ class UsersTableSeeder extends Seeder
 			'name' => 'Thaha',
 			'email' => 'thahaac@gmail.com',
 			'password' => Hash::make('password'),
+        ));
+        
+		User::create(array(
+			// 'location_id' => $faker->numberBetween(1, 5),
+			'name' => 'Vahab',
+			'email' => 'vahabz@gmail.com',
+			'password' => Hash::make('kmcc123'),
+        ));
+        
+		User::create(array(
+			// 'location_id' => $faker->numberBetween(1, 5),
+			'name' => 'Sameer',
+			'email' => 'smr_kp@yahoo.com',
+			'password' => Hash::make('kmcc123'),
 		));
 
-        $data = [];
-		foreach (range(0, 5) as $lb) {
-            $data[] = [
-                // 'location_id' => $faker->numberBetween(1, 5),
-                'name' => $faker->firstName,
-                'email' => $faker->unique()->email,
-                'password' => Hash::make('password'),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ];
-		}
-        User::insert($data);
+        // $data = [];
+		// foreach (range(0, 5) as $lb) {
+        //     $data[] = [
+        //         // 'location_id' => $faker->numberBetween(1, 5),
+        //         'name' => $faker->firstName,
+        //         'email' => $faker->unique()->email,
+        //         'password' => Hash::make('password'),
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now(),
+        //     ];
+		// }
+        // User::insert($data);
 
 	}
 }

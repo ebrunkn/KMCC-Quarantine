@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-12 logo-section">
         <a href="../../index.html" class="logo">
-          {!! Html::image('admin/images/logo.svg') !!}
+          {!! Html::image('images/kmcc_azhikode.png') !!}
         </a>
       </div>
     </div>

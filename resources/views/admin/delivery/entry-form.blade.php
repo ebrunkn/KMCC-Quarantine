@@ -21,7 +21,14 @@
                 <form id="data-form" class="form" action="{{url('delivery/entry')}}" callback="{{url('delivery/entry')}}" method="POST">
                     @csrf
                     <div class="grid">
-                        <p class="grid-header">Delivery Entry  ({{ $data_bundle['requirements']->first()->getBuilding['building_name'] }})</p>
+                        <p class="grid-header">
+                            Delivery Entry  ({{ $data_bundle['requirements']->first()->getBuilding['building_name'] }})
+
+                            <a href="{{url('delivery/requirements', array($data_bundle['requirements']->first()['id']))}}" class="btn btn-sm btn-default float-right">
+                                <i class="mdi mdi-arrow-left"></i>
+                                BACK
+                            </a>
+                        </p>
                         <div class="grid-body">
                             <div class="item-wrapper">
                                 <div class="row mb-3">

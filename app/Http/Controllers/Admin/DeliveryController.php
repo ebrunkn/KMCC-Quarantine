@@ -80,8 +80,11 @@ class DeliveryController extends Controller
                 ->where('id',$req_id)
                 ->where('fulfilled_qty', '>', 0)
                 ->first();
+                
+                $item_total_delivering_count = $existReq->door_delivered_sum + $request->input('item_count')[$index];
 
-                if($existReq){
+                if($existReq && ($existReq->fulfilled_qty  >= $item_total_delivering_count)){
+
                     $datat_to_insert[] = [
                         'user_id'=>auth()->user()->id,
                         'request_id'=>$req_id,
@@ -99,7 +102,7 @@ class DeliveryController extends Controller
                 DoorDelivery::insert($datat_to_insert);
                 session()->flash('form-action', ['success','Saved']);
             }else{
-                session()->flash('form-action', ['warning','Nothing to deliver']);
+                session()->flash('form-action', ['warning','Cannot deliver']);
             }
 
             

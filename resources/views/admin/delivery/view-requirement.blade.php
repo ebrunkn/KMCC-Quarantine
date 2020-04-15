@@ -22,7 +22,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="grid">
-                    <p class="grid-header">Edit Building</p>
+                    <p class="grid-header">
+                        Requirement Detail
+                    
+                        <a href="{{url('delivery/requirements')}}" class="btn btn-sm btn-default float-right">
+                            <i class="mdi mdi-arrow-left"></i>
+                            BACK
+                        </a>
+                    </p>
                     <div class="grid-body">
                         <div class="item-wrapper">
                             <div class="row mb-3">
@@ -125,15 +132,15 @@
                                         
                                     @if($data_bundle['requirement']->status == 3)
 
-                                        <a href="#" class="btn btn-danger">
+                                        <a href="#" class="btn btn-danger m-1">
                                             <i class="mdi mdi-truck-delivery mr-2"></i>
                                             Stop Delivery
                                         </a>
-                                        <a href="#" class="btn btn-success">
+                                        <a href="#" class="btn btn-success m-1">
                                             <i class="mdi mdi-truck-delivery mr-2"></i>
                                             Finish Delivery
                                         </a>
-                                        <a href="{{ url('delivery/entry') }}" class="btn btn-info">
+                                        <a href="{{ url('delivery/entry') }}" class="btn btn-info m-1">
                                             <i class="mdi mdi-truck-delivery mr-2"></i>
                                             Delivery Entry
                                         </a>
