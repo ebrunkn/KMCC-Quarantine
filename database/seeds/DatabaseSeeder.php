@@ -27,12 +27,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
-        // $this->call(BuildingTableSeeder::class);
-        // $this->call(WarehouseTableSeeder::class);
+        $this->call(BuildingTableSeeder::class);
+        $this->call(WarehouseTableSeeder::class);
         $this->call(RequestTypeTableSeeder::class);
         $this->call(FoodTimeTableSeeder::class);
         $this->call(FoodCuisineTableSeeder::class);
-        // $this->call(RequirementTableSeeder::class);
+        $this->call(RequirementTableSeeder::class);
         $this->call(UserPermissionSeeder::class);
         $this->call(AssignPermissionForUser::class);
     }
@@ -57,14 +57,14 @@ class UsersTableSeeder extends Seeder
 			'email' => 'thahaac@gmail.com',
 			'password' => Hash::make('password'),
         ));
-        
+
 		User::create(array(
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Vahab',
 			'email' => 'vahabz@gmail.com',
 			'password' => Hash::make('kmcc123'),
         ));
-        
+
 		User::create(array(
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Sameer',
@@ -158,7 +158,7 @@ class UserPermissionSeeder extends seeder {
         // gets all permissions via Gate::before rule; see AuthServiceProvider
 
         // // create demo users
-        
+
     }
 }
 
@@ -267,8 +267,8 @@ class RequirementTableSeeder extends Seeder {
                     $food_time_count = null;
                     $food_cuisine_count = null;
                 }
-    
-    
+
+
                 Requirement::create(array(
                     'user_id'=>1,
                     'building_id'=>rand(1, $building_count),
@@ -281,7 +281,7 @@ class RequirementTableSeeder extends Seeder {
                     'info'=>'custom text',
                 ));
             }
-            
+
         }
     }
 }

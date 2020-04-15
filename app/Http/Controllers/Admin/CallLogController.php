@@ -53,10 +53,18 @@ class CallLogController extends Controller
                 $item = CallLog::find($id);
                 $item->name = $request->input('name');
                 $item->mobile = $request->input('mobile');
-                $item->area = $request->input('area');
+                $item->dob = $request->input('dob');
+                $item->emirate = $request->input('emirate');
                 $item->address = $request->input('address');
-                $item->comments = $request->input('comments');
+                $item->nationality = $request->input('nationality');
+                $item->residence_type = $request->input('residence_type');
+                $item->contact_time = $request->input('contact_time');
+                $item->follow_up_status = $request->input('follow_up_status');
+                $item->covid_tested = $request->input('covid_tested');
+                $item->remarks = $request->input('remarks');
                 $item->save();
+
+                $fillable = ['name', 'mobile', 'nationality', 'dob', 'residence_type', 'contact_time', 'follow_up_status', 'covid_tested', 'emirate', 'address', 'remarks'];
 
                 LogReport::create(array(
                     'user_id' => auth()->user()->id,

@@ -19,9 +19,9 @@
     {!! Html::style('admin/css/demo_1/style.css') !!}
     <!-- Layout style -->
     <link rel="shortcut icon" href="../asssets/images/favicon.ico" />
-    
 
-    
+
+
         <style type="text/css">
 
         .is-overrequest {
@@ -209,6 +209,21 @@
                         {{-- <li>
                             <a href="{{url('delivery/add')}}">List Items</a>
                         </li> --}}
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#call-logs-nav" data-toggle="collapse" aria-expanded="false">
+                        <span class="link-title">Call Logs</span>
+                        <i class="mdi mdi-phone link-icon"></i>
+                    </a>
+                    <ul class="collapse navigation-submenu @if(request()->path() == 'call-logs/*') show @endif" id="call-logs-nav">
+                        <li>
+                            <a href="{{url('call-logs')}}">List Calls</a>
+                        </li>
+                        <li>
+                            <a href="{{url('call-logs/add')}}">Add New</a>
+                        </li>
                     </ul>
                 </li>
 

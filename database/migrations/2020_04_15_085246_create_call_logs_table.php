@@ -16,10 +16,16 @@ class CreateCallLogsTable extends Migration
         Schema::create('call_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->date('dob')->nullable();
+            $table->string('nationality')->default('India');
             $table->string('mobile');
-            $table->enum('area', ['Abu Dhabi', 'Dubai', 'Sharjah', 'Ajman', 'RAK', 'Fujairah', 'UAQ'])->nullable();
             $table->text('address')->nullable();
-            $table->text('comments')->nullable();
+            $table->tinyInteger('residence_type')->default(0);
+            $table->string('contact_time')->nullable();
+            $table->string('follow_up_status')->nullable();
+            $table->tinyInteger('covid_tested')->default(0);
+            $table->tinyInteger('emirate');
+            $table->text('remarks')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
