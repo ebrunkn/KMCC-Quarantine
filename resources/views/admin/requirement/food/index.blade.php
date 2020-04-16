@@ -39,7 +39,7 @@
                             <th>Meal Type</th>
                             <th>Cuisine Type</th>
                             <th>Qty Requested</th>
-                            <th>Building</th>
+                            <th>Building / Person</th>
                             <th>Date Requested</th>
                             <th>Status</th>
                             <th></th>
@@ -56,10 +56,10 @@
                                 {{$item->getFoodCuisine->name}}
                               </td>
                               <td>{{$item->requested_qty}}</td>
-                              <td>{{$item->getBuilding->building_name}}</td>
-                              <td>{{Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
+                              <td>{{$item->getBuilding->building_name ?? $item->individual_name.'('.$item->individual_mobile.')'}}</td>
+                              <td>{{Carbon::parse($item->created_at)->format('d M, Y   h:i A')}}</td>
                               <td>
-                                <span class="badge badge-warning">{{$item->status_label}}</span>
+                              <span class="badge badge-{{$data_bundle['status_label_color'][$item->status]}}">{{$item->status_label}}</span>
                               </td>
                               <td class="actions">
                                 {{-- @switch($item->status)

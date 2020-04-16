@@ -45,7 +45,12 @@ class DeliveryController extends Controller
 
     public function changeStatus(Request $request, $requirement_id ,$status_to){
         $data_bundle = [];
-        $data_bundle['requirement'] =  Requirement::assigned()->where('id',$requirement_id)->firstOrFail();
+        
+        $data_bundle['requirement'] =  Requirement::assigned()
+            ->where('id',$requirement_id)
+            ->where('status','<',$status_to)
+            ->firstOrFail();
+
         $exist_current_delivery =  Requirement::assigned()
         ->where('status',Requirement::DELIVERY_STARTED_STATUS)
         ->where('building_id','!=',$data_bundle['requirement']->building_id)
@@ -53,15 +58,13 @@ class DeliveryController extends Controller
 
         // dd($exist_current_delivery); 
         if(!$exist_current_delivery){
-            $data_bundle['requirement']->status = 3;
+            $data_bundle['requirement']->status = $status_to;
             $data_bundle['requirement']->save();
 
             return redirect()->back()->with('form-action', ['success','OK...! Started delivery']);
         }else{
             return redirect()->back()->with('form-action', ['error','Sorry...! You cannot deliver on different building at same time.']);
-        }
-        
-        
+        }  
     }
 
     public function entry(Request $request){

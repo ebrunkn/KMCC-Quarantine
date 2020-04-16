@@ -31,7 +31,9 @@ class RequirementController extends Controller
             $query->where('type_id',4);
         }
 
-        $query->orderBy('id', 'desc');
+        $query->orderBy('updated_at', 'desc');
+
+        $data_bundle['status_label_color'] = ['dark','default','warning','info','default','success','danger'];
 
         $data_bundle['items'] = $query->paginate(20);
         // dd($data_bundle['items']);
@@ -101,7 +103,9 @@ class RequirementController extends Controller
     public function save(Request $request, $id=false){
         //save
         $message = [
-            'building_id.required'=>'Building name field is required',
+            'building_id.required_if'=>'Building name field is required',
+            'individual_name.required_if'=>'Person name is required',
+            'individual_mobile.required_if'=>'Person mobile is required',
             'type_id.required'=>'Request type is required',
             'food_time_id.required_if'=>'Food time is required for food request',
             'food_cuisine_id.required_if'=>'Cuisine is required for food request',
@@ -110,7 +114,9 @@ class RequirementController extends Controller
         ];
 
         $validationRule = array(
-            'building_id'=>'required',
+            'building_id'=>'required_if:requirement_for,0',
+            'individual_name'=>'required_if:requirement_for,1',
+            'individual_mobile'=>'required_if:requirement_for,1',
             'type_id'=>'required',
             'food_time_id'=>'required_if:type_id,2',
             'food_cuisine_id'=>'required_if:type_id,2',
@@ -133,11 +139,21 @@ class RequirementController extends Controller
             
             if($id){
                 $item = Requirement::find($id);
-                $item->building_id = $request->input('building_id');
+                
                 $item->food_time_id = $request->input('food_time_id');
                 $item->food_cuisine_id = $request->input('food_cuisine_id');
                 $item->warehouse_item_id = $request->input('warehouse_item_id');
                 $item->requested_qty = $request->input('requested_qty');
+
+                if($request->input('requirement_for') == 1){
+                    $item->building_id = null;
+                    $item->individual_name = $request->input('individual_name');
+                    $item->individual_mobile = $request->input('individual_mobile');
+                }else{
+                    $item->building_id = $request->input('building_id');
+                    $item->individual_name = null;
+                    $item->individual_mobile = null;
+                }
                 
                 $status = 0;
                 if($request->input('assigned_user')){
@@ -167,10 +183,23 @@ class RequirementController extends Controller
                 ));
             }else{
 
+                if($request->input('requirement_for') == 1){
+                    $request->merge(array(
+                        'building_id'=>null,
+                    ));
+                }else{
+                    $request->merge(array(
+                        'individual_name'=>null,
+                        'individual_mobile'=>null,
+                    ));
+                }
+
                 $request->merge(array(
                     'user_id'=>auth()->user()->id,
                     'emirate_id' => auth()->user()->emirate_id,
                 ));
+
+                // \dd($request->input());
 
                 $item = Requirement::create($request->input());
                 LogReport::create(array(
