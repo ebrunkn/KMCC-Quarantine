@@ -26,7 +26,6 @@ class CreateCallLogsTable extends Migration
             $table->string('follow_up_status')->nullable();
             $table->tinyInteger('covid_tested')->nullable()->default(0);
             $table->tinyInteger('emirate');
-            $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

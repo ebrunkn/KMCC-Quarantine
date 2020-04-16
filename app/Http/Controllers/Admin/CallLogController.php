@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\CallLogMessage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\CallLog;
@@ -29,6 +30,7 @@ class CallLogController extends Controller
     public function view(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = CallLog::findOrFail($id);
+        // dd($data_bundle['item']->getMessages());
         return view('admin.callLog.view', compact('data_bundle'));
     }
 
@@ -45,7 +47,7 @@ class CallLogController extends Controller
             'name' => 'required',
             'mobile' => 'required',
             'emirate' => 'required',
-            'remarks' => 'required',
+            'message' => 'required',
             'residence_type' => 'required',
             'covid_tested' => 'required',
             'follow_up_status' => 'required',
@@ -74,15 +76,25 @@ class CallLogController extends Controller
                 $item->contact_time = $request->input('contact_time');
                 $item->follow_up_status = $request->input('follow_up_status');
                 $item->covid_tested = $request->input('covid_tested');
-                $item->remarks = $request->input('remarks');
                 $item->save();
 
-                $fillable = ['name', 'mobile', 'nationality', 'dob', 'residence_type', 'contact_time', 'follow_up_status', 'covid_tested', 'emirate', 'address', 'remarks'];
+                $message = new CallLogMessage();
+                $message->call_log_id = $id;
+                $message->user_id = auth()->user()->id;
+                $message->message = $request->input('message');
+
+                $message->save();
 
                 LogReport::create(array(
                     'user_id' => auth()->user()->id,
                     'type' => 'edit callLog item',
                     'data' => $item,
+                ));
+
+                LogReport::create(array(
+                    'user_id' => auth()->user()->id,
+                    'type' => 'added callLog message',
+                    'data' => $message,
                 ));
             } else {
                 $request->merge(array(
@@ -93,6 +105,19 @@ class CallLogController extends Controller
                     'user_id' => auth()->user()->id,
                     'type' => 'add callLog item',
                     'data' => $item,
+                ));
+
+                $message = new CallLogMessage();
+                $message->call_log_id = $item->id;
+                $message->user_id = auth()->user()->id;
+                $message->message = $request->input('message');
+
+                $message->save();
+
+                LogReport::create(array(
+                    'user_id' => auth()->user()->id,
+                    'type' => 'added callLog message',
+                    'data' => $message,
                 ));
             }
 

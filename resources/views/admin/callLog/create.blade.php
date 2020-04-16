@@ -54,6 +54,24 @@
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Date of Birth</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                                    {{-- <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/> --}}
+                                                {!! Form::text('dob', old('dob'),
+                                                array('class'=>'form-control datetimepicker-input','placeholder'=>'Date of Birth', 'rows'=>4, 'data-target'=>'#datetimepicker4')) !!}
+                                                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    </div>
+                                                </div>
+                                                <span id="form-error-dob"></span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
                                                 <label for="inputType1">Emirate</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
@@ -398,17 +416,32 @@
                                             </div>
                                         </div>
 
-                {{-- ['nationality', 'dob', 'residence_type', 'contact_time', 'follow_up_status', 'covid_tested']; --}}
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Contact Time</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                                    {{-- <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/> --}}
+                                                {!! Form::text('contact_time', old('contact_time'),
+                                                array('class'=>'form-control datetimepicker-input','placeholder'=>'Contact Time', 'rows'=>4, 'data-target'=>'#datetimepicker1')) !!}
+                                                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    </div>
+                                                </div>
+                                                <span id="form-error-contact_time"></span>
 
+                                            </div>
+                                        </div>
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
                                                 <label for="inputType1">Remarks</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::textArea('remarks', old('remarks'),
+                                                {!! Form::textArea('message', old('message'),
                                                 array('class'=>'form-control','placeholder'=>'Remarks', 'rows'=>4)) !!}
-                                                <span id="form-error-remarks"></span>
+                                                <span id="form-error-message"></span>
                                             </div>
                                         </div>
 
@@ -433,15 +466,29 @@
         </div>
     </div>
 </div>
-{!! Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js') !!}
+@push('page-specific-css-lib')
+{!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css') !!}
+{!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css') !!}
+@endpush
+@push('page-specific-js-lib')
+{!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js') !!}
+{{-- {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js') !!} --}}
+{!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js') !!}
 {!! Html::script('form-handle/ajax-form.js') !!}
+@endpush
 @push('page-specific-script')
 <script>
-    $('.add-more').click(function(e) {
-        e.preventDefault();
-        console.log('Clicked');
-        $('#contact-person-item').children().clone().appendTo('.contacts');
-    })
+    $(function () {
+        // $('.datetimepicker-input').datetimepicker();
+        // $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker1').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm'
+        });
+        $('#datetimepicker4').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+
+    });
 </script>
 @endpush
 @stop

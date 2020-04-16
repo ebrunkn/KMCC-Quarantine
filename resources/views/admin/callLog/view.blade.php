@@ -103,9 +103,20 @@
                                                 <label for="inputType1">Remarks</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! $data_bundle['item']->remarks !!}
+                                                {{-- {!! $data_bundle['item']->remarks !!} --}}
                                             </div>
                                         </div>
+
+                                        @foreach ($data_bundle['item']->getMessages() as $message)
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Remarks</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! $data_bundle['item']->remarks !!}
+                                                </div>
+                                            </div>
+                                        @endforeach
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
