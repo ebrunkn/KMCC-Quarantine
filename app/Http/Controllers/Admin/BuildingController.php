@@ -178,7 +178,8 @@ class BuildingController extends Controller
 
     public function deleteContact(Request $request, $id)
     {
-        BuildingContact::authEmirate()->where('id', $id)->delete();
+        
+        BuildingContact::where('id', $id)->delete();
         LogReport::create(array(
             'user_id' => auth()->user()->id,
             'type' => 'delete building contact',
