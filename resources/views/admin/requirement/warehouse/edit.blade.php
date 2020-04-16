@@ -85,7 +85,7 @@
                                             <div class="col-md-9 showcase_content_area">
                                                 <div class="form-check form-check-inline">
                                                     {!! Form::radio('requirement_for', 0,
-                                                    $data_bundle['item']->building_id != '',
+                                                    $data_bundle['item']->building_id != null,
                                                     array('class'=>'form-check-input requirement_for_change',
                                                     'id'=>'requirement_for1')) !!}
                                                     <label class="form-check-label"
@@ -93,7 +93,7 @@
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     {!! Form::radio('requirement_for', 1,
-                                                    $data_bundle['item']->building_id == '',
+                                                    $data_bundle['item']->building_id == null,
                                                     array('class'=>'form-check-input requirement_for_change',
                                                     'id'=>'requirement_for2')) !!}
                                                     <label class="form-check-label"
