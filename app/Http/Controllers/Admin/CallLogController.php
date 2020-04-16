@@ -16,7 +16,11 @@ class CallLogController extends Controller
     public function index(Request $request)
     {
         $data_bundle = [];
-        $data_bundle['items'] = CallLog::orderBy('updated_at','desc')->paginate(20);
+        $query = CallLog::orderBy('updated_at','desc');
+        if($request->has('mobile') && $request->mobile != ''){
+            $query->where('mobile','like','%'.$request->mobile.'%');
+        }
+        $data_bundle['items'] = $query->paginate(20);
         // dd($data_bundle['items']);
         return view('admin.callLog.index', compact('data_bundle'));
     }
