@@ -53,8 +53,8 @@ class CallLogController extends Controller
             'emirate' => 'required',
             'message' => 'required',
             'residence_type' => 'required',
-            'covid_tested' => 'required',
-            'follow_up_status' => 'required',
+            // 'covid_tested' => 'required',
+            // 'follow_up_status' => 'required',
         );
 
         $validation = Validator::make($request->input(), $validationRule);
@@ -78,8 +78,8 @@ class CallLogController extends Controller
                 $item->nationality = $request->input('nationality');
                 $item->residence_type = $request->input('residence_type');
                 $item->contact_time = $request->input('contact_time');
-                $item->follow_up_status = $request->input('follow_up_status');
-                $item->covid_tested = $request->input('covid_tested');
+                // $item->follow_up_status = $request->input('follow_up_status');
+                // $item->covid_tested = $request->input('covid_tested');
                 $item->save();
 
                 $message = new CallLogMessage();

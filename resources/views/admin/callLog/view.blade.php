@@ -80,7 +80,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group row showcase_row_area">
+                                    {{-- <div class="form-group row showcase_row_area">
                                         <div class="col-md-3 showcase_text_area">
                                             <label for="inputType1">Covid Tested</label>
                                         </div>
@@ -96,7 +96,7 @@
                                         <div class="col-md-9 showcase_content_area">
                                             {{$data_bundle['item']->follow_up}}
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="form-group row showcase_row_area">
                                         <div class="col-md-3 showcase_text_area">

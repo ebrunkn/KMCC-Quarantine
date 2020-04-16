@@ -385,7 +385,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row showcase_row_area">
+                                        {{-- <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
                                                 <label for="inputType1">Covid Tested</label>
                                             </div>
@@ -432,7 +432,7 @@
                                                 </div>
                                                 <span id="form-error-follow_up_status"></span>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
