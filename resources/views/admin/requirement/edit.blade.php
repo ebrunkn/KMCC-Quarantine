@@ -27,6 +27,14 @@
                         <div class="item-wrapper">
                             <div class="row mb-3">
 
+                                @if(auth()->user()->role_id != 2 && $data_bundle['item']->status > 0)
+                                    <div class="col-12 text-center mb-5">
+                                        <div class="alert alert-danger m-auto">
+                                            Already assigned to a volunteer. Cannot update it anymore. Please contact Admin.
+                                        </div>
+                                    </div>
+                                @endif
+
                                 <div class="col-md-8 mx-auto">
                                     <form id="data-form" class="form" action="{{url('requirement/save', $data_bundle['item']->id)}}"
                                         callback="{{url('requirement/food')}}" method="POST">
@@ -138,15 +146,17 @@
 
                                         @endif
 
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
+                                        @if(auth()->user()->role_id != 2 && $data_bundle['item']->status > 0)
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
 
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::submit('Submit', array('class'=>'btn btn-success btn-block',
+                                                    'id' => 'form-submit')) !!}
+                                                </div>
                                             </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {!! Form::submit('Submit', array('class'=>'btn btn-success btn-block',
-                                                'id' => 'form-submit')) !!}
-                                            </div>
-                                        </div>
+                                        @endif
                                     </form>
                                 </div>
 
@@ -162,6 +172,12 @@
 {!! Html::script('form-handle/ajax-form.js') !!}
 @push('page-specific-script')
 <script>
+    $(document).ready(function(){
+        @if(auth()->user()->role_id != 2 && $data_bundle['item']->status > 0)
+            $( ".form-control" ).prop( "disabled", true );
+            $( "#form-submit" ).prop( "disabled", true );
+        @endif
+    });
     $( "#fulfilled_qty" ).change(function() {
         var max = parseInt($(this).attr('max'));
         var min = parseInt($(this).attr('min'));

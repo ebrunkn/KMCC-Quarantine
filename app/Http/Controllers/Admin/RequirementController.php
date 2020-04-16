@@ -138,22 +138,23 @@ class RequirementController extends Controller
                 $item->food_cuisine_id = $request->input('food_cuisine_id');
                 $item->warehouse_item_id = $request->input('warehouse_item_id');
                 $item->requested_qty = $request->input('requested_qty');
-                $item->assigned_user = $request->input('assigned_user') ?? null;
                 
+                $status = 0;
                 if($request->input('assigned_user')){
+                    $item->assigned_user = $request->input('assigned_user') ?? null;
                     $item->assigned_time = Carbon::now();
+                    $status = Requirement::ASSIGNED_STATUS;
                 }
 
                 $fulfilled_qty = $request->input('fulfilled_qty');
 
                 //@todo Check if enough stock. Otherwise set fulfilled to available stock.
                 $item->fulfilled_qty = $fulfilled_qty;
-
-                $status = 0;
-                if ($request->input('fulfilled_qty') > 0);
-                    $status = 1;
-                if ($request->input('fulfilled_qty') == $request->input('requested_qty'))
-                    $status = 2;
+  
+                // if ($request->input('fulfilled_qty') > 0);
+                //     $status = 1;
+                // if ($request->input('fulfilled_qty') == $request->input('requested_qty'))
+                //     $status = 2;
 
                 $item->status = $status;
 
