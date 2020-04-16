@@ -30,7 +30,7 @@ class CallLogController extends Controller
     public function view(Request $request, $id) {
         $data_bundle = [];
         $data_bundle['item'] = CallLog::findOrFail($id);
-        // dd($data_bundle['item']->getMessages());
+        // dd($data_bundle['item']->getMessages);
         return view('admin.callLog.view', compact('data_bundle'));
     }
 
