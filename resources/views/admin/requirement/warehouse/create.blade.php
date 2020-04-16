@@ -47,17 +47,6 @@
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Building</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {!! Form::select('building_id', $data_bundle['buildings'], null,
-                                                array('class'=>'form-control','placeholder'=>'Building')) !!}
-                                                <span id="form-error-building_id"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
                                                 <label for="inputType1">Quantity</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
@@ -69,13 +58,73 @@
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Room Number</label>
+                                                <label for="inputType1">Requirement For</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::text('room_no', old('room_no'),
-                                                array('class'=>'form-control','placeholder'=>'Room Number')) !!}
-                                                <span id="form-error-room_no"></span>
+                                                <div class="form-check form-check-inline">
+                                                    {!! Form::radio('requirement_for', 0, 1,
+                                                    array('class'=>'form-check-input requirement_for_change', 'id'=>'requirement_for1')) !!}
+                                                    <label class="form-check-label" for="requirement_for1">Building</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    {!! Form::radio('requirement_for', 1, null,
+                                                    array('class'=>'form-check-input requirement_for_change', 'id'=>'requirement_for2')) !!}
+                                                    <label class="form-check-label" for="requirement_for2">Individual</label>
+                                                </div>
+                                                <span id="form-error-requirement_for"></span>
                                             </div>
+                                        </div>
+
+                                        <div class="requirement_for_option">
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Building</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::select('building_id', $data_bundle['buildings'], null,
+                                                    array('class'=>'form-control','placeholder'=>'Building')) !!}
+                                                    <span id="form-error-building_id"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Room Number</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::text('room_no', old('room_no'),
+                                                    array('class'=>'form-control','placeholder'=>'Room Number')) !!}
+                                                    <span id="form-error-room_no"></span>
+                                                </div>
+                                            </div>
+                                            <div></div>
+                                        </div>
+
+                                        <div class="requirement_for_option d-none">
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Name</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::text('individual_name',
+                                                    old('individual_name'),
+                                                    array('class'=>'form-control','placeholder'=>'Name')) !!}
+                                                    <span id="form-error-individual_name"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Mobile</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::text('individual_mobile',
+                                                    old('individual_mobile'),
+                                                    array('class'=>'form-control','placeholder'=>'Mobile')) !!}
+                                                    <span id="form-error-individual_mobile"></span>
+                                                </div>
+                                            </div>
+                                            <div></div>
                                         </div>
 
                                         <div class="form-group row showcase_row_area">
@@ -102,11 +151,9 @@
 {!! Html::script('form-handle/ajax-form.js') !!}
 @push('page-specific-script')
 <script>
-    $('.add-more').click(function(e) {
-        e.preventDefault();
-        console.log('Clicked');
-        $('#contact-person-item').children().clone().appendTo('.contacts');
-    })
+    $('.requirement_for_change').change(function(e) {
+        $('.requirement_for_option').toggleClass('d-none');
+    });
 </script>
 @endpush
 @stop
