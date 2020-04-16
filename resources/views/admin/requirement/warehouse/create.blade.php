@@ -58,7 +58,7 @@
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Requirement For</label>
+                                                <label for="inputType1">Order For</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
                                                 <div class="form-check form-check-inline">
