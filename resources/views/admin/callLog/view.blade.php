@@ -9,9 +9,9 @@
                     <a href="#">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="#">Buildings</a>
+                    <a href="#">Call Logs</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                <li class="breadcrumb-item active" aria-current="page">View</li>
             </ol>
         </nav>
     </div>
@@ -19,115 +19,112 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="grid">
-                    <p class="grid-header">Edit Building</p>
+                    <p class="grid-header">View Call Log</p>
                     <div class="grid-body">
                         <div class="item-wrapper">
                             <div class="row mb-3">
 
                                 <div class="col-md-8 mx-auto">
 
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Name</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {{ $data_bundle['item']->name }}
-                                            </div>
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Name</label>
                                         </div>
-
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Mobile</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {{ $data_bundle['item']->mobile }}
-                                            </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            {{ $data_bundle['item']->name }}
                                         </div>
+                                    </div>
 
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Emirate</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {{ $data_bundle['item']->getEmirate['name'] }}
-                                            </div>
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Mobile</label>
                                         </div>
-
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Nationality</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {{ $data_bundle['item']->nationality }}
-                                            </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            {{ $data_bundle['item']->mobile }}
                                         </div>
+                                    </div>
 
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Address</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {!! $data_bundle['item']->address !!}
-                                            </div>
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Emirate</label>
                                         </div>
-
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Residence Type</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {{$data_bundle['item']->residence_type}}
-                                            </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            {{ $data_bundle['item']->getEmirate['name'] }}
                                         </div>
+                                    </div>
 
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Covid Tested</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {{$data_bundle['item']->covid_tested}}
-                                            </div>
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Nationality</label>
                                         </div>
-
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Follow up Status</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {{$data_bundle['item']->follow_up_status}}
-                                            </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            {{ $data_bundle['item']->nationality }}
                                         </div>
+                                    </div>
 
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Remarks</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {{-- {!! $data_bundle['item']->remarks !!} --}}
-                                            </div>
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Address</label>
                                         </div>
-
-                                        @foreach ($data_bundle['item']->getMessages() as $message)
-                                            <div class="form-group row showcase_row_area">
-                                                <div class="col-md-3 showcase_text_area">
-                                                    <label for="inputType1">Remarks</label>
-                                                </div>
-                                                <div class="col-md-9 showcase_content_area">
-                                                    {!! $data_bundle['item']->remarks !!}
-                                                </div>
-                                            </div>
-                                        @endforeach
-
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                <a href="{{url('call-logs/edit', array($data_bundle['item']->id))}}" class="btn btn-success btn-block">
-                                                    UPDATE
-                                                </a>
-                                            </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            {!! $data_bundle['item']->address !!}
                                         </div>
+                                    </div>
+
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Residence Type</label>
+                                        </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            {{$data_bundle['item']->residence}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Covid Tested</label>
+                                        </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            {{$data_bundle['item']->covid}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Follow up Status</label>
+                                        </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            {{$data_bundle['item']->follow_up}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Remarks</label>
+                                        </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            @foreach ($data_bundle['item']->getMessages as $message)
+                                            <div class="border-bottom pb-3">
+                                                <p><small class="text-muted">{{$message->getUser->name}} on
+                                                        {{$message->created_at}}</small></p>
+                                                <p>{!! $message->message !!}</p>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+
+                                        </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            <a href="{{url('call-logs/edit', array($data_bundle['item']->id))}}"
+                                                class="btn btn-success btn-block">
+                                                UPDATE
+                                            </a>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>

@@ -1,5 +1,17 @@
 @extends ('admin.layout.master')
 
+@push('page-specific-css')
+
+    @if(auth()->user()->role_id != 2 && $data_bundle['item']->status > 0)
+        <style>
+            input, select {
+                /* pointer-events: none;  */
+            }
+        </style>
+    @endif
+
+@endpush
+
 @section('content')
 <div class="page-content-wrapper-inner">
     <div class="viewport-header">
@@ -22,10 +34,18 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="grid">
-                    <p class="grid-header">Edit Building</p>
+                    <p class="grid-header">Edit Requirement</p>
                     <div class="grid-body">
                         <div class="item-wrapper">
                             <div class="row mb-3">
+
+                                @if(auth()->user()->role_id != 2 && $data_bundle['item']->status > 0)
+                                    <div class="col-12 text-center mb-5">
+                                        <div class="alert alert-danger m-auto">
+                                            Already assigned to a volunteer. Cannot update it anymore. Please contact Admin.
+                                        </div>
+                                    </div>
+                                @endif
 
                                 <div class="col-md-8 mx-auto">
                                     <form id="data-form" class="form" action="{{url('requirement/save', $data_bundle['item']->id)}}"
@@ -142,6 +162,14 @@
 {!! Html::script('form-handle/ajax-form.js') !!}
 @push('page-specific-script')
 <script>
+
+    $(document).ready(function(){
+        @if(auth()->user()->role_id != 2 && $data_bundle['item']->status > 0)
+            $( ".form-control" ).prop( "disabled", true );
+            $( "#form-submit" ).prop( "disabled", true );
+        @endif
+    });
+
     $( "#fulfilled_qty" ).change(function() {
         var max = parseInt($(this).attr('max'));
         var min = parseInt($(this).attr('min'));
