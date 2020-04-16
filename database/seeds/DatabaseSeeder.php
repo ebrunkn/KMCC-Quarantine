@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RequestTypeTableSeeder::class);
         $this->call(FoodTimeTableSeeder::class);
         $this->call(FoodCuisineTableSeeder::class);
-        $this->call(RequirementTableSeeder::class);
+        // $this->call(RequirementTableSeeder::class);
         // $this->call(UserPermissionSeeder::class);
         // $this->call(AssignPermissionForUser::class);
     }
