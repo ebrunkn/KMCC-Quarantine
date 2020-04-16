@@ -9,7 +9,7 @@
                     <a href="#">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="#">Buildings</a>
+                    <a href="#">Call Logs</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Edit</li>
             </ol>
@@ -56,10 +56,29 @@
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Date of Birth</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                                    {{-- <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/> --}}
+                                                {!! Form::text('dob', old('dob'),
+                                                array('class'=>'form-control datetimepicker-input','placeholder'=>'Date of Birth', 'rows'=>4, 'data-target'=>'#datetimepicker4')) !!}
+                                                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    </div>
+                                                </div>
+                                                <span id="form-error-dob"></span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
                                                 <label for="inputType1">Emirate</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::select('emirate', $data_bundle['emirates'], $data_bundle['item']->emirate,
+                                                {!! Form::select('emirate', $data_bundle['emirates'],
+                                                $data_bundle['item']->emirate,
                                                 array('class'=>'form-control','placeholder'=>'Emirate')) !!}
                                                 <span id="form-error-emirate"></span>
                                             </div>
@@ -100,7 +119,8 @@
                                                     <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
                                                     <option value="Botswana">Botswana</option>
                                                     <option value="Brazil">Brazil</option>
-                                                    <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+                                                    <option value="British Indian Ocean Ter">British Indian Ocean Ter
+                                                    </option>
                                                     <option value="Brunei">Brunei</option>
                                                     <option value="Bulgaria">Bulgaria</option>
                                                     <option value="Burkina Faso">Burkina Faso</option>
@@ -111,7 +131,8 @@
                                                     <option value="Canary Islands">Canary Islands</option>
                                                     <option value="Cape Verde">Cape Verde</option>
                                                     <option value="Cayman Islands">Cayman Islands</option>
-                                                    <option value="Central African Republic">Central African Republic</option>
+                                                    <option value="Central African Republic">Central African Republic
+                                                    </option>
                                                     <option value="Chad">Chad</option>
                                                     <option value="Channel Islands">Channel Islands</option>
                                                     <option value="Chile">Chile</option>
@@ -247,7 +268,8 @@
                                                     <option value="Portugal">Portugal</option>
                                                     <option value="Puerto Rico">Puerto Rico</option>
                                                     <option value="Qatar">Qatar</option>
-                                                    <option value="Republic of Montenegro">Republic of Montenegro</option>
+                                                    <option value="Republic of Montenegro">Republic of Montenegro
+                                                    </option>
                                                     <option value="Republic of Serbia">Republic of Serbia</option>
                                                     <option value="Reunion">Reunion</option>
                                                     <option value="Romania">Romania</option>
@@ -260,7 +282,8 @@
                                                     <option value="St Lucia">St Lucia</option>
                                                     <option value="St Maarten">St Maarten</option>
                                                     <option value="St Pierre & Miquelon">St Pierre & Miquelon</option>
-                                                    <option value="St Vincent & Grenadines">St Vincent & Grenadines</option>
+                                                    <option value="St Vincent & Grenadines">St Vincent & Grenadines
+                                                    </option>
                                                     <option value="Saipan">Saipan</option>
                                                     <option value="Samoa">Samoa</option>
                                                     <option value="Samoa American">Samoa American</option>
@@ -302,7 +325,8 @@
                                                     <option value="United Kingdom">United Kingdom</option>
                                                     <option value="Ukraine">Ukraine</option>
                                                     <option value="United Arab Erimates">United Arab Emirates</option>
-                                                    <option value="United States of America">United States of America</option>
+                                                    <option value="United States of America">United States of America
+                                                    </option>
                                                     <option value="Uraguay">Uruguay</option>
                                                     <option value="Uzbekistan">Uzbekistan</option>
                                                     <option value="Vanuatu">Vanuatu</option>
@@ -317,7 +341,7 @@
                                                     <option value="Zaire">Zaire</option>
                                                     <option value="Zambia">Zambia</option>
                                                     <option value="Zimbabwe">Zimbabwe</option>
-                                                 </select>
+                                                </select>
                                                 <span id="form-error-emirate"></span>
                                             </div>
                                         </div>
@@ -339,17 +363,21 @@
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
                                                 <div class="form-check form-check-inline">
-                                                    {!! Form::radio('residence_type', 0, $data_bundle['item']->residence_type,
+                                                    {!! Form::radio('residence_type', 0,
+                                                    $data_bundle['item']->residence_type == 0,
                                                     array('class'=>'form-check-input', 'id'=>'residence_type1')) !!}
                                                     <label class="form-check-label" for="residence_type1">Family</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    {!! Form::radio('residence_type', 1, $data_bundle['item']->residence_type,
+                                                    {!! Form::radio('residence_type', 1,
+                                                    $data_bundle['item']->residence_type == 1,
                                                     array('class'=>'form-check-input', 'id'=>'residence_type2')) !!}
-                                                    <label class="form-check-label" for="residence_type2">Bachelor</label>
+                                                    <label class="form-check-label"
+                                                        for="residence_type2">Bachelor</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    {!! Form::radio('residence_type', 2, $data_bundle['item']->residence_type,
+                                                    {!! Form::radio('residence_type', 2,
+                                                    $data_bundle['item']->residence_type == 2,
                                                     array('class'=>'form-check-input', 'id'=>'residence_type3')) !!}
                                                     <label class="form-check-label" for="residence_type3">Other</label>
                                                 </div>
@@ -363,12 +391,14 @@
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
                                                 <div class="form-check form-check-inline">
-                                                    {!! Form::radio('covid_tested', 1, $data_bundle['item']->covid_tested,
+                                                    {!! Form::radio('covid_tested', 1,
+                                                    $data_bundle['item']->covid_tested == 1,
                                                     array('class'=>'form-check-input', 'id'=>'covid_tested1')) !!}
                                                     <label class="form-check-label" for="covid_tested1">Yes</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    {!! Form::radio('covid_tested', 0, $data_bundle['item']->covid_tested,
+                                                    {!! Form::radio('covid_tested', 0 == 0,
+                                                    $data_bundle['item']->covid_tested,
                                                     array('class'=>'form-check-input', 'id'=>'covid_tested2')) !!}
                                                     <label class="form-check-label" for="covid_tested2">No</label>
                                                 </div>
@@ -382,21 +412,43 @@
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
                                                 <div class="form-check form-check-inline">
-                                                    {!! Form::radio('follow_up_status', 1, $data_bundle['item']->follow_up_status,
+                                                    {!! Form::radio('follow_up_status', 1,
+                                                    $data_bundle['item']->follow_up_status == 1,
                                                     array('class'=>'form-check-input', 'id'=>'follow_up_status1')) !!}
                                                     <label class="form-check-label" for="follow_up_status1">Yes</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    {!! Form::radio('follow_up_status', 0, $data_bundle['item']->follow_up_status,
+                                                    {!! Form::radio('follow_up_status', 0,
+                                                    $data_bundle['item']->follow_up_status == 0,
                                                     array('class'=>'form-check-input', 'id'=>'follow_up_status2')) !!}
                                                     <label class="form-check-label" for="follow_up_status12">No</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    {!! Form::radio('follow_up_status', 2, $data_bundle['item']->follow_up_status,
+                                                    {!! Form::radio('follow_up_status', 2,
+                                                    $data_bundle['item']->follow_up_status == 2,
                                                     array('class'=>'form-check-input', 'id'=>'follow_up_status3')) !!}
-                                                    <label class="form-check-label" for="follow_up_status13">Other</label>
+                                                    <label class="form-check-label"
+                                                        for="follow_up_status13">Other</label>
                                                 </div>
                                                 <span id="form-error-follow_up_status"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Contact Time</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                                    {{-- <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/> --}}
+                                                {!! Form::text('contact_time', old('contact_time'),
+                                                array('class'=>'form-control datetimepicker-input','placeholder'=>'Contact Time', 'rows'=>4, 'data-target'=>'#datetimepicker1')) !!}
+                                                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    </div>
+                                                </div>
+                                                <span id="form-error-contact_time"></span>
+
                                             </div>
                                         </div>
 
@@ -405,9 +457,9 @@
                                                 <label for="inputType1">Remarks</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::textArea('remarks', $data_bundle['item']->remarks,
+                                                {!! Form::textArea('message', null,
                                                 array('class'=>'form-control','placeholder'=>'Remarks')) !!}
-                                                <span id="form-error-remarks"></span>
+                                                <span id="form-error-message"></span>
                                             </div>
                                         </div>
 
@@ -430,15 +482,33 @@
             </div>
         </div>
     </div>
-    {!! Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js') !!}
+    @push('page-specific-css-lib')
+    {!! Html::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css') !!}
+    {!!
+    Html::style('https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css')
+    !!}
+    @endpush
+    @push('page-specific-js-lib')
+    {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js') !!}
+    {{-- {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js') !!} --}}
+    {!!
+    Html::script('https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js')
+    !!}
     {!! Html::script('form-handle/ajax-form.js') !!}
+    @endpush
     @push('page-specific-script')
     <script>
-        $('.add-more').click(function(e) {
-        e.preventDefault();
-        console.log('Clicked');
-        $('#contact-person-item').children().clone().appendTo('.contacts');
-    })
+        $(function () {
+            // $('.datetimepicker-input').datetimepicker();
+            // $('#datetimepicker1').datetimepicker();
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm'
+            });
+            $('#datetimepicker4').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+
+        });
     </script>
     @endpush
     @stop
