@@ -63,7 +63,8 @@
 
                         </thead>
                         <tbody>
-                          @foreach($data_bundle['items'] as $callLog)
+
+                          @forelse($data_bundle['items'] as $callLog)
                             <tr>
                               <td class="">
                                 {{$callLog->name}}
@@ -76,7 +77,14 @@
                                 <a href="{{url('call-logs/view', array($callLog->id))}}" class="btn btn-xs btn-success"><i class="mdi mdi-eye"></a></i>
                               </td>
                             </tr>
-                          @endforeach
+                          @empty
+                            <tr>
+                              <td colspan="5" class="text-center py-5">
+                                <h5>Sorry...! No results found.</h5>
+                              </td>
+                            </tr>
+                          @endforelse
+
                         </tbody>
                       </table>
                     </div>

@@ -71,8 +71,9 @@
 
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::submit('Update', array('class'=>'btn btn-success btn-block',
-                                                'id' => 'form-submit')) !!}
+                                                @include('admin.partials.submit-button')
+                                                {{-- {!! Form::submit('Update', array('class'=>'btn btn-success btn-block',
+                                                'id' => 'form-submit')) !!} --}}
                                             </div>
                                         </div>
                                     </form>
@@ -169,9 +170,10 @@
 
                                                 </div>
                                                 <div class="col-md-9 showcase_content_area">
-                                                    {!! Form::submit('Submit', array('class'=>'btn btn-success
+                                                    @include('admin.partials.submit-button')
+                                                    {{-- {!! Form::submit('Submit', array('class'=>'btn btn-success
                                                     btn-block',
-                                                    'id' => 'form-submit')) !!}
+                                                    'id' => 'form-submit')) !!} --}}
                                                 </div>
                                             </div>
 

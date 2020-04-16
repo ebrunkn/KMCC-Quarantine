@@ -145,10 +145,12 @@
                                             <div class="col-md-3 showcase_text_area">
 
                                             </div>
-                                            <div class="col-md-9 showcase_content_area">
+
+                                            @include('admin.partials.submit-button')
+                                            {{-- <div class="col-md-9 showcase_content_area">
                                                 {!! Form::submit('Submit', array('class'=>'btn btn-success btn-block',
                                                 'id' => 'form-submit')) !!}
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </form>
                                 </div>
