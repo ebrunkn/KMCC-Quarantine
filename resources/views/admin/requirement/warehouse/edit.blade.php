@@ -104,6 +104,8 @@
                                                                 {{$volunteer->name}}
                                                                 @if($volunteer->constituency_id)
                                                                     <small>({{ $volunteer->getConstituency['name'] }})</small>
+                                                                @elseif($volunteer->district_id)
+                                                                    <small>({{ $volunteer->getDistrict['name'] }})</small>
                                                                 @endif
                                                             </option>
                                                         @endforeach

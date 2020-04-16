@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RequestTypeTableSeeder::class);
         $this->call(FoodTimeTableSeeder::class);
         $this->call(FoodCuisineTableSeeder::class);
-        $this->call(RequirementTableSeeder::class);
+        // $this->call(RequirementTableSeeder::class);
         // $this->call(UserPermissionSeeder::class);
         // $this->call(AssignPermissionForUser::class);
     }
@@ -190,7 +190,7 @@ class UsersTableSeeder extends Seeder
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Vahab',
 			'email' => 'vahabz@gmail.com',
-            'password' => Hash::make('kmcc123'),
+            'password' => Hash::make('vahab@kmcc'),
             'role_id' => User::ADMIN,
             'emirate_id' => 3,
         ));
@@ -199,11 +199,55 @@ class UsersTableSeeder extends Seeder
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Sameer',
 			'email' => 'smr_kp@yahoo.com',
-            'password' => Hash::make('kmcc123'),
+            'password' => Hash::make('sameer@kmcc'),
             'role_id' => User::VOLUNTEER,
             'emirate_id' => 3,
             'district_id' => 2,
             'constituency_id' => 10,
+        ));
+        
+        User::create(array(
+			// 'location_id' => $faker->numberBetween(1, 5),
+			'name' => 'Riyas',
+			'email' => 'riyas_nadakkal@yahoo.com',
+            'password' => Hash::make('riyas@kmcc'),
+            'role_id' => User::VOLUNTEER,
+            'emirate_id' => 3,
+            'district_id' => 5,
+            // 'constituency_id' => 1,
+        ));
+        
+        User::create(array(
+			// 'location_id' => $faker->numberBetween(1, 5),
+			'name' => 'Shafeek',
+			'email' => 'shafeek1480@gmail.com',
+            'password' => Hash::make('shafeek@kmcc'),
+            'role_id' => User::VOLUNTEER,
+            'emirate_id' => 3,
+            'district_id' => 2,
+            // 'constituency_id' => 1,
+        ));
+        
+        User::create(array(
+			// 'location_id' => $faker->numberBetween(1, 5),
+			'name' => 'Abdul Sadath',
+			'email' => 'sadathte@gmail.com',
+            'password' => Hash::make('sadath@kmcc'),
+            'role_id' => User::VOLUNTEER,
+            'emirate_id' => 3,
+            'district_id' => 3,
+            // 'constituency_id' => 1,
+        ));
+        
+        User::create(array(
+			// 'location_id' => $faker->numberBetween(1, 5),
+			'name' => 'Faisal',
+			'email' => 'kmcckkd@gmail.com',
+            'password' => Hash::make('faisal@kmcc'),
+            'role_id' => User::VOLUNTEER,
+            'emirate_id' => 3,
+            'district_id' => 4,
+            // 'constituency_id' => 1,
 		));
 
         // $data = [];

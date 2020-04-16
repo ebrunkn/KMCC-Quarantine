@@ -131,6 +131,8 @@
                     <p class="user-name">{{auth()->user()->name}}
                         @if(auth()->user()->constituency_id)
                             <small>({{ auth()->user()->getConstituency['name'] }})</small>
+                        @elseif(auth()->user()->district_id)
+                            <small>({{ auth()->user()->getDistrict['name'] }})</small>
                         @endif
                     </p>
                     {{--            <h6 class="display-income">$3,400,00</h6>--}}
