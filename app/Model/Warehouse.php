@@ -10,7 +10,7 @@ class Warehouse extends Model
     use SoftDeletes;
     
     protected $table = 'warehouses';
-    protected $fillable = ['item_name','threshold'];
+    protected $fillable = ['item_name','threshold', 'emirate_id'];
 
     public function scopeAuthEmirate($query){
         if(auth()->user()->emirate_id){

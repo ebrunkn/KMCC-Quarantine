@@ -82,6 +82,8 @@ class WarehouseController extends Controller
                     'threshold'=> $request->input('threshold') ?? 25,
                 ));
 
+                // Log::info($request->input());
+
                 $item = Warehouse::create($request->input());
                 LogReport::create(array(
                     'user_id'=>auth()->user()->id,
