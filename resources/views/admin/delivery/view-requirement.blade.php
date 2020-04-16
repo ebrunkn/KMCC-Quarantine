@@ -36,23 +36,43 @@
 
                                 <div class="col-12 col-md-8 mx-auto">
 
-                                    <div class="form-group row showcase_row_area">
-                                        <div class="col-md-3 showcase_text_area">
-                                            <label for="inputType1">Building</label>
+                                    @if($data_bundle['requirement']->getBuilding['building_name'])
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Building</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                {{ $data_bundle['requirement']->getBuilding['building_name'] }}
+                                            </div>
                                         </div>
-                                        <div class="col-md-9 showcase_content_area">
-                                            {{ $data_bundle['requirement']->getBuilding['building_name'] }}
-                                        </div>
-                                    </div>
 
-                                    <div class="form-group row showcase_row_area">
-                                        <div class="col-md-3 showcase_text_area">
-                                            <label for="inputType1">Room No</label>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Room No</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                {{ $data_bundle['requirement']->room_no ?? 'NA' }}
+                                            </div>
                                         </div>
-                                        <div class="col-md-9 showcase_content_area">
-                                            {{ $data_bundle['requirement']->room_no ?? 'NA' }}
+                                    @else
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Person Name</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                {{ $data_bundle['requirement']->individual_name }}
+                                            </div>
                                         </div>
-                                    </div>
+
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Person Mobile</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                {{ $data_bundle['requirement']->individual_mobile }}
+                                            </div>
+                                        </div>
+                                    @endif
 
                                     <div class="form-group row showcase_row_area">
                                         <div class="col-md-3 showcase_text_area">
@@ -132,19 +152,22 @@
                                         
                                     @if($data_bundle['requirement']->status == 3)
 
-                                        <a href="#" class="btn btn-danger m-1">
+                                        <a href="{{ url('delivery/change-status', array($data_bundle['requirement']->id, 5)) }}" class="btn btn-success m-1">
                                             <i class="mdi mdi-truck-delivery mr-2"></i>
-                                            Stop Delivery
-                                        </a>
-                                        <a href="#" class="btn btn-success m-1">
-                                            <i class="mdi mdi-truck-delivery mr-2"></i>
-                                            Finish Delivery
+                                            Finished Delivery
                                         </a>
                                         <a href="{{ url('delivery/entry') }}" class="btn btn-info m-1">
                                             <i class="mdi mdi-truck-delivery mr-2"></i>
-                                            Delivery Entry
+                                            Door Delivery Entry
                                         </a>
 
+                                    @elseif($data_bundle['requirement']->status == 5)
+
+                                        <a href="#" class="btn btn-default m-1">
+                                            <i class="mdi mdi-check"></i>
+                                            Delivery is Finished
+                                        </a>
+                                        
                                     @else
 
                                         <a href="{{ url('delivery/change-status', array($data_bundle['requirement']->id, 3)) }}" class="btn btn-info">

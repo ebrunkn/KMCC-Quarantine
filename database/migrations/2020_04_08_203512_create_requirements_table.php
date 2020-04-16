@@ -18,6 +18,8 @@ class CreateRequirementsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('building_id')->unsigned()->nullable();
             $table->bigInteger('room_no')->unsigned()->nullable();
+            $table->string('individual_name')->nullable();
+            $table->string('individual_mobile')->nullable();
             $table->bigInteger('type_id')->unsigned();
             $table->bigInteger('food_time_id')->unsigned()->nullable();
             $table->bigInteger('food_cuisine_id')->unsigned()->nullable();

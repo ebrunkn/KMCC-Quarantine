@@ -33,7 +33,7 @@
 
                           <tr>
                             <th>Order No</th>
-                            <th>Buidling</th>
+                            <th>Buidling / Person</th>
                             <th>Order Type</th>
                             <th>Assigned Time</th>
                             <th>Status</th>
@@ -47,7 +47,7 @@
                               <td class="">
                                 {{ $requirement->id }}
                               </td>
-                              <td>{{ $requirement->getBuilding['building_name'] }}</td>
+                              <td>{{ $requirement->getBuilding['building_name'] ?? $requirement->individual_name.'('.$requirement->individual_mobile.')' }}</td>
                               <td>{{ $requirement->getRequestType['type'] }}</td>
                               <td>{{ $requirement->assigned_time ?? 'NA' }}</td>
                               <td>{{ $requirement->status_label }}</td>

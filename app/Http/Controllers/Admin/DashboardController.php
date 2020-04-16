@@ -29,16 +29,17 @@ class DashboardController extends Controller
 
         $data_bundle['warehouse_request'] = [
             'received'=>Requirement::authEmirate()->warehouse()->count(),
-            'completed'=>Requirement::authEmirate()->warehouse()->fulfilled()->count(),
-            'pending'=>Requirement::authEmirate()->warehouse()->unFulfilled()->count(),
+            'completed'=>Requirement::authEmirate()->warehouse()->completed()->count(),
+            'pending'=>Requirement::authEmirate()->warehouse()->pending()->count(),
+            'processing'=>Requirement::authEmirate()->warehouse()->processing()->count(),
         ];
 
-        $data_bundle['maintenence_request'] = [
-            'received'=>Requirement::authEmirate()->maintennace()->count(),
-            'completed'=>Requirement::authEmirate()->maintennace()->completed()->count(),
-            'pending'=>Requirement::authEmirate()->maintennace()->pending()->count(),
-            'processing'=>Requirement::authEmirate()->maintennace()->processing()->count(),
-        ];
+        // $data_bundle['maintenence_request'] = [
+        //     'received'=>Requirement::authEmirate()->maintennace()->count(),
+        //     'completed'=>Requirement::authEmirate()->maintennace()->completed()->count(),
+        //     'pending'=>Requirement::authEmirate()->maintennace()->pending()->count(),
+        //     'processing'=>Requirement::authEmirate()->maintennace()->processing()->count(),
+        // ];
 
         // dd($data_bundle);
         return view('admin/dashboard/index', compact('data_bundle'));

@@ -19,7 +19,7 @@
 
         @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
 
-          <div class="col-md-3 col-sm-6 col-6 equel-grid">
+        <div class="col-md-4 col-12 equel-grid">
             <div class="grid">
               <div class="grid-body text-gray">
                 <div class="text-center">
@@ -35,7 +35,7 @@
 
         @endif
 
-        <div class="col-md-3 col-sm-6 col-6 equel-grid">
+        <div class="col-md-4 col-12 equel-grid">
           <div class="grid">
             <div class="grid-body text-gray">
               <div class="text-center">
@@ -46,6 +46,9 @@
                   {{$data_bundle['food_request']['completed']}} <small> &nbsp; Completed Requests</small>
                 </h3>
                 <h3 class="d-flex align-items-center justify-content-center">
+                  {{$data_bundle['food_request']['processing']}} <small> &nbsp; Processing Requests</small>
+                </h3>
+                <h3 class="d-flex align-items-center justify-content-center">
                   {{$data_bundle['food_request']['pending']}} <small> &nbsp; Pending Requests</small>
                 </h3>
               </div>
@@ -54,7 +57,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6 col-6 equel-grid">
+        <div class="col-md-4 col-12 equel-grid">
           <div class="grid">
             <div class="grid-body text-gray">
               <div class="text-center">
@@ -65,6 +68,9 @@
                   {{$data_bundle['warehouse_request']['completed']}} &nbsp; <small> Completed Requests</small>
                 </h3>
                 <h3 class="d-flex align-items-center justify-content-center">
+                  {{$data_bundle['warehouse_request']['processing']}} <small> &nbsp; Processing Requests</small>
+                </h3>
+                <h3 class="d-flex align-items-center justify-content-center">
                   {{$data_bundle['warehouse_request']['pending']}} &nbsp; <small> Pending Requests</small>
                 </h3>
               </div>
@@ -73,7 +79,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3 col-sm-6 col-6 equel-grid">
+        {{-- <div class="col-md-3 col-sm-6 col-6 equel-grid">
           <div class="grid">
               <div class="grid-body text-gray">
                 <div class="text-center">
@@ -91,7 +97,7 @@
                 <p class="text-black text-center"><a href="requirement/maintenance" class="">Maintenance Requests</a></p>
             </div>
           </div>
-        </div>
+        </div> --}}
         {{-- <div class="col-lg-4 col-md-6 equel-grid">
           <div class="grid">
             <div class="grid-body d-flex flex-column h-100">
