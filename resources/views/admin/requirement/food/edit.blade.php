@@ -28,11 +28,11 @@
                             <div class="row mb-3">
 
                                 @if(auth()->user()->role_id != 2 && $data_bundle['item']->status > 0)
-                                    <div class="col-12 text-center mb-5">
-                                        <div class="alert alert-danger m-auto">
-                                            Already assigned to a volunteer. Cannot update it anymore. Please contact Admin.
-                                        </div>
+                                <div class="col-12 text-center mb-5">
+                                    <div class="alert alert-danger m-auto">
+                                        Already assigned to a volunteer. Cannot update it anymore. Please contact Admin.
                                     </div>
+                                </div>
                                 @endif
 
                                 <div class="col-md-8 mx-auto">
@@ -68,29 +68,6 @@
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Building</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {!! Form::select('building_id', $data_bundle['buildings'],
-                                                $data_bundle['item']->building_id,
-                                                array('class'=>'form-control','placeholder'=>'Building')) !!}
-                                                <span id="form-error-building_id"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Room Number</label>
-                                            </div>
-                                            <div class="col-md-9 showcase_content_area">
-                                                {!! Form::text('room_no', $data_bundle['item']->room_no,
-                                                array('class'=>'form-control','placeholder'=>'Room Number')) !!}
-                                                <span id="form-error-room_no"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row showcase_row_area">
-                                            <div class="col-md-3 showcase_text_area">
                                                 <label for="inputType1">Quantity</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
@@ -102,10 +79,91 @@
 
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Order For</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <div class="form-check form-check-inline">
+                                                    {!! Form::radio('requirement_for', 0,
+                                                    $data_bundle['item']->building_id != null,
+                                                    array('class'=>'form-check-input requirement_for_change',
+                                                    'id'=>'requirement_for1')) !!}
+                                                    <label class="form-check-label"
+                                                        for="requirement_for1">Building</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    {!! Form::radio('requirement_for', 1,
+                                                    $data_bundle['item']->building_id == null,
+                                                    array('class'=>'form-check-input requirement_for_change',
+                                                    'id'=>'requirement_for2')) !!}
+                                                    <label class="form-check-label"
+                                                        for="requirement_for2">Individual</label>
+                                                </div>
+                                                <span id="form-error-requirement_for"></span>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="requirement_for_option {{$data_bundle['item']->building_id ? '' : 'd-none'}}">
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Building</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::select('building_id', $data_bundle['buildings'],
+                                                    $data_bundle['item']->building_id,
+                                                    array('class'=>'form-control','placeholder'=>'Building')) !!}
+                                                    <span id="form-error-building_id"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Room Number</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::text('room_no', $data_bundle['item']->room_no,
+                                                    array('class'=>'form-control','placeholder'=>'Room Number')) !!}
+                                                    <span id="form-error-room_no"></span>
+                                                </div>
+                                            </div>
+                                            <div></div>
+                                        </div>
+                                        <div
+                                            class="requirement_for_option  {{$data_bundle['item']->building_id ? 'd-none' : ''}}">
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Name</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::text('individual_name',
+                                                    $data_bundle['item']->individual_name,
+                                                    array('class'=>'form-control','placeholder'=>'Name')) !!}
+                                                    <span id="form-error-individual_name"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row showcase_row_area">
+                                                <div class="col-md-3 showcase_text_area">
+                                                    <label for="inputType1">Mobile</label>
+                                                </div>
+                                                <div class="col-md-9 showcase_content_area">
+                                                    {!! Form::text('individual_mobile',
+                                                    $data_bundle['item']->individual_mobile,
+                                                    array('class'=>'form-control','placeholder'=>'Mobile')) !!}
+                                                    <span id="form-error-individual_mobile"></span>
+                                                </div>
+                                            </div>
+                                            <div></div>
+                                        </div>
+
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
                                                 <label for="inputType1">Fulfilled Quantity</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
-                                                {!! Form::number('fulfilled_qty', $data_bundle['item']->fulfilled_qty > 0 ? $data_bundle['item']->fulfilled_qty : $data_bundle['item']->requested_qty,
+                                                {!! Form::number('fulfilled_qty', $data_bundle['item']->fulfilled_qty >
+                                                0 ? $data_bundle['item']->fulfilled_qty :
+                                                $data_bundle['item']->requested_qty,
                                                 array('class'=>'form-control','placeholder'=>'Fulfilled Quantity',
                                                 'min' => 0, 'max' => $data_bundle['item']->requested_qty, 'id' =>
                                                 'fulfilled_qty')) !!}
@@ -115,40 +173,40 @@
 
                                         @if(auth()->user()->role_id == 2)
 
-                                            <div class="form-group row showcase_row_area">
-                                                <div class="col-md-3 showcase_text_area">
-                                                    <label for="inputType1">Assign volunteer</label>
-                                                </div>
-                                                <div class="col-md-9 showcase_content_area">
-                                                    <select class="form-control" name="assigned_user" id="">
-                                                        <option value="">Assign A Volunteer</option>
-                                                        @foreach($data_bundle['volunteers'] as $volunteer)
-                                                            <option value="{{$volunteer->id}}">
-                                                                {{$volunteer->name}}
-                                                                @if($volunteer->constituency_id)
-                                                                    <small>({{ $volunteer->getConstituency['name'] }})</small>
-                                                                @elseif($volunteer->district_id)
-                                                                    <small>({{ $volunteer->getDistrict['name'] }})</small>
-                                                                @endif
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    <span id="form-error-fulfilled_qty"></span>
-                                                </div>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Assign volunteer</label>
                                             </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <select class="form-control" name="assigned_user" id="">
+                                                    <option value="">Assign A Volunteer</option>
+                                                    @foreach($data_bundle['volunteers'] as $volunteer)
+                                                    <option value="{{$volunteer->id}}">
+                                                        {{$volunteer->name}}
+                                                        @if($volunteer->constituency_id)
+                                                        <small>({{ $volunteer->getConstituency['name'] }})</small>
+                                                        @elseif($volunteer->district_id)
+                                                        <small>({{ $volunteer->getDistrict['name'] }})</small>
+                                                        @endif
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                                <span id="form-error-fulfilled_qty"></span>
+                                            </div>
+                                        </div>
 
                                         @endif
 
                                         @if(auth()->user()->role_id != 2 && $data_bundle['item']->status > 0)
-                                            <div class="form-group row showcase_row_area">
-                                                <div class="col-md-3 showcase_text_area">
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
 
-                                                </div>
-                                                <div class="col-md-9 showcase_content_area">
-                                                    {!! Form::submit('Submit', array('class'=>'btn btn-success btn-block',
-                                                    'id' => 'form-submit')) !!}
-                                                </div>
                                             </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                {!! Form::submit('Submit', array('class'=>'btn btn-success btn-block',
+                                                'id' => 'form-submit')) !!}
+                                            </div>
+                                        </div>
                                         @endif
 
                                     </form>
@@ -184,6 +242,10 @@
             $(this).val(min);
         }
     });
+
+$('.requirement_for_change').change(function(e) {
+    $('.requirement_for_option').toggleClass('d-none');
+});
 </script>
 @endpush
 @stop

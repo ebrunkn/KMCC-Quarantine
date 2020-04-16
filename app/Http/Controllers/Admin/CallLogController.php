@@ -16,7 +16,11 @@ class CallLogController extends Controller
     public function index(Request $request)
     {
         $data_bundle = [];
-        $data_bundle['items'] = CallLog::orderBy('updated_at','desc')->paginate(20);
+        $query = CallLog::orderBy('updated_at','desc');
+        if($request->has('mobile') && $request->mobile != ''){
+            $query->where('mobile','like','%'.$request->mobile.'%');
+        }
+        $data_bundle['items'] = $query->paginate(20);
         // dd($data_bundle['items']);
         return view('admin.callLog.index', compact('data_bundle'));
     }
@@ -49,8 +53,8 @@ class CallLogController extends Controller
             'emirate' => 'required',
             'message' => 'required',
             'residence_type' => 'required',
-            'covid_tested' => 'required',
-            'follow_up_status' => 'required',
+            // 'covid_tested' => 'required',
+            // 'follow_up_status' => 'required',
         );
 
         $validation = Validator::make($request->input(), $validationRule);
@@ -74,8 +78,8 @@ class CallLogController extends Controller
                 $item->nationality = $request->input('nationality');
                 $item->residence_type = $request->input('residence_type');
                 $item->contact_time = $request->input('contact_time');
-                $item->follow_up_status = $request->input('follow_up_status');
-                $item->covid_tested = $request->input('covid_tested');
+                // $item->follow_up_status = $request->input('follow_up_status');
+                // $item->covid_tested = $request->input('covid_tested');
                 $item->save();
 
                 $message = new CallLogMessage();

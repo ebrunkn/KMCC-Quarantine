@@ -27,6 +27,28 @@
                     </a>
                   </p>
                   <div class="item-wrapper">
+
+                    <div class="row my-4">
+                      <div class="col-12">
+                        <div class="row justify-content-end">
+                          <div class="col-12 col-md-4 col-lg-3">
+                            {!! Form::open(array('method'=>'get')) !!}
+
+                              <div class="input-group mb-3">
+                              <input type="text" name="mobile" value="{{request()->get('mobile')}}" class="form-control form-control-lg" placeholder="Search Mobile" aria-label="Search Mobile" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-success btn-sm" type="submit">
+                                    <i class="mdi mdi-account-search"></i>
+                                  </button>
+                                </div>
+                              </div>
+
+                            {!! Form::close() !!}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="table-responsive">
                       <table class="table table-hover">
                         <thead>
