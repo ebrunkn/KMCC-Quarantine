@@ -45,15 +45,20 @@ Route::namespace('Admin')->group(function(){
         // Route::get('requirement/update/{id}/{status}', 'RequirementController@updateStatus');
         Route::get('requirement/{type?}', 'RequirementController@index');
 
+        Route::get('call-logs', 'CallLogController@index');
+        Route::get('call-logs/add', 'CallLogController@create');
+        Route::get('call-logs/edit/{id}', 'CallLogController@edit');
+        Route::post('call-logs/save/{id?}', 'CallLogController@save');
+        Route::get('call-logs/view/{id}', 'CallLogController@view');
+        Route::get('call-logs/delete/{id}', 'CallLogController@delete');
+
         Route::get('notifications', 'NotificationController@index');
 
-        Route::group(['middleware' => ['can:delivery add']], function () {
-            Route::get('delivery/requirements', 'DeliveryController@index');
-            Route::get('delivery/requirements/{id}', 'DeliveryController@viewRequirement');
-            Route::get('delivery/change-status/{req_id}/{statusTo}', 'DeliveryController@changeStatus');
-            Route::get('delivery/entry', 'DeliveryController@entry');
-            Route::post('delivery/entry', 'DeliveryController@entrySave');
-        });
+        Route::get('delivery/requirements', 'DeliveryController@index');
+        Route::get('delivery/requirements/{id}', 'DeliveryController@viewRequirement');
+        Route::get('delivery/change-status/{req_id}/{statusTo}', 'DeliveryController@changeStatus');
+        Route::get('delivery/entry', 'DeliveryController@entry');
+        Route::post('delivery/entry', 'DeliveryController@entrySave');
 
     });
 });

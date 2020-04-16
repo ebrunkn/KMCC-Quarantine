@@ -12,6 +12,13 @@ class Warehouse extends Model
     protected $table = 'warehouses';
     protected $fillable = ['item_name','threshold'];
 
+    public function scopeAuthEmirate($query){
+        if(auth()->user()->emirate_id){
+            return $query->where('emirate_id',auth()->user()->emirate_id);
+        }
+        return;
+    }
+
     public function getTotalStockAttribute(){
         $sum = $this->getStocks()->withoutRestock()->sum('qty');
         return $sum ?? 0;

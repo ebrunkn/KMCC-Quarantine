@@ -16,19 +16,25 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-3 col-sm-6 col-6 equel-grid">
-          <div class="grid">
-            <div class="grid-body text-gray">
-              <div class="text-center">
-                <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['buildings']['total']}}
-                </h3>
+
+        @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+
+          <div class="col-md-3 col-sm-6 col-6 equel-grid">
+            <div class="grid">
+              <div class="grid-body text-gray">
+                <div class="text-center">
+                  <h3 class="d-flex align-items-center justify-content-center">
+                    {{$data_bundle['buildings']['total']}}
+                  </h3>
+                </div>
+                <hr>
+                <p class="text-black text-center"><a href="buildings" class="">Total Buildings</a></p>
               </div>
-              <hr>
-              <p class="text-black text-center"><a href="buildings" class="">Total Buildings</a></p>
             </div>
           </div>
-        </div>
+
+        @endif
+
         <div class="col-md-3 col-sm-6 col-6 equel-grid">
           <div class="grid">
             <div class="grid-body text-gray">

@@ -6,13 +6,30 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Model\Requirement;
+use App\Model\User;
 use App\Model\DoorDelivery;
 use App\Model\LogReport;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Auth;
 
 class DeliveryController extends Controller
 {
+
+    public function __construct(Request $request){
+
+        $this->middleware(function ($request, $next) {
+            $this->user= Auth::user();
+            // dd($this->user);
+            if(auth()->user()->role_id != User::DEVELOPER){
+                if(auth()->user()->role_id != User::VOLUNTEER){
+                    abort(404);
+                }
+            }
+            return $next($request);
+        });
+
+    }
 
     public function index(Request $request){
         $data_bundle = [];

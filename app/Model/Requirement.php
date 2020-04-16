@@ -25,7 +25,7 @@ class Requirement extends Model
 
 
     protected $table = 'requirements';
-    protected $fillable = ['user_id','assigned_user','building_id','room_no','type_id', 'food_time_id', 'food_cuisine_id', 'warehouse_item_id', 'requested_qty', 'fulfilled_qty','status', 'info','visited'];
+    protected $fillable = ['user_id','emirate_id','assigned_user','building_id','room_no','type_id', 'food_time_id', 'food_cuisine_id', 'warehouse_item_id', 'requested_qty', 'fulfilled_qty','status', 'info','visited'];
 
 
     public function getTypeAttribute($query){
@@ -80,6 +80,13 @@ class Requirement extends Model
 
     public function scopeDeliveryStarted($query){
         return $query->where('status', self::DELIVERY_STARTED_STATUS);
+    }
+
+    public function scopeAuthEmirate($query){
+        if(auth()->user()->emirate_id){
+            return $query->where('emirate_id',auth()->user()->emirate_id);
+        }
+        return;
     }
 
     public function scopeUnread($query){

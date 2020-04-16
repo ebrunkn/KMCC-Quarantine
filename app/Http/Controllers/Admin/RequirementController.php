@@ -168,6 +168,7 @@ class RequirementController extends Controller
 
                 $request->merge(array(
                     'user_id'=>auth()->user()->id,
+                    'emirate_id' => auth()->user()->emirate_id,
                 ));
 
                 $item = Requirement::create($request->input());
@@ -202,7 +203,7 @@ class RequirementController extends Controller
         $data_bundle['buildings'] = Building::pluck('building_name', 'id');
         $data_bundle['ware_house_items'] = Warehouse::pluck('item_name', 'id');
 
-        $data_bundle['volunteers'] = User::pluck('name','id');
+        $data_bundle['volunteers'] = User::authEmirate()->volunteer()->get();
 
         $view = 'admin.requirement.edit';
         switch ($type) {
